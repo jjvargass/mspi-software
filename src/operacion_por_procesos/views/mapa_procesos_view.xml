@@ -82,16 +82,12 @@
                 <header>
                 </header>
                 <sheet>
-<!--                     <div class="oe_button_box" name="button_box">
-                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
-                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
-                        </button>
-                    </div> -->
                     <div class="oe_title">
                         <label for="name" class="oe_edit_only" string="Nombre del Proceso" />
                         <h1><field name="name" placeholder="Nombre del Proceso"/></h1>
                     </div>
                     <group>
+                        <field name="id" attrs="{'invisible':True}"/>
                         <field name="objetivo" />
                         <field name="alcance" />
                         <field name="tipo" />
@@ -99,8 +95,8 @@
                         <field name="dependencia_gestor" />
                     </group>
                     <notebook>
-                        <page string='Actividades'>
-                            <field name="actividad_ids"/>
+                        <page string='Actividades' attrs="{'invisible': [('id','=',False)]}">
+                            <field name="actividad_ids"  context="{'proceso_id': active_id}"/>
                         </page>
                     </notebook>
                 </sheet>
@@ -191,27 +187,22 @@
                 <header>
                 </header>
                 <sheet>
-                    <div class="oe_button_box" name="button_box">
-                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
-                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
-                        </button>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" string="Nombre de la Actividad" />
+                        <h1><field name="name" placeholder="Nombre de la Actividad"/></h1>
                     </div>
                     <group>
-                        <field name="name" />
+                        <field name="id" attrs="{'invisible':True}"/>
                         <field name="ciclo" />
                         <field name="descripcion" />
                         <field name="proceso_id" />
                     </group>
                     <notebook>
-                        <page string='Entradas'>
-                            <group>
-                                <field name="entrada_ids" />
-                            </group>
+                        <page string='Entradas' attrs="{'invisible': [('id','=',False)]}">
+                            <field name="entrada_ids" context="{'actividad_id': active_id}"/>
                         </page>
-                        <page string='Salidas'>
-                            <group>
-                                <field name="salida_ids" />
-                            </group>
+                        <page string='Salidas' attrs="{'invisible': [('id','=',False)]}">
+                             <field name="salida_ids" context="{'actividad_id': active_id}"/>
                         </page>
                     </notebook>
                 </sheet>
@@ -293,13 +284,12 @@
                 <header>
                 </header>
                 <sheet>
-                    <div class="oe_button_box" name="button_box">
-                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
-                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
-                        </button>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" string="Nombre de la Entrada" />
+                        <h1><field name="name" placeholder="Nombre de la Entrada"/></h1>
                     </div>
+
                     <group>
-                        <field name="name" />
                         <field name="descripcion" />
                         <field name="tipo" />
                         <field name="proceso" />
@@ -387,13 +377,11 @@
                 <header>
                 </header>
                 <sheet>
-                    <div class="oe_button_box" name="button_box">
-                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
-                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
-                        </button>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" string="Nombre de la Actividad" />
+                        <h1><field name="name" placeholder="Nombre de la Actividad"/></h1>
                     </div>
                     <group>
-                        <field name="name" />
                         <field name="descripcion" />
                         <field name="tipo" />
                         <field name="proceso" />

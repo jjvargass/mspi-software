@@ -112,10 +112,10 @@ class mapa_procesos_actividad(models.Model):
         track_visibility='onchange',
         help='''Ciclo PHVA''',
         selection=[
-            ('planear', 'planear'),
-            ('hacer', 'hacer'),
-            ('verificar', 'verificar'),
-            ('actuar', 'actuar'),
+            ('planear', 'Planear'),
+            ('hacer', 'Hacer'),
+            ('verificar', 'Verificar'),
+            ('actuar', 'Actuar'),
         ],
     )
     descripcion = fields.Text(
@@ -131,6 +131,7 @@ class mapa_procesos_actividad(models.Model):
         comodel_name='mapa_procesos.proceso',
         ondelete='restrict',
         help='''Proceso''',
+        default=lambda self: self._context.get('proceso_id', None),
     )
     entrada_ids = fields.One2many(
         string='Entradas',
