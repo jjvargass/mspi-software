@@ -1,0 +1,5 @@
+id,active,name,group_id/id,model_id/id,perm_create,perm_read,perm_write,perm_unlink
+proceso_global,True,"mapa_procesos.proceso global",,operacion_por_procesos.model_mapa_procesos_proceso,0,1,0,0
+actividad_global,True,"mapa_procesos.actividad global",,operacion_por_procesos.model_mapa_procesos_actividad,0,1,0,0
+actividad_entranda_global,True,"mapa_procesos.actividad_entranda global",,operacion_por_procesos.model_mapa_procesos_actividad_entranda,0,1,0,0
+actividad_salida_global,True,"mapa_procesos.actividad_salida global",,operacion_por_procesos.model_mapa_procesos_actividad_salida,0,1,0,0

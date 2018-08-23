@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <!--
+    =================================================================
+    Menú
+    =================================================================
+    -->
+     <menuitem id="operacion_por_procesos_nav" name="Operación por Procesos"/>
+
+     <menuitem id="operacion_por_procesos_menu"
+        name="Operación por Procesos"
+        parent="operacion_por_procesos_nav"
+        sequence="10"
+    />
+     <menuitem id="operacion_por_procesos_conf_menu" parent="operacion_por_procesos_nav"
+        name="Configuración Operación por Procesos"
+        groups="base.group_configuration"
+        sequence="30"
+     />
+     <menuitem id="operacion_por_procesos_admin_menu" parent="operacion_por_procesos_nav"
+        name="Administración Operación por Procesos"
+        groups="base.group_configuration"
+        sequence="100"
+     />
+
+    <!--
+    =================================================================
+    mapa_procesos.proceso
+    Procesos
+    =================================================================
+    -->
+    <record model="ir.ui.view" id="proceso_search">
+        <field name="name">mapa_procesos.proceso.search</field>
+        <field name="model">mapa_procesos.proceso</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="objetivo" />
+                <field name="alcance" />
+                <field name="tipo" />
+                <filter name="filtro_tipo_estrategico"
+                    string="estrategico"
+                    help="Filtrar Tipo estrategico"
+                    domain="[('tipo', '=', 'estrategico')]"
+                />
+                <filter name="filtro_tipo_misional"
+                    string="misional"
+                    help="Filtrar Tipo misional"
+                    domain="[('tipo', '=', 'misional')]"
+                />
+                <filter name="filtro_tipo_apoyo"
+                    string="apoyo"
+                    help="Filtrar Tipo apoyo"
+                    domain="[('tipo', '=', 'apoyo')]"
+                />
+                <filter name="filtro_tipo_control"
+                    string="control"
+                    help="Filtrar Tipo control"
+                    domain="[('tipo', '=', 'control')]"
+                />
+                <field name="dependencia_lider" />
+                <field name="dependencia_gestor" />
+                <field name="actividad_ids" />
+                <group string="Agrupar por...">
+                    <filter string="Nombre" context="{'group_by':'name'}"/>
+                    <filter string="Objetivo" context="{'group_by':'objetivo'}"/>
+                    <filter string="Alcance" context="{'group_by':'alcance'}"/>
+                    <filter string="Tipo" context="{'group_by':'tipo'}"/>
+                    <filter string="Dependencia Lider" context="{'group_by':'dependencia_lider'}"/>
+                    <filter string="Dependencia Gestor(es)" context="{'group_by':'dependencia_gestor'}"/>
+                    <filter string="Actividades" context="{'group_by':'actividad_ids'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="proceso_form">
+        <field name="name">mapa_procesos.proceso.form</field>
+        <field name="model">mapa_procesos.proceso</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+<!--                     <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                    </div> -->
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" string="Nombre del Proceso" />
+                        <h1><field name="name" placeholder="Nombre del Proceso"/></h1>
+                    </div>
+                    <group>
+                        <field name="objetivo" />
+                        <field name="alcance" />
+                        <field name="tipo" />
+                        <field name="dependencia_lider" />
+                        <field name="dependencia_gestor" />
+                    </group>
+                    <notebook>
+                        <page string='Actividades'>
+                            <field name="actividad_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="proceso_tree">
+        <field name="name">mapa_procesos.proceso.tree</field>
+        <field name="model">mapa_procesos.proceso</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="objetivo" />
+                <field name="alcance" />
+                <field name="tipo" />
+                <field name="dependencia_lider" />
+                <field name="dependencia_gestor" />
+                <field name="actividad_ids" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="proceso_action">
+        <field name="name">Procesos</field>
+        <field name="res_model">mapa_procesos.proceso</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="proceso_menu"
+        parent="operacion_por_procesos_menu"
+        sequence="20"
+        name="Procesos" action="proceso_action"
+    />
+
+    <!--
+    =================================================================
+    mapa_procesos.actividad
+    Actividad
+    =================================================================
+    -->
+    <record model="ir.ui.view" id="actividad_search">
+        <field name="name">mapa_procesos.actividad.search</field>
+        <field name="model">mapa_procesos.actividad</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="ciclo" />
+                <filter name="filtro_ciclo_planear"
+                    string="planear"
+                    help="Filtrar Ciclo planear"
+                    domain="[('ciclo', '=', 'planear')]"
+                />
+                <filter name="filtro_ciclo_hacer"
+                    string="hacer"
+                    help="Filtrar Ciclo hacer"
+                    domain="[('ciclo', '=', 'hacer')]"
+                />
+                <filter name="filtro_ciclo_verificar"
+                    string="verificar"
+                    help="Filtrar Ciclo verificar"
+                    domain="[('ciclo', '=', 'verificar')]"
+                />
+                <filter name="filtro_ciclo_actuar"
+                    string="actuar"
+                    help="Filtrar Ciclo actuar"
+                    domain="[('ciclo', '=', 'actuar')]"
+                />
+                <field name="descripcion" />
+                <field name="proceso_id" />
+                <field name="entrada_ids" />
+                <field name="salida_ids" />
+                <group string="Agrupar por...">
+                    <filter string="Nombre" context="{'group_by':'name'}"/>
+                    <filter string="Ciclo" context="{'group_by':'ciclo'}"/>
+                    <filter string="Descripción" context="{'group_by':'descripcion'}"/>
+                    <filter string="Proceso" context="{'group_by':'proceso_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="actividad_form">
+        <field name="name">mapa_procesos.actividad.form</field>
+        <field name="model">mapa_procesos.actividad</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name" />
+                        <field name="ciclo" />
+                        <field name="descripcion" />
+                        <field name="proceso_id" />
+                    </group>
+                    <notebook>
+                        <page string='Entradas'>
+                            <group>
+                                <field name="entrada_ids" />
+                            </group>
+                        </page>
+                        <page string='Salidas'>
+                            <group>
+                                <field name="salida_ids" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="actividad_tree">
+        <field name="name">mapa_procesos.actividad.tree</field>
+        <field name="model">mapa_procesos.actividad</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="ciclo" />
+                <field name="descripcion" />
+                <field name="proceso_id" />
+                <field name="entrada_ids" />
+                <field name="salida_ids" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="actividad_action">
+        <field name="name">Actividad</field>
+        <field name="res_model">mapa_procesos.actividad</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="actividad_menu"
+        parent="operacion_por_procesos_admin_menu"
+        sequence="50"
+        name="Actividad" action="actividad_action"
+    />
+
+    <!--
+    =================================================================
+    mapa_procesos.actividad_entranda
+    Actividad Entrada
+    =================================================================
+    -->
+    <record model="ir.ui.view" id="actividad_entranda_search">
+        <field name="name">mapa_procesos.actividad_entranda.search</field>
+        <field name="model">mapa_procesos.actividad_entranda</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="descripcion" />
+                <field name="tipo" />
+                <filter name="filtro_tipo_interno"
+                    string="interno"
+                    help="Filtrar Tipo interno"
+                    domain="[('tipo', '=', 'interno')]"
+                />
+                <filter name="filtro_tipo_externo"
+                    string="externo"
+                    help="Filtrar Tipo externo"
+                    domain="[('tipo', '=', 'externo')]"
+                />
+                <field name="proceso" />
+                <field name="proveedor" />
+                <field name="actividad_id" />
+                <group string="Agrupar por...">
+                    <filter string="Nombre" context="{'group_by':'name'}"/>
+                    <filter string="Descripción" context="{'group_by':'descripcion'}"/>
+                    <filter string="Tipo" context="{'group_by':'tipo'}"/>
+                    <filter string="Procesos" context="{'group_by':'proceso'}"/>
+                    <filter string="Proveedor" context="{'group_by':'proveedor'}"/>
+                    <filter string="Actividad" context="{'group_by':'actividad_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="actividad_entranda_form">
+        <field name="name">mapa_procesos.actividad_entranda.form</field>
+        <field name="model">mapa_procesos.actividad_entranda</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name" />
+                        <field name="descripcion" />
+                        <field name="tipo" />
+                        <field name="proceso" />
+                        <field name="proveedor" />
+                        <field name="actividad_id" />
+                    </group>
+                    <notebook>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="actividad_entranda_tree">
+        <field name="name">mapa_procesos.actividad_entranda.tree</field>
+        <field name="model">mapa_procesos.actividad_entranda</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="descripcion" />
+                <field name="tipo" />
+                <field name="proceso" />
+                <field name="proveedor" />
+                <field name="actividad_id" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="actividad_entranda_action">
+        <field name="name">Actividad Entrada</field>
+        <field name="res_model">mapa_procesos.actividad_entranda</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="actividad_entranda_menu"
+        parent="operacion_por_procesos_admin_menu"
+        sequence="50"
+        name="Actividad Entrada" action="actividad_entranda_action"
+    />
+
+    <!--
+    =================================================================
+    mapa_procesos.actividad_salida
+    Actividad Salida
+    =================================================================
+    -->
+    <record model="ir.ui.view" id="actividad_salida_search">
+        <field name="name">mapa_procesos.actividad_salida.search</field>
+        <field name="model">mapa_procesos.actividad_salida</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="descripcion" />
+                <field name="tipo" />
+                <filter name="filtro_tipo_interno"
+                    string="interno"
+                    help="Filtrar Tipo interno"
+                    domain="[('tipo', '=', 'interno')]"
+                />
+                <filter name="filtro_tipo_externo"
+                    string="externo"
+                    help="Filtrar Tipo externo"
+                    domain="[('tipo', '=', 'externo')]"
+                />
+                <field name="proceso" />
+                <field name="cliente" />
+                <field name="actividad_id" />
+                <group string="Agrupar por...">
+                    <filter string="Nombre" context="{'group_by':'name'}"/>
+                    <filter string="Descripción" context="{'group_by':'descripcion'}"/>
+                    <filter string="Tipo" context="{'group_by':'tipo'}"/>
+                    <filter string="Procesos" context="{'group_by':'proceso'}"/>
+                    <filter string="Cliente/Usuario" context="{'group_by':'cliente'}"/>
+                    <filter string="Actividad" context="{'group_by':'actividad_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="actividad_salida_form">
+        <field name="name">mapa_procesos.actividad_salida.form</field>
+        <field name="model">mapa_procesos.actividad_salida</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name" />
+                        <field name="descripcion" />
+                        <field name="tipo" />
+                        <field name="proceso" />
+                        <field name="cliente" />
+                        <field name="actividad_id" />
+                    </group>
+                    <notebook>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="actividad_salida_tree">
+        <field name="name">mapa_procesos.actividad_salida.tree</field>
+        <field name="model">mapa_procesos.actividad_salida</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="descripcion" />
+                <field name="tipo" />
+                <field name="proceso" />
+                <field name="cliente" />
+                <field name="actividad_id" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="actividad_salida_action">
+        <field name="name">Actividad Salida</field>
+        <field name="res_model">mapa_procesos.actividad_salida</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="actividad_salida_menu"
+        parent="operacion_por_procesos_admin_menu"
+        sequence="50"
+        name="Actividad Salida" action="actividad_salida_action"
+    />
+
+</data>
+</openerp>
