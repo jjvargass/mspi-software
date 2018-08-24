@@ -68,8 +68,6 @@
                     <filter string="Alcance" context="{'group_by':'alcance'}"/>
                     <filter string="Tipo" context="{'group_by':'tipo'}"/>
                     <filter string="Dependencia Lider" context="{'group_by':'dependencia_lider'}"/>
-                    <filter string="Dependencia Gestor(es)" context="{'group_by':'dependencia_gestor'}"/>
-                    <filter string="Actividades" context="{'group_by':'actividad_ids'}"/>
                 </group>
             </search>
         </field>
