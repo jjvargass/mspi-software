@@ -191,7 +191,7 @@ class mapa_procesos_actividad_entranda(models.Model):
             ('externo', 'externo'),
         ],
     )
-    proceso = fields.Many2many(
+    proceso_ids = fields.Many2many(
         string='Procesos',
         required=False,
         track_visibility='onchange',
@@ -199,7 +199,7 @@ class mapa_procesos_actividad_entranda(models.Model):
         ondelete='restrict',
         help='''Insumo Interno''',
     )
-    proveedor = fields.Many2many(
+    proveedor_ids = fields.Many2many(
         string='Proveedor',
         required=False,
         track_visibility='onchange',
@@ -256,7 +256,7 @@ class mapa_procesos_actividad_salida(models.Model):
             ('externo', 'externo'),
         ],
     )
-    proceso = fields.Many2many(
+    proceso_ids = fields.Many2many(
         string='Procesos',
         required=False,
         track_visibility='onchange',
@@ -264,7 +264,7 @@ class mapa_procesos_actividad_salida(models.Model):
         ondelete='restrict',
         help='''Producto Interno''',
     )
-    cliente = fields.Many2many(
+    cliente_ids = fields.Many2many(
         string='Cliente/Usuario',
         required=False,
         track_visibility='onchange',

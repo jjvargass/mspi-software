@@ -111,8 +111,6 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name" />
-                <field name="objetivo" />
-                <field name="alcance" />
                 <field name="tipo" />
                 <field name="dependencia_lider" />
                 <field name="dependencia_gestor" />
@@ -260,15 +258,13 @@
                     help="Filtrar Tipo externo"
                     domain="[('tipo', '=', 'externo')]"
                 />
-                <field name="proceso" />
-                <field name="proveedor" />
+                <field name="proceso_ids" />
+                <field name="proveedor_ids" />
                 <field name="actividad_id" />
                 <group string="Agrupar por...">
                     <filter string="Nombre" context="{'group_by':'name'}"/>
                     <filter string="Descripción" context="{'group_by':'descripcion'}"/>
                     <filter string="Tipo" context="{'group_by':'tipo'}"/>
-                    <filter string="Procesos" context="{'group_by':'proceso'}"/>
-                    <filter string="Proveedor" context="{'group_by':'proveedor'}"/>
                     <filter string="Actividad" context="{'group_by':'actividad_id'}"/>
                 </group>
             </search>
@@ -290,8 +286,8 @@
                     <group>
                         <field name="descripcion" />
                         <field name="tipo" />
-                        <field name="proceso" />
-                        <field name="proveedor" />
+                        <field name="proceso_ids" />
+                        <field name="proveedor_ids" />
                         <field name="actividad_id" />
                     </group>
                     <notebook>
@@ -312,8 +308,8 @@
                 <field name="name" />
                 <field name="descripcion" />
                 <field name="tipo" />
-                <field name="proceso" />
-                <field name="proveedor" />
+                <field name="proceso_ids" />
+                <field name="proveedor_ids" />
                 <field name="actividad_id" />
             </tree>
         </field>
@@ -353,15 +349,13 @@
                     help="Filtrar Tipo externo"
                     domain="[('tipo', '=', 'externo')]"
                 />
-                <field name="proceso" />
-                <field name="cliente" />
+                <field name="proceso_ids" />
+                <field name="cliente_ids" />
                 <field name="actividad_id" />
                 <group string="Agrupar por...">
                     <filter string="Nombre" context="{'group_by':'name'}"/>
                     <filter string="Descripción" context="{'group_by':'descripcion'}"/>
                     <filter string="Tipo" context="{'group_by':'tipo'}"/>
-                    <filter string="Procesos" context="{'group_by':'proceso'}"/>
-                    <filter string="Cliente/Usuario" context="{'group_by':'cliente'}"/>
                     <filter string="Actividad" context="{'group_by':'actividad_id'}"/>
                 </group>
             </search>
@@ -382,8 +376,8 @@
                     <group>
                         <field name="descripcion" />
                         <field name="tipo" />
-                        <field name="proceso" />
-                        <field name="cliente" />
+                        <field name="proceso_ids" />
+                        <field name="cliente_ids" />
                         <field name="actividad_id" />
                     </group>
                     <notebook>
@@ -404,8 +398,8 @@
                 <field name="name" />
                 <field name="descripcion" />
                 <field name="tipo" />
-                <field name="proceso" />
-                <field name="cliente" />
+                <field name="proceso_ids" />
+                <field name="cliente_ids" />
                 <field name="actividad_id" />
             </tree>
         </field>
