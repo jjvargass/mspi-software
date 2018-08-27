@@ -67,7 +67,6 @@
                     <filter string="Objetivo" context="{'group_by':'objetivo'}"/>
                     <filter string="Alcance" context="{'group_by':'alcance'}"/>
                     <filter string="Tipo" context="{'group_by':'tipo'}"/>
-                    <filter string="Dependencia Lider" context="{'group_by':'dependencia_lider'}"/>
                 </group>
             </search>
         </field>
