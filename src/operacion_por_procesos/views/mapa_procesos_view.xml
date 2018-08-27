@@ -60,7 +60,7 @@
                     domain="[('tipo', '=', 'control')]"
                 />
                 <field name="dependencia_lider" />
-                <field name="dependencia_gestor" />
+                <field name="dependencia_gestor_ids" />
                 <field name="actividad_ids" />
                 <group string="Agrupar por...">
                     <filter string="Nombre" context="{'group_by':'name'}"/>
@@ -89,7 +89,7 @@
                         <field name="alcance" />
                         <field name="tipo" />
                         <field name="dependencia_lider" />
-                        <field name="dependencia_gestor" />
+                        <field name="dependencia_gestor_ids" />
                     </group>
                     <notebook>
                         <page string='Actividades' attrs="{'invisible': [('id','=',False)]}">
@@ -112,7 +112,7 @@
                 <field name="name" />
                 <field name="tipo" />
                 <field name="dependencia_lider" />
-                <field name="dependencia_gestor" />
+                <field name="dependencia_gestor_ids" />
                 <field name="actividad_ids" />
             </tree>
         </field>

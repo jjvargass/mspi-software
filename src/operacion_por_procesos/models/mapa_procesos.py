@@ -68,14 +68,16 @@ class mapa_procesos_proceso(models.Model):
         comodel_name='hr.department',
         ondelete='restrict',
         help='''Dependencia Lider''',
+        relation='mapa_proceso_proceso_lider_hr_department_rel',
     )
-    dependencia_gestor = fields.Many2many(
+    dependencia_gestor_ids = fields.Many2many(
         string='Dependencia Gestor(es)',
         required=True,
         track_visibility='onchange',
         comodel_name='hr.department',
         ondelete='restrict',
         help='''Dependencia Gestor(es)''',
+        relation='mapa_proceso_proceso_gestor_hr_department_rel',
     )
     actividad_ids = fields.One2many(
         string='Actividades',
