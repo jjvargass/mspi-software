@@ -285,8 +285,18 @@
                     <group>
                         <field name="descripcion" />
                         <field name="tipo" />
-                        <field name="proceso_ids" />
-                        <field name="proveedor_ids" />
+                        <field name="proceso_ids"
+                          attrs="{
+                                'invisible':[('tipo','!=','interno')],
+                                'required':[('tipo','=','interno')],
+                            }"
+                        />
+                        <field name="proveedor_ids"
+                            attrs="{
+                                'invisible':[('tipo','!=','externo')],
+                                'required':[('tipo','=','externo')],
+                            }"
+                        />
                         <field name="actividad_id" />
                     </group>
                     <notebook>
@@ -348,8 +358,18 @@
                     help="Filtrar Tipo externo"
                     domain="[('tipo', '=', 'externo')]"
                 />
-                <field name="proceso_ids" />
-                <field name="cliente_ids" />
+                <field name="proceso_ids"
+                    attrs="{
+                          'invisible':[('tipo','!=','interno')],
+                          'required':[('tipo','=','interno')],
+                      }"
+                />
+                <field name="cliente_ids"
+                    attrs="{
+                          'invisible':[('tipo','!=','externo')],
+                          'required':[('tipo','=','externo')],
+                      }"
+                />
                 <field name="actividad_id" />
                 <group string="Agrupar por...">
                     <filter string="Nombre" context="{'group_by':'name'}"/>

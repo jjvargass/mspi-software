@@ -22,6 +22,11 @@ from openerp import models, fields, api
 from openerp.exceptions import ValidationError
 
 
+TIPO_ENTRADA_SALIDAS = [
+    ('interno', 'Interno'),
+    ('externo', 'Externo'),
+]
+
 class mapa_procesos_proceso(models.Model):
     _name = 'mapa_procesos.proceso'
     _description = 'Procesos'
@@ -184,14 +189,11 @@ class mapa_procesos_actividad_entranda(models.Model):
         help='''Descripción Insumo''',
     )
     tipo = fields.Selection(
+        TIPO_ENTRADA_SALIDAS,
         string='Tipo',
         required=True,
         track_visibility='onchange',
         help='''Insumo Interno/Externo''',
-        selection=[
-            ('interno', 'interno'),
-            ('externo', 'externo'),
-        ],
     )
     proceso_ids = fields.Many2many(
         string='Procesos',
@@ -249,14 +251,11 @@ class mapa_procesos_actividad_salida(models.Model):
         help='''Descripción del Producto''',
     )
     tipo = fields.Selection(
+        TIPO_ENTRADA_SALIDAS,
         string='Tipo',
         required=True,
         track_visibility='onchange',
         help='''Producto Interno/Externo''',
-        selection=[
-            ('interno', 'interno'),
-            ('externo', 'externo'),
-        ],
     )
     proceso_ids = fields.Many2many(
         string='Procesos',
