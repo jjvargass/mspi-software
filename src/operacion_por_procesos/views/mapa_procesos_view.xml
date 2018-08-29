@@ -166,9 +166,7 @@
                 <field name="entrada_ids" />
                 <field name="salida_ids" />
                 <group string="Agrupar por...">
-                    <filter string="Nombre" context="{'group_by':'name'}"/>
                     <filter string="Ciclo" context="{'group_by':'ciclo'}"/>
-                    <filter string="Descripción" context="{'group_by':'descripcion'}"/>
                     <filter string="Proceso" context="{'group_by':'proceso_id'}"/>
                 </group>
             </search>
@@ -261,8 +259,6 @@
                 <field name="proveedor_ids" />
                 <field name="actividad_id" />
                 <group string="Agrupar por...">
-                    <filter string="Nombre" context="{'group_by':'name'}"/>
-                    <filter string="Descripción" context="{'group_by':'descripcion'}"/>
                     <filter string="Tipo" context="{'group_by':'tipo'}"/>
                     <filter string="Actividad" context="{'group_by':'actividad_id'}"/>
                 </group>
@@ -372,8 +368,6 @@
                 />
                 <field name="actividad_id" />
                 <group string="Agrupar por...">
-                    <filter string="Nombre" context="{'group_by':'name'}"/>
-                    <filter string="Descripción" context="{'group_by':'descripcion'}"/>
                     <filter string="Tipo" context="{'group_by':'tipo'}"/>
                     <filter string="Actividad" context="{'group_by':'actividad_id'}"/>
                 </group>
