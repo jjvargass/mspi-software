@@ -22,6 +22,15 @@ from openerp import models, fields, api
 from openerp.exceptions import ValidationError
 
 
+TIPO_ACTIVO = [
+    ('informacion', 'Información'),
+    ('software', 'Software'),
+    ('recurso_humano', 'Recurso Humano'),
+    ('servicio', 'Servicio'),
+    ('hardware', 'Hardware'),
+    ('otros', 'otros'),
+]
+
 class activo_informacion_activo_tipo(models.Model):
     _name = 'activo_informacion.activo_tipo'
     _description = 'Tipo Activo de Información'
@@ -30,9 +39,8 @@ class activo_informacion_activo_tipo(models.Model):
     # -------------------
     # Fields
     # -------------------
-    active = fields.Boolean(
+    activo_sistema = fields.Boolean(
         string='Habilitado en el sistema',
-        required=True,
         track_visibility='onchange',
         help='''Habilitado en el sistema''',
         default=True,
@@ -51,18 +59,11 @@ class activo_informacion_activo_tipo(models.Model):
         help='''Descripción''',
     )
     tipo = fields.Selection(
+        TIPO_ACTIVO,
         string='Tipo',
         required=True,
         track_visibility='onchange',
         help='''Tipo''',
-        selection=[
-            ('informacion', 'informacion'),
-            ('software', 'software'),
-            ('resursoh', 'resursoh'),
-            ('servicio', 'servicio'),
-            ('hardware', 'hardware'),
-            ('otros', 'otros'),
-        ],
     )
 
     # -------------------
@@ -111,19 +112,12 @@ class activo_informacion_activo(models.Model):
         help='''Custodio''',
     )
     tipo_para_busqueda = fields.Selection(
+        TIPO_ACTIVO,
         string='Tipo',
         required=True,
         track_visibility='onchange',
         store=False,
         help='''Tipo''',
-        selection=[
-            ('informacion', 'informacion'),
-            ('software', 'software'),
-            ('resursoh', 'resursoh'),
-            ('servicio', 'servicio'),
-            ('hardware', 'hardware'),
-            ('otros', 'otros'),
-        ],
     )
     tipo = fields.Many2one(
         string='Detalle Tipo',

@@ -88,11 +88,14 @@
                             <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
                         </button>
                     </div>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" string="Nombre" />
+                        <h1><field name="name" placeholder="Nombre Tipo de Activo"/></h1>
+                    </div>
                     <group>
-                        <field name="active" />
-                        <field name="name" />
                         <field name="descripcion" />
                         <field name="tipo" />
+                        <field name="activo_sistema" />
                     </group>
                     <notebook>
                     </notebook>
@@ -109,10 +112,10 @@
         <field name="model">activo_informacion.activo_tipo</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="active" />
                 <field name="name" />
                 <field name="descripcion" />
                 <field name="tipo" />
+                <field name="activo_sistema" />
             </tree>
         </field>
     </record>
