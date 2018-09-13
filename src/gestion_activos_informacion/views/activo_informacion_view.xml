@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <!--
+    =================================================================
+    Menú
+    =================================================================
+    -->
+     <menuitem id="gestion_activos_informacion_nav" name="Gestion de Activos de Información"/>
+
+     <menuitem id="gestion_activos_informacion_menu"
+        name="Gestion"
+        parent="gestion_activos_informacion_nav"
+        sequence="10"
+    />
+     <menuitem id="gestion_activos_informacion_conf_menu" parent="gestion_activos_informacion_nav"
+        name="Configuración"
+        groups="base.group_configuration"
+        sequence="30"
+     />
+     <menuitem id="gestion_activos_informacion_admin_menu" parent="gestion_activos_informacion_nav"
+        name="Administración Gestion de Activos de Información"
+        groups="base.group_configuration"
+        sequence="100"
+     />
+
+    <!--
+    =================================================================
+    activo_informacion.activo_tipo
+    Tipo Activo de Información
+    =================================================================
+    -->
+    <record model="ir.ui.view" id="activo_tipo_search">
+        <field name="name">activo_informacion.activo_tipo.search</field>
+        <field name="model">activo_informacion.activo_tipo</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="active" />
+                <field name="name" />
+                <field name="descripcion" />
+                <field name="tipo" />
+                <filter name="filtro_tipo_informacion"
+                    string="informacion"
+                    help="Filtrar Tipo informacion"
+                    domain="[('tipo', '=', 'informacion')]"
+                />
+                <filter name="filtro_tipo_software"
+                    string="software"
+                    help="Filtrar Tipo software"
+                    domain="[('tipo', '=', 'software')]"
+                />
+                <filter name="filtro_tipo_resursoh"
+                    string="resursoh"
+                    help="Filtrar Tipo resursoh"
+                    domain="[('tipo', '=', 'resursoh')]"
+                />
+                <filter name="filtro_tipo_servicio"
+                    string="servicio"
+                    help="Filtrar Tipo servicio"
+                    domain="[('tipo', '=', 'servicio')]"
+                />
+                <filter name="filtro_tipo_hardware"
+                    string="hardware"
+                    help="Filtrar Tipo hardware"
+                    domain="[('tipo', '=', 'hardware')]"
+                />
+                <filter name="filtro_tipo_otros"
+                    string="otros"
+                    help="Filtrar Tipo otros"
+                    domain="[('tipo', '=', 'otros')]"
+                />
+                <group string="Agrupar por...">
+                    <filter string="Tipo" context="{'group_by':'tipo'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="activo_tipo_form">
+        <field name="name">activo_informacion.activo_tipo.form</field>
+        <field name="model">activo_informacion.activo_tipo</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="active" />
+                        <field name="name" />
+                        <field name="descripcion" />
+                        <field name="tipo" />
+                    </group>
+                    <notebook>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="activo_tipo_tree">
+        <field name="name">activo_informacion.activo_tipo.tree</field>
+        <field name="model">activo_informacion.activo_tipo</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="active" />
+                <field name="name" />
+                <field name="descripcion" />
+                <field name="tipo" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="activo_tipo_action">
+        <field name="name">Tipo Activo de Información</field>
+        <field name="res_model">activo_informacion.activo_tipo</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="activo_tipo_menu"
+        parent="gestion_activos_informacion_conf_menu"
+        sequence="30"
+        name="Tipo Activo de Información" action="activo_tipo_action"
+    />
+
+    <!--
+    =================================================================
+    activo_informacion.activo
+    Activos de Información
+    =================================================================
+    -->
+    <record model="ir.ui.view" id="activo_search">
+        <field name="name">activo_informacion.activo.search</field>
+        <field name="model">activo_informacion.activo</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="descripcion" />
+                <field name="proceso_id" />
+                <field name="propietario" />
+                <field name="custodio" />
+                <field name="tipo_para_busqueda" />
+                <filter name="filtro_tipo_para_busqueda_informacion"
+                    string="informacion"
+                    help="Filtrar Tipo informacion"
+                    domain="[('tipo_para_busqueda', '=', 'informacion')]"
+                />
+                <filter name="filtro_tipo_para_busqueda_software"
+                    string="software"
+                    help="Filtrar Tipo software"
+                    domain="[('tipo_para_busqueda', '=', 'software')]"
+                />
+                <filter name="filtro_tipo_para_busqueda_resursoh"
+                    string="resursoh"
+                    help="Filtrar Tipo resursoh"
+                    domain="[('tipo_para_busqueda', '=', 'resursoh')]"
+                />
+                <filter name="filtro_tipo_para_busqueda_servicio"
+                    string="servicio"
+                    help="Filtrar Tipo servicio"
+                    domain="[('tipo_para_busqueda', '=', 'servicio')]"
+                />
+                <filter name="filtro_tipo_para_busqueda_hardware"
+                    string="hardware"
+                    help="Filtrar Tipo hardware"
+                    domain="[('tipo_para_busqueda', '=', 'hardware')]"
+                />
+                <filter name="filtro_tipo_para_busqueda_otros"
+                    string="otros"
+                    help="Filtrar Tipo otros"
+                    domain="[('tipo_para_busqueda', '=', 'otros')]"
+                />
+                <field name="tipo" />
+                <field name="ubicacion" />
+                <field name="confidencialidad" />
+                <filter name="filtro_confidencialidad_ipr"
+                    string="IPR"
+                    help="Filtrar Confidencialidad IPR"
+                    domain="[('confidencialidad', '=', 'ipr')]"
+                />
+                <filter name="filtro_confidencialidad_ipc"
+                    string="IPC"
+                    help="Filtrar Confidencialidad IPC"
+                    domain="[('confidencialidad', '=', 'ipc')]"
+                />
+                <filter name="filtro_confidencialidad_ipb"
+                    string="IPB"
+                    help="Filtrar Confidencialidad IPB"
+                    domain="[('confidencialidad', '=', 'ipb')]"
+                />
+                <field name="confidencialidad_justificacion" />
+                <field name="integridad" />
+                <filter name="filtro_integridad_a"
+                    string="A"
+                    help="Filtrar Integridad A"
+                    domain="[('integridad', '=', 'a')]"
+                />
+                <filter name="filtro_integridad_m"
+                    string="M"
+                    help="Filtrar Integridad M"
+                    domain="[('integridad', '=', 'm')]"
+                />
+                <filter name="filtro_integridad_b"
+                    string="B"
+                    help="Filtrar Integridad B"
+                    domain="[('integridad', '=', 'b')]"
+                />
+                <field name="integridad_justificacion" />
+                <field name="disponibilidad" />
+                <filter name="filtro_disponibilidad_1"
+                    string="1"
+                    help="Filtrar Disponibilidad 1"
+                    domain="[('disponibilidad', '=', '1')]"
+                />
+                <filter name="filtro_disponibilidad_2"
+                    string="2"
+                    help="Filtrar Disponibilidad 2"
+                    domain="[('disponibilidad', '=', '2')]"
+                />
+                <filter name="filtro_disponibilidad_3"
+                    string="3"
+                    help="Filtrar Disponibilidad 3"
+                    domain="[('disponibilidad', '=', '3')]"
+                />
+                <field name="disponibilidad_justicicacion" />
+                <field name="criticidad" />
+                <field name="fecha_ingreso" />
+                <field name="fecha_retiro" />
+                <field name="state" />
+                <filter name="filtro_state_edicion"
+                    string="edicion"
+                    help="Filtrar Estado edicion"
+                    domain="[('state', '=', 'edicion')]"
+                />
+                <filter name="filtro_state_por_aprobar"
+                    string="por_aprobar"
+                    help="Filtrar Estado por_aprobar"
+                    domain="[('state', '=', 'por_aprobar')]"
+                />
+                <filter name="filtro_state_ingresado"
+                    string="ingresado"
+                    help="Filtrar Estado ingresado"
+                    domain="[('state', '=', 'ingresado')]"
+                />
+                <filter name="filtro_state_retirado"
+                    string="retirado"
+                    help="Filtrar Estado retirado"
+                    domain="[('state', '=', 'retirado')]"
+                />
+                <group string="Agrupar por...">
+                    <filter string="Proceso" context="{'group_by':'proceso_id'}"/>
+                    <filter string="Detalle Tipo" context="{'group_by':'tipo'}"/>
+                    <filter string="Confidencialidad" context="{'group_by':'confidencialidad'}"/>
+                    <filter string="Integridad" context="{'group_by':'integridad'}"/>
+                    <filter string="Disponibilidad" context="{'group_by':'disponibilidad'}"/>
+                    <filter string="Criticidad" context="{'group_by':'criticidad'}"/>
+                    <filter string="Estado" context="{'group_by':'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="activo_form">
+        <field name="name">activo_informacion.activo.form</field>
+        <field name="model">activo_informacion.activo</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name" />
+                        <field name="descripcion" />
+                        <field name="proceso_id" />
+                        <field name="propietario" />
+                        <field name="custodio" />
+                        <field name="tipo_para_busqueda" />
+                        <field name="tipo" />
+                        <field name="ubicacion" />
+                        <field name="confidencialidad" />
+                        <field name="confidencialidad_justificacion" />
+                        <field name="integridad" />
+                        <field name="integridad_justificacion" />
+                        <field name="disponibilidad" />
+                        <field name="disponibilidad_justicicacion" />
+                        <field name="criticidad" />
+                        <field name="fecha_ingreso" />
+                        <field name="fecha_retiro" />
+                    </group>
+                    <notebook>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="activo_tree">
+        <field name="name">activo_informacion.activo.tree</field>
+        <field name="model">activo_informacion.activo</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="descripcion" />
+                <field name="proceso_id" />
+                <field name="propietario" />
+                <field name="custodio" />
+                <field name="tipo_para_busqueda" />
+                <field name="tipo" />
+                <field name="ubicacion" />
+                <field name="confidencialidad" />
+                <field name="confidencialidad_justificacion" />
+                <field name="integridad" />
+                <field name="integridad_justificacion" />
+                <field name="disponibilidad" />
+                <field name="disponibilidad_justicicacion" />
+                <field name="criticidad" />
+                <field name="fecha_ingreso" />
+                <field name="fecha_retiro" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="activo_action">
+        <field name="name">Activos de Información</field>
+        <field name="res_model">activo_informacion.activo</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="activo_menu"
+        parent="gestion_activos_informacion_menu"
+        sequence="20"
+        name="Activos de Información" action="activo_action"
+    />
+
+</data>
+</openerp>

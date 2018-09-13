@@ -1,0 +1,1 @@
+import activo_informacion
