@@ -28,7 +28,7 @@ TIPO_ACTIVO = [
     ('recurso_humano', 'Recurso Humano'),
     ('servicio', 'Servicio'),
     ('hardware', 'Hardware'),
-    ('otros', 'otros'),
+    ('otros', 'Otros'),
 ]
 
 class activo_informacion_activo_tipo(models.Model):

@@ -1,0 +1,22 @@
+id,name,descripcion,tipo
+activo_informacion_activo_tipo_1,Base de Datos,Descripción,Información
+activo_informacion_activo_tipo_2,Archivo de Datos,Descripción,Información
+activo_informacion_activo_tipo_3,Contratos,Descripción,Información
+activo_informacion_activo_tipo_4,Documentación del Sistema,Descripción,Información
+activo_informacion_activo_tipo_5,Investigaciones,Descripción,Información
+activo_informacion_activo_tipo_6,Acuerdos de Confidencialidad,Descripción,Información
+activo_informacion_activo_tipo_7,Manuales de Usuario,Descripción,Información
+activo_informacion_activo_tipo_8,Procedimientos Operativos o de Soporte,Descripción,Información
+activo_informacion_activo_tipo_9,Planes para la Continuidad del Negocio,Descripción,Información
+activo_informacion_activo_tipo_10,Acuerdos sobre Retiro,Descripción,Información
+activo_informacion_activo_tipo_11,Pruebas de Auditoria,Descripción,Información
+activo_informacion_activo_tipo_12,Software de Aplicación,Descripción,Software
+activo_informacion_activo_tipo_13,Interfaces ,Descripción,Software
+activo_informacion_activo_tipo_14,Software del sistema,Descripción,Software
+activo_informacion_activo_tipo_15,Herramientas de desarrollo,Descripción,Software
+activo_informacion_activo_tipo_16,Personal,"Aquellas personas que, por su conocimiento, experiencia y criticidad para el proceso, son consideradas activos de Información.",Recurso Humano
+activo_informacion_activo_tipo_17,Internet,Servicios de computación y comunicaciones,Servicio
+activo_informacion_activo_tipo_18,Páginas de Consulta,Descripción,Servicio
+activo_informacion_activo_tipo_19,Directorios Compartidos e Intranet,Descripción,Servicio
+activo_informacion_activo_tipo_20,Equipos de Cómputo y Comunicaciones,"Equipos de cómputo y de comunicaciones que por su criticidad son considerados activos de información, no sólo activos fijos",Hardware
+activo_informacion_activo_tipo_21,Otros,activos de información que no corresponden a ninguno de los tipos descritos anteriormente pero deben ser valorados para conocer su criticidad al interior del proceso.,Otros
