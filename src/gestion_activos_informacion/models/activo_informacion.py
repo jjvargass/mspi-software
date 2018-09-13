@@ -120,6 +120,7 @@ class activo_informacion_activo(models.Model):
         help='''Tipo''',
     )
     tipo = fields.Many2one(
+        domain="[('tipo','=', tipo_para_busqueda)]",
         string='Detalle Tipo',
         required=True,
         track_visibility='onchange',
@@ -194,14 +195,12 @@ class activo_informacion_activo(models.Model):
     )
     fecha_ingreso = fields.Date(
         string='Fecha Ingreso',
-        required=True,
         readonly=True,
         track_visibility='onchange',
         help='''Fecha Ingreso''',
     )
     fecha_retiro = fields.Date(
         string='Fecha Retiro',
-        required=True,
         readonly=True,
         track_visibility='onchange',
         help='''Fecha Retiro''',
