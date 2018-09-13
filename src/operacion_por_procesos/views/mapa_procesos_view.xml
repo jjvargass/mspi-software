@@ -63,9 +63,6 @@
                 <field name="dependencia_gestor_ids" />
                 <field name="actividad_ids" />
                 <group string="Agrupar por...">
-                    <filter string="Nombre" context="{'group_by':'name'}"/>
-                    <filter string="Objetivo" context="{'group_by':'objetivo'}"/>
-                    <filter string="Alcance" context="{'group_by':'alcance'}"/>
                     <filter string="Tipo" context="{'group_by':'tipo'}"/>
                 </group>
             </search>
