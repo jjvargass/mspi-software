@@ -49,10 +49,10 @@
                     help="Filtrar Tipo software"
                     domain="[('tipo', '=', 'software')]"
                 />
-                <filter name="filtro_tipo_resursoh"
-                    string="resursoh"
-                    help="Filtrar Tipo resursoh"
-                    domain="[('tipo', '=', 'resursoh')]"
+                <filter name="filtro_tipo_recurso_humano"
+                    string="recurso_humano"
+                    help="Filtrar Tipo recurso_humano"
+                    domain="[('tipo', '=', 'recurso_humano')]"
                 />
                 <filter name="filtro_tipo_servicio"
                     string="servicio"
@@ -157,10 +157,10 @@
                     help="Filtrar Tipo software"
                     domain="[('tipo_para_busqueda', '=', 'software')]"
                 />
-                <filter name="filtro_tipo_para_busqueda_resursoh"
-                    string="resursoh"
-                    help="Filtrar Tipo resursoh"
-                    domain="[('tipo_para_busqueda', '=', 'resursoh')]"
+                <filter name="filtro_tipo_para_busqueda_recurso_humano"
+                    string="recurso_humano"
+                    help="Filtrar Tipo recurso_humano"
+                    domain="[('tipo_para_busqueda', '=', 'recurso_humano')]"
                 />
                 <filter name="filtro_tipo_para_busqueda_servicio"
                     string="servicio"
@@ -280,8 +280,11 @@
                             <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
                         </button>
                     </div>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" string="Nombre " />
+                        <h1><field name="name" placeholder="Nombre del Activo de Información"/></h1>
+                    </div>
                     <group>
-                        <field name="name" />
                         <field name="descripcion" />
                         <field name="proceso_id" />
                         <field name="propietario" />
@@ -289,6 +292,9 @@
                         <field name="tipo_para_busqueda" />
                         <field name="tipo" />
                         <field name="ubicacion" />
+                    </group>
+                    <separator string="Protección de Información"/>
+                    <group col='4'>
                         <field name="confidencialidad" />
                         <field name="confidencialidad_justificacion" />
                         <field name="integridad" />
@@ -296,6 +302,9 @@
                         <field name="disponibilidad" />
                         <field name="disponibilidad_justicicacion" />
                         <field name="criticidad" />
+                    </group>
+                    <separator string="Gestión"/>
+                    <group>
                         <field name="fecha_ingreso" />
                         <field name="fecha_retiro" />
                     </group>
