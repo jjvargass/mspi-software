@@ -1,0 +1,847 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <!--
+    =================================================================
+    Menú
+    =================================================================
+    -->
+     <menuitem id="planes_mejoramiento_nav" name="Planes de Mejoramiento"/>
+
+     <menuitem id="planes_mejoramiento_menu"
+        name="Planes de Mejoramiento"
+        parent="planes_mejoramiento_nav"
+        sequence="10"
+    />
+     <menuitem id="planes_mejoramiento_conf_menu" parent="planes_mejoramiento_nav"
+        name="Configuración Planes de Mejoramiento"
+        groups="base.group_configuration"
+        sequence="30"
+     />
+     <menuitem id="planes_mejoramiento_admin_menu" parent="planes_mejoramiento_nav"
+        name="Administración Planes de Mejoramiento"
+        groups="base.group_configuration"
+        sequence="100"
+     />
+
+    <!--
+    =================================================================
+    plan_mejoramiento.tipo_calificacion
+    Tipo Calificación
+    =================================================================
+    -->
+    <record model="ir.ui.view" id="tipo_calificacion_search">
+        <field name="name">plan_mejoramiento.tipo_calificacion.search</field>
+        <field name="model">plan_mejoramiento.tipo_calificacion</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="activo_sistema" />
+                <field name="tipo" />
+                <filter name="filtro_tipo_interno"
+                    string="Interno"
+                    help="Filtrar Tipo interno"
+                    domain="[('tipo', '=', 'interno')]"
+                />
+                <filter name="filtro_tipo_contraloria_bog"
+                    string="Contraloria Bogotá"
+                    help="Filtrar Tipo contraloria_bog"
+                    domain="[('tipo', '=', 'contraloria_bog')]"
+                />
+                <filter name="filtro_tipo_contraloria_gral"
+                    string="Contraloria General"
+                    help="Filtrar Tipo contraloria_gral"
+                    domain="[('tipo', '=', 'contraloria_gral')]"
+                />
+                <field name="state" />
+                <filter name="filtro_state_sin_iniciar"
+                    string="Sin Iniciar"
+                    help="Filtrar Estado sin_iniciar"
+                    domain="[('state', '=', 'sin_iniciar')]"
+                />
+                <filter name="filtro_state_en_progreso"
+                    string="En Progreso"
+                    help="Filtrar Estado en_progreso"
+                    domain="[('state', '=', 'en_progreso')]"
+                />
+                <filter name="filtro_state_bloqueado"
+                    string="Bloqueado"
+                    help="Filtrar Estado bloqueado"
+                    domain="[('state', '=', 'bloqueado')]"
+                />
+                <filter name="filtro_state_terminado"
+                    string="Terminado"
+                    help="Filtrar Estado terminado"
+                    domain="[('state', '=', 'terminado')]"
+                />
+                <filter name="filtro_state_terminado_con_retraso"
+                    string="Terminado con Retraso"
+                    help="Filtrar Estado terminado_con_retraso"
+                    domain="[('state', '=', 'terminado_con_retraso')]"
+                />
+                <group string="Agrupar por...">
+                    <filter string="Tipo" context="{'group_by':'tipo'}"/>
+                    <filter string="Estado" context="{'group_by':'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="tipo_calificacion_form">
+        <field name="name">plan_mejoramiento.tipo_calificacion.form</field>
+        <field name="model">plan_mejoramiento.tipo_calificacion</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" string="Nombre" />
+                        <h1><field name="name" placeholder="Nombre Tipo de Calificación"/></h1>
+                    </div>
+                    <group>
+                        <field name="tipo" />
+                        <field name="state" />
+                        <field name="activo_sistema" />
+                    </group>
+                    <notebook>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="tipo_calificacion_tree">
+        <field name="name">plan_mejoramiento.tipo_calificacion.tree</field>
+        <field name="model">plan_mejoramiento.tipo_calificacion</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="tipo" />
+                <field name="state" />
+                <field name="activo_sistema" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="tipo_calificacion_action">
+        <field name="name">Tipo Calificación</field>
+        <field name="res_model">plan_mejoramiento.tipo_calificacion</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="tipo_calificacion_menu"
+        parent="planes_mejoramiento_conf_menu"
+        sequence="30"
+        name="Tipo Calificación" action="tipo_calificacion_action"
+    />
+
+    <!--
+    =================================================================
+    plan_mejoramiento.recurso
+    Recurso
+    =================================================================
+    -->
+    <record model="ir.ui.view" id="recurso_search">
+        <field name="name">plan_mejoramiento.recurso.search</field>
+        <field name="model">plan_mejoramiento.recurso</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="descripcion" />
+                <field name="activo_sistema" />
+                <field name="tipo" />
+                <filter name="filtro_tipo_financiero"
+                    string="Financiero"
+                    help="Filtrar Tipo financiero"
+                    domain="[('tipo', '=', 'financiero')]"
+                />
+                <filter name="filtro_tipo_humano"
+                    string="Humano"
+                    help="Filtrar Tipo humano"
+                    domain="[('tipo', '=', 'humano')]"
+                />
+                <filter name="filtro_tipo_tecnologico"
+                    string="Tecnologico"
+                    help="Filtrar Tipo tecnologico"
+                    domain="[('tipo', '=', 'tecnologico')]"
+                />
+                <filter name="filtro_tipo_fisico"
+                    string="Fisico"
+                    help="Filtrar Tipo fisico"
+                    domain="[('tipo', '=', 'fisico')]"
+                />
+                <group string="Agrupar por...">
+                    <filter string="Tipo" context="{'group_by':'tipo'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="recurso_form">
+        <field name="name">plan_mejoramiento.recurso.form</field>
+        <field name="model">plan_mejoramiento.recurso</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" string="Nombre" />
+                        <h1><field name="name" placeholder="Nombre Recurso"/></h1>
+                    </div>
+                    <group>
+                        <field name="descripcion" />
+                        <field name="tipo" />
+                        <field name="activo_sistema" />
+                    </group>
+                    <notebook>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="recurso_tree">
+        <field name="name">plan_mejoramiento.recurso.tree</field>
+        <field name="model">plan_mejoramiento.recurso</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="descripcion" />
+                <field name="tipo" />
+                <field name="activo_sistema" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="recurso_action">
+        <field name="name">Recurso</field>
+        <field name="res_model">plan_mejoramiento.recurso</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="recurso_menu"
+        parent="planes_mejoramiento_conf_menu"
+        sequence="30"
+        name="Recurso" action="recurso_action"
+    />
+
+    <!--
+    =================================================================
+    plan_mejoramiento.causa
+    Causa
+    =================================================================
+    -->
+    <record model="ir.ui.view" id="causa_search">
+        <field name="name">plan_mejoramiento.causa.search</field>
+        <field name="model">plan_mejoramiento.causa</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="descripcion" />
+                <field name="activo_sistema" />
+                <group string="Agrupar por...">
+                </group>
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="causa_form">
+        <field name="name">plan_mejoramiento.causa.form</field>
+        <field name="model">plan_mejoramiento.causa</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" string="Nombre" />
+                        <h1><field name="name" placeholder="Nombre Causa"/></h1>
+                    </div>
+                    <group>
+                        <field name="descripcion" />
+                        <field name="activo_sistema" />
+                    </group>
+                    <notebook>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="causa_tree">
+        <field name="name">plan_mejoramiento.causa.tree</field>
+        <field name="model">plan_mejoramiento.causa</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="descripcion" />
+                <field name="activo_sistema" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="causa_action">
+        <field name="name">Causa</field>
+        <field name="res_model">plan_mejoramiento.causa</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="causa_menu"
+        parent="planes_mejoramiento_conf_menu"
+        sequence="30"
+        name="Causa" action="causa_action"
+    />
+
+    <!--
+    =================================================================
+    plan_mejoramiento.origen
+    Origen Plan de Mejoramiento
+    =================================================================
+    -->
+    <record model="ir.ui.view" id="origen_search">
+        <field name="name">plan_mejoramiento.origen.search</field>
+        <field name="model">plan_mejoramiento.origen</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="descripcion" />
+                <field name="parent_id" />
+                <field name="activo_sistema" />
+                <group string="Agrupar por...">
+                    <filter string="Padre" context="{'group_by':'parent_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="origen_form">
+        <field name="name">plan_mejoramiento.origen.form</field>
+        <field name="model">plan_mejoramiento.origen</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" string="Nombre" />
+                        <h1><field name="name" placeholder="Nombre Tipo de Activo"/></h1>
+                    </div>
+                    <group>
+                        <field name="descripcion" />
+                        <field name="parent_id" />
+                        <field name="activo_sistema" />
+                    </group>
+                    <notebook>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="origen_tree">
+        <field name="name">plan_mejoramiento.origen.tree</field>
+        <field name="model">plan_mejoramiento.origen</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="descripcion" />
+                <field name="parent_id" />
+                <field name="activo_sistema" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="origen_action">
+        <field name="name">Origen</field>
+        <field name="res_model">plan_mejoramiento.origen</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="origen_menu"
+        parent="planes_mejoramiento_conf_menu"
+        sequence="30"
+        name="Origen" action="origen_action"
+    />
+
+    <!--
+    =================================================================
+    plan_mejoramiento.plan
+    Plan Mejoramiento
+    =================================================================
+    -->
+    <record model="ir.ui.view" id="plan_search">
+        <field name="name">plan_mejoramiento.plan.search</field>
+        <field name="model">plan_mejoramiento.plan</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="tipo" />
+                <filter name="filtro_tipo_interno"
+                    string="interno"
+                    help="Filtrar Tipo interno"
+                    domain="[('tipo', '=', 'interno')]"
+                />
+                <filter name="filtro_tipo_contraloria_bog"
+                    string="contraloria_bog"
+                    help="Filtrar Tipo contraloria_bog"
+                    domain="[('tipo', '=', 'contraloria_bog')]"
+                />
+                <filter name="filtro_tipo_contraloria_gral"
+                    string="contraloria_gral"
+                    help="Filtrar Tipo contraloria_gral"
+                    domain="[('tipo', '=', 'contraloria_gral')]"
+                />
+                <field name="radicado" />
+                <field name="dependencia_id" />
+                <field name="origen_id" />
+                <field name="sub_origen_id" />
+                <field name="facha" />
+                <group string="Agrupar por...">
+                    <filter string="Tipo" context="{'group_by':'tipo'}"/>
+                    <filter string="Unidad" context="{'group_by':'dependencia_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="plan_form">
+        <field name="name">plan_mejoramiento.plan.form</field>
+        <field name="model">plan_mejoramiento.plan</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="tipo" />
+                        <field name="project_id" />
+                        <field name="radicado" />
+                        <field name="dependencia_id" />
+                        <field name="origen_id" />
+                        <field name="sub_origen_id" />
+                        <field name="facha" />
+                    </group>
+                    <notebook>
+                        <page string='Hallazgos'>
+                            <group>
+                                <field name="hallazgo_ids" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="plan_tree">
+        <field name="name">plan_mejoramiento.plan.tree</field>
+        <field name="model">plan_mejoramiento.plan</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="tipo" />
+                <field name="dependencia_id" />
+                <field name="facha" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="plan_action">
+        <field name="name">Plan</field>
+        <field name="res_model">plan_mejoramiento.plan</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="plan_menu"
+        parent="planes_mejoramiento_menu"
+        sequence="20"
+        name="Plan" action="plan_action"
+    />
+
+    <!--
+    =================================================================
+    plan_mejoramiento.hallazgo
+    Hallazgo
+    =================================================================
+    -->
+    <record model="ir.ui.view" id="hallazgo_search">
+        <field name="name">plan_mejoramiento.hallazgo.search</field>
+        <field name="model">plan_mejoramiento.hallazgo</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="descripcion" />
+                <field name="user_id" />
+                <field name="dependencia_id" />
+                <field name="fecha_inicio" />
+                <field name="fecha_fin" />
+                <field name="state" />
+                <filter name="filtro_state_en_progreso"
+                    string="en_progreso"
+                    help="Filtrar Estado en_progreso"
+                    domain="[('state', '=', 'en_progreso')]"
+                />
+                <filter name="filtro_state_terminado"
+                    string="terminado"
+                    help="Filtrar Estado terminado"
+                    domain="[('state', '=', 'terminado')]"
+                />
+                <filter name="filtro_state_cancelado"
+                    string="cancelado"
+                    help="Filtrar Estado cancelado"
+                    domain="[('state', '=', 'cancelado')]"
+                />
+                <field name="plan_id" />
+                <field name="plan_tipo" />
+                <group string="Agrupar por...">
+                    <filter string="Auditor" context="{'group_by':'user_id'}"/>
+                    <filter string="Unidad" context="{'group_by':'dependencia_id'}"/>
+                    <filter string="Estado" context="{'group_by':'state'}"/>
+                    <filter string="Plan de Mejoramiento" context="{'group_by':'plan_id'}"/>
+                    <filter string="Tipo Plan de Mejoramiento" context="{'group_by':'plan_tipo'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="hallazgo_form">
+        <field name="name">plan_mejoramiento.hallazgo.form</field>
+        <field name="model">plan_mejoramiento.hallazgo</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name" />
+                        <field name="descripcion" />
+                        <field name="user_id" />
+                        <field name="proceso_id" />
+                        <field name="dependencia_id" />
+                        <field name="fecha_inicio" />
+                        <field name="fecha_fin" />
+                        <field name="plan_id" />
+                        <field name="plan_tipo" />
+                    </group>
+                    <notebook>
+                        <page string='Acciones'>
+                            <group>
+                                <field name="acciones_ids" />
+                            </group>
+                        </page>
+                        <page string='Causas'>
+                            <group>
+                                <separator colspan="4" string="Causas" /><field name="causa_ids" nolabel="1" colspan="4" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="hallazgo_tree">
+        <field name="name">plan_mejoramiento.hallazgo.tree</field>
+        <field name="model">plan_mejoramiento.hallazgo</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="descripcion" />
+                <field name="user_id" />
+                <field name="dependencia_id" />
+                <field name="fecha_inicio" />
+                <field name="fecha_fin" />
+                <field name="plan_id" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="hallazgo_action">
+        <field name="name">Hallazgo</field>
+        <field name="res_model">plan_mejoramiento.hallazgo</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="hallazgo_menu"
+        parent="planes_mejoramiento_menu"
+        sequence="20"
+        name="Hallazgo" action="hallazgo_action"
+    />
+
+    <!--
+    =================================================================
+    plan_mejoramiento.accion
+    Hallazgo
+    =================================================================
+    -->
+    <record model="ir.ui.view" id="accion_search">
+        <field name="name">plan_mejoramiento.accion.search</field>
+        <field name="model">plan_mejoramiento.accion</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="descripcion" />
+                <field name="state" />
+                <filter name="filtro_state_nuevo"
+                    string="nuevo"
+                    help="Filtrar Estado nuevo"
+                    domain="[('state', '=', 'nuevo')]"
+                />
+                <filter name="filtro_state_por_aprobar"
+                    string="por_aprobar"
+                    help="Filtrar Estado por_aprobar"
+                    domain="[('state', '=', 'por_aprobar')]"
+                />
+                <filter name="filtro_state_en_progreso"
+                    string="en_progreso"
+                    help="Filtrar Estado en_progreso"
+                    domain="[('state', '=', 'en_progreso')]"
+                />
+                <filter name="filtro_state_terminado"
+                    string="terminado"
+                    help="Filtrar Estado terminado"
+                    domain="[('state', '=', 'terminado')]"
+                />
+                <filter name="filtro_state_cancelado"
+                    string="cancelado"
+                    help="Filtrar Estado cancelado"
+                    domain="[('state', '=', 'cancelado')]"
+                />
+                <field name="ejecutor_id" />
+                <field name="dependencia_id" />
+                <field name="jefe_dependencia_id" />
+                <field name="user_id" />
+                <field name="facha_inicio" />
+                <field name="facha_fin" />
+                <field name="facha_creacion" />
+                <group string="Agrupar por...">
+                    <filter string="Estado" context="{'group_by':'state'}"/>
+                    <filter string="Ejecutor" context="{'group_by':'ejecutor_id'}"/>
+                    <filter string="Unidad" context="{'group_by':'dependencia_id'}"/>
+                    <filter string="Jefe Dependencia" context="{'group_by':'jefe_dependencia_id'}"/>
+                    <filter string="Auditor" context="{'group_by':'user_id'}"/>
+                    <filter string="Hallazgo" context="{'group_by':'hallazgo_id'}"/>
+                    <filter string="None" context="{'group_by':'plan_tipo'}"/>
+                    <filter string="None" context="{'group_by':'plan_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="accion_form">
+        <field name="name">plan_mejoramiento.accion.form</field>
+        <field name="model">plan_mejoramiento.accion</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name" />
+                        <field name="descripcion" />
+                        <field name="tipo" />
+                        <field name="ejecutor_id" />
+                        <field name="dependencia_id" />
+                        <field name="jefe_dependencia_id" />
+                        <field name="user_id" />
+                        <field name="objetivo" />
+                        <field name="indicador" />
+                        <field name="unidad_medida" />
+                        <field name="meta" />
+                        <field name="recurso_ids" />
+                        <field name="facha_inicio" />
+                        <field name="facha_fin" />
+                        <field name="facha_creacion" />
+                        <field name="hallazgo_id" />
+                        <field name="hallazgo_dependencia_id" />
+                        <field name="plan_tipo" />
+                        <field name="plan_id" />
+                    </group>
+                    <notebook>
+                        <page string='Avances'>
+                            <group>
+                                <field name="avance_ids" />
+                            </group>
+                        </page>
+                        <page string='Tareas'>
+                            <group>
+                                <field name="task_ids" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="accion_tree">
+        <field name="name">plan_mejoramiento.accion.tree</field>
+        <field name="model">plan_mejoramiento.accion</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="descripcion" />
+                <field name="state" />
+                <field name="ejecutor_id" />
+                <field name="dependencia_id" />
+                <field name="jefe_dependencia_id" />
+                <field name="user_id" />
+                <field name="facha_inicio" />
+                <field name="facha_fin" />
+                <field name="facha_creacion" />
+                <field name="hallazgo_id" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="accion_action">
+        <field name="name">Acción</field>
+        <field name="res_model">plan_mejoramiento.accion</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="accion_menu"
+        parent="planes_mejoramiento_menu"
+        sequence="20"
+        name="Acción" action="accion_action"
+    />
+
+    <!--
+    =================================================================
+    plan_mejoramiento.avance
+    Avances
+    =================================================================
+    -->
+    <record model="ir.ui.view" id="avance_search">
+        <field name="name">plan_mejoramiento.avance.search</field>
+        <field name="model">plan_mejoramiento.avance</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="descripcion" />
+                <field name="facha_creacion" />
+                <field name="tipo_calificacion_id" />
+                <field name="state" />
+                <field name="porcentaje_avance" />
+                <field name="observacion" />
+                <field name="accion_id" />
+                <field name="dependencia_id" />
+                <field name="accion_descripcion" />
+                <field name="plan_tipo" />
+                <field name="jefe_dependencia_id" />
+                <field name="ejecutor_id" />
+                <group string="Agrupar por...">
+                    <filter string="Tipo Calificación" context="{'group_by':'tipo_calificacion_id'}"/>
+                    <filter string="Estado" context="{'group_by':'state'}"/>
+                    <filter string="Actividad" context="{'group_by':'accion_id'}"/>
+                    <filter string="Unidad" context="{'group_by':'dependencia_id'}"/>
+                    <filter string="Tipo Plan de Mejoramiento" context="{'group_by':'plan_tipo'}"/>
+                    <filter string="Jefe Dependencia" context="{'group_by':'jefe_dependencia_id'}"/>
+                    <filter string="Ejecutor" context="{'group_by':'ejecutor_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="avance_form">
+        <field name="name">plan_mejoramiento.avance.form</field>
+        <field name="model">plan_mejoramiento.avance</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="descripcion" />
+                        <field name="facha_creacion" />
+                        <field name="aprobacion_jefe_dependencia" />
+                        <field name="tipo_calificacion_id" />
+                        <field name="porcentaje_avance" />
+                        <field name="observacion" />
+                        <field name="accion_id" />
+                        <field name="dependencia_id" />
+                        <field name="accion_descripcion" />
+                        <field name="plan_tipo" />
+                        <field name="jefe_dependencia_id" />
+                        <field name="ejecutor_id" />
+                    </group>
+                    <notebook>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="avance_tree">
+        <field name="name">plan_mejoramiento.avance.tree</field>
+        <field name="model">plan_mejoramiento.avance</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="facha_creacion" />
+                <field name="aprobacion_jefe_dependencia" />
+                <field name="tipo_calificacion_id" />
+                <field name="state" />
+                <field name="accion_id" />
+                <field name="dependencia_id" />
+                <field name="accion_descripcion" />
+                <field name="plan_tipo" />
+                <field name="jefe_dependencia_id" />
+                <field name="ejecutor_id" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="avance_action">
+        <field name="name">Avances</field>
+        <field name="res_model">plan_mejoramiento.avance</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="avance_menu"
+        parent="planes_mejoramiento_menu"
+        sequence="20"
+        name="Avances" action="avance_action"
+    />
+
+</data>
+</openerp>
