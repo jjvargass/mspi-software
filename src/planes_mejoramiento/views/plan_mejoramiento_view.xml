@@ -450,7 +450,6 @@
                     </div>
                     <group>
                         <field name="tipo" />
-                        <field name="project_id" />
                         <field name="radicado" />
                         <field name="user_id"
                             string="Auditor"
@@ -458,14 +457,36 @@
                             readonly="1"
                         />
                         <field name="dependencia_id" />
-                        <field name="origen_id" />
-                        <field name="sub_origen_id" />
+                        <field name="origen_id" 
+                            attrs="{
+                                'invisible':[('tipo','!=','interno')],
+                                'required':[('tipo','=','interno')],
+                            }"
+                        />
+                        <field name="sub_origen_id" 
+                            attrs="{
+                                'invisible':[('tipo','!=','interno')],
+                                'required':[('tipo','=','interno')],
+                            }"
+                        />
                         <field name="facha" />
+                        <field name="edt_raiz_id"
+                            string="EDT Seguimiento"
+                            readonly="1"
+                            required="0"
+                            attrs="{'invisible': [('edt_raiz_id','=',False)]}"
+                        />
+                        <field name="project_id"
+                            string="Proyecto Seguimiento"
+                            readonly="1"
+                            required="0"
+                            attrs="{'invisible': [('project_id','=',False)]}"
+                        />
                     </group>
                     <notebook>
                         <page string='Hallazgos'>
                             <group>
-                                <field name="hallazgo_ids" />
+                                <field name="hallazgo_ids" context="{'parent_id': edt_raiz_id, 'plan_id': active_id, 'plan_dependencia_id': dependencia_id}"/>
                             </group>
                         </page>
                     </notebook>

@@ -215,7 +215,7 @@ class plan_mejoramiento_plan(models.Model):
     _description = 'Plan Mejoramiento'
     _inherit = ['mail.thread', 'models.soft_delete.mixin']
     _inherits = {
-        'project.project': 'project_project_id',
+        'project.project': 'project_id',
     }
 
     # -------------------
@@ -248,6 +248,7 @@ class plan_mejoramiento_plan(models.Model):
         comodel_name='hr.department',
         ondelete='restrict',
         help='''Unidad''',
+        readonly=True,
         default=lambda self: self.env.user.department_id.id,
     )
     origen_id = fields.Many2one(
@@ -281,15 +282,35 @@ class plan_mejoramiento_plan(models.Model):
         required=False,
         help='''Hallazgos''',
     )
-    project_project_id = fields.Many2one(
-        comodel_name="project.project",
-        ondelete='restrict',
-        required=True,
-    )
 
     # -------------------
     # methods
     # -------------------
+
+    @api.model
+    def create(self, vals):
+        plan = super(plan_mejoramiento_plan, self).create(vals)
+        plan.project_id.write({
+            'proyecto_tipo': 'plan_mejoramiento',
+            'active': False, # El registro no se elimina, solo que no es visible en el listado de project.project,
+                             # por el momento no es necesario que la gente acceda a este project.project
+                             # si se requiere solo se desarchiva el registro y se gestiona comun y corriente.
+        })
+        plan.project_id.edt_raiz_id = self.env['project.edt'].create({
+          'name': plan.project_id.name,
+          'user_id': plan.project_id.user_id.id,
+        })
+        return plan
+
+    @api.one
+    def write(self, vals):
+        res = super(plan_mejoramiento_plan, self).write(vals)
+        if vals.get('user_id', False):
+            self.project_id.edt_raiz_id.write({
+                'user_id': vals.get('user_id'),
+            })
+        return res
+
 
 class plan_mejoramiento_hallazgo(models.Model):
     _name = 'plan_mejoramiento.hallazgo'
