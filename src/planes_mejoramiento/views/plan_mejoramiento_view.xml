@@ -396,17 +396,17 @@
             <search>
                 <field name="tipo" />
                 <filter name="filtro_tipo_interno"
-                    string="interno"
+                    string="Interno"
                     help="Filtrar Tipo interno"
                     domain="[('tipo', '=', 'interno')]"
                 />
                 <filter name="filtro_tipo_contraloria_bog"
-                    string="contraloria_bog"
+                    string="Contraloria Bogota"
                     help="Filtrar Tipo contraloria_bog"
                     domain="[('tipo', '=', 'contraloria_bog')]"
                 />
                 <filter name="filtro_tipo_contraloria_gral"
-                    string="contraloria_gral"
+                    string="Contraloria General"
                     help="Filtrar Tipo contraloria_gral"
                     domain="[('tipo', '=', 'contraloria_gral')]"
                 />
@@ -434,11 +434,29 @@
                         <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
                             <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
                         </button>
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" string="Nombre" />
+                        <h1><field name="name" placeholder="Plan Mejoramiento YYYY"/></h1>
                     </div>
                     <group>
                         <field name="tipo" />
                         <field name="project_id" />
                         <field name="radicado" />
+                        <field name="user_id"
+                            string="Auditor"
+                            domain="[('id','=',uid)]"
+                            readonly="1"
+                        />
                         <field name="dependencia_id" />
                         <field name="origen_id" />
                         <field name="sub_origen_id" />
