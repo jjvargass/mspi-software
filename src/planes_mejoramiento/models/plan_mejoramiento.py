@@ -222,15 +222,11 @@ class plan_mejoramiento_plan(models.Model):
     # Fields
     # -------------------
     tipo = fields.Selection(
+        TIPO_PLAN,
         string='Tipo',
         required=True,
         track_visibility='onchange',
         help='''Topo''',
-        selection=[
-            ('interno', 'interno'),
-            ('contraloria_bog', 'contraloria_bog'),
-            ('contraloria_gral', 'contraloria_gral'),
-        ],
     )
     project_id = fields.Many2one(
         string='Proyecto',
@@ -239,7 +235,7 @@ class plan_mejoramiento_plan(models.Model):
         ondelete='restrict',
         help='''Proyecto''',
     )
-    radicado = fields.Text(
+    radicado = fields.Char(
         string='Radicado',
         required=False,
         track_visibility='onchange',
@@ -252,6 +248,7 @@ class plan_mejoramiento_plan(models.Model):
         comodel_name='hr.department',
         ondelete='restrict',
         help='''Unidad''',
+        default=lambda self: self.env.user.department_id.id,
     )
     origen_id = fields.Many2one(
         string='Origen',
