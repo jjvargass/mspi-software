@@ -430,11 +430,31 @@ class plan_mejoramiento_hallazgo(models.Model):
 
     @api.one
     def _compute_fecha_inicio(self):
-        self.fecha_inicio = "1994-07-05"
+        for hallazgo in self:
+            self.env.cr.execute("""
+                        SELECT
+                            MIN(fecha_inicio)
+                        FROM
+                            plan_mejoramiento_accion t
+                        WHERE
+                            t.hallazgo_id = %s
+                     """, (hallazgo.id,))
+        date_min = self.env.cr.fetchall()[0][0]
+        self.fecha_inicio = date_min
 
     @api.one
     def _compute_fecha_fin(self):
-        self.fecha_fin = "1990-04-22"
+        for hallazgo in self:
+            self.env.cr.execute("""
+                        SELECT
+                            MAX(fecha_fin)
+                        FROM
+                            plan_mejoramiento_accion t
+                        WHERE
+                            t.hallazgo_id = %s
+                     """, (hallazgo.id,))
+        date_max = self.env.cr.fetchall()[0][0]
+        self.fecha_fin = date_max
 
 class plan_mejoramiento_accion(models.Model):
     _name = 'plan_mejoramiento.accion'
