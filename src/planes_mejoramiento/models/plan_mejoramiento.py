@@ -336,6 +336,7 @@ class plan_mejoramiento_hallazgo(models.Model):
     user_id = fields.Many2one(
         string='Auditor',
         required=True,
+        readonly=True,
         track_visibility='onchange',
         comodel_name='res.users',
         ondelete='restrict',
@@ -419,6 +420,13 @@ class plan_mejoramiento_hallazgo(models.Model):
     # -------------------
     # methods
     # -------------------
+    @api.onchange('proceso_id')
+    def _onchange_proceso_id(self):
+        lideres = self.proceso_id.dependencia_lider
+        print lideres
+        gestores = self.proceso_id.dependencia_gestor_ids
+        all_areas = lideres + gestores
+        print all_areas
 
     @api.one
     def _compute_fecha_inicio(self):
