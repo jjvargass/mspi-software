@@ -269,7 +269,7 @@ class plan_mejoramiento_plan(models.Model):
         help='''Sub Origne''',
         domain="[('parent_id','=',origen_id)]",
     )
-    facha = fields.Date(
+    fecha = fields.Date(
         string='Fecha Registro',
         required=False,
         readonly=True,
@@ -558,19 +558,19 @@ class plan_mejoramiento_accion(models.Model):
         ondelete='restrict',
         help='''Recursos''',
     )
-    facha_inicio = fields.Date(
+    fecha_inicio = fields.Date(
         string='Fecha Inicio',
         required=False,
         track_visibility='onchange',
         help='''Fecha Inicio''',
     )
-    facha_fin = fields.Date(
+    fecha_fin = fields.Date(
         string='Fecha Fin',
         required=False,
         track_visibility='onchange',
         help='''Fecha Fin''',
     )
-    facha_creacion = fields.Date(
+    fecha_creacion = fields.Date(
         string='Fecha Registro',
         required=False,
         readonly=True,
@@ -636,7 +636,7 @@ class plan_mejoramiento_avance(models.Model):
         track_visibility='onchange',
         help='''Descripción''',
     )
-    facha_creacion = fields.Date(
+    fecha_creacion = fields.Date(
         string='Fecha Registro',
         required=False,
         readonly=True,

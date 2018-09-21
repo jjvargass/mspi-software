@@ -414,7 +414,7 @@
                 <field name="dependencia_id" />
                 <field name="origen_id" />
                 <field name="sub_origen_id" />
-                <field name="facha" />
+                <field name="fecha" />
                 <group string="Agrupar por...">
                     <filter string="Tipo" context="{'group_by':'tipo'}"/>
                     <filter string="Unidad" context="{'group_by':'dependencia_id'}"/>
@@ -469,7 +469,7 @@
                                 'required':[('tipo','=','interno')],
                             }"
                         />
-                        <field name="facha" />
+                        <field name="fecha" />
                         <field name="edt_raiz_id"
                             string="EDT Seguimiento"
                             readonly="1"
@@ -508,7 +508,7 @@
                 />
                 <field name="tipo" />
                 <field name="dependencia_id" />
-                <field name="facha" />
+                <field name="fecha" />
             </tree>
         </field>
     </record>
@@ -693,9 +693,9 @@
                 <field name="dependencia_id" />
                 <field name="jefe_dependencia_id" />
                 <field name="user_id" />
-                <field name="facha_inicio" />
-                <field name="facha_fin" />
-                <field name="facha_creacion" />
+                <field name="fecha_inicio" />
+                <field name="fecha_fin" />
+                <field name="fecha_creacion" />
                 <group string="Agrupar por...">
                     <filter string="Estado" context="{'group_by':'state'}"/>
                     <filter string="Ejecutor" context="{'group_by':'ejecutor_id'}"/>
@@ -736,9 +736,9 @@
                         <field name="unidad_medida" />
                         <field name="meta" />
                         <field name="recurso_ids" />
-                        <field name="facha_inicio" />
-                        <field name="facha_fin" />
-                        <field name="facha_creacion" />
+                        <field name="fecha_inicio" />
+                        <field name="fecha_fin" />
+                        <field name="fecha_creacion" />
                         <field name="hallazgo_id" />
                         <field name="hallazgo_dependencia_id" />
                         <field name="plan_tipo" />
@@ -776,9 +776,9 @@
                 <field name="dependencia_id" />
                 <field name="jefe_dependencia_id" />
                 <field name="user_id" />
-                <field name="facha_inicio" />
-                <field name="facha_fin" />
-                <field name="facha_creacion" />
+                <field name="fecha_inicio" />
+                <field name="fecha_fin" />
+                <field name="fecha_creacion" />
                 <field name="hallazgo_id" />
             </tree>
         </field>
@@ -806,7 +806,7 @@
         <field name="arch" type="xml">
             <search>
                 <field name="descripcion" />
-                <field name="facha_creacion" />
+                <field name="fecha_creacion" />
                 <field name="tipo_calificacion_id" />
                 <field name="state" />
                 <field name="porcentaje_avance" />
@@ -845,7 +845,7 @@
                     </div>
                     <group>
                         <field name="descripcion" />
-                        <field name="facha_creacion" />
+                        <field name="fecha_creacion" />
                         <field name="aprobacion_jefe_dependencia" />
                         <field name="tipo_calificacion_id" />
                         <field name="porcentaje_avance" />
@@ -872,7 +872,7 @@
         <field name="model">plan_mejoramiento.avance</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="facha_creacion" />
+                <field name="fecha_creacion" />
                 <field name="aprobacion_jefe_dependencia" />
                 <field name="tipo_calificacion_id" />
                 <field name="state" />
