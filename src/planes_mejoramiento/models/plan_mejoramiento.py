@@ -20,6 +20,7 @@
 
 from openerp import models, fields, api
 from openerp.exceptions import ValidationError
+from openid import store
 
 
 TIPO_PLAN = [
@@ -391,9 +392,9 @@ class plan_mejoramiento_hallazgo(models.Model):
         track_visibility='onchange',
         help='''Estado''',
         selection=[
-            ('en_progreso', 'en_progreso'),
-            ('terminado', 'terminado'),
-            ('cancelado', 'cancelado'),
+            ('en_progreso', 'En Progreso'),
+            ('terminado', 'Terminado'),
+            ('cancelado', 'Cancelado'),
         ],
         default='en_progreso',
     )
@@ -410,19 +411,24 @@ class plan_mejoramiento_hallazgo(models.Model):
         string='Tipo Plan de Mejoramiento',
         required=False,
         readonly=True,
+        store=True,
         track_visibility='onchange',
         related='plan_id.tipo',
         help='''Tipo Plan de Mejoramiento''',
     )
-    acciones_ids = fields.Text(
+    acciones_ids = fields.One2many(
         string='Acciones',
         required=False,
         help='''Acciones''',
+        comodel_name='plan_mejoramiento.accion',
+        inverse_name='hallazgo_id',
+        ondelete='restrict',
     )
 
     # -------------------
     # methods
     # -------------------
+
     @api.onchange('proceso_id')
     def _onchange_proceso_id(self):
         lideres = self.proceso_id.dependencia_lider
@@ -498,13 +504,13 @@ class plan_mejoramiento_accion(models.Model):
         track_visibility='onchange',
         help='''Estado''',
         selection=[
-            ('nuevo', 'nuevo'),
-            ('por_aprobar', 'por_aprobar'),
-            ('en_progreso', 'en_progreso'),
-            ('terminado', 'terminado'),
-            ('cancelado', 'cancelado'),
+            ('nuevo', 'Nuevo'),
+            ('por_aprobar', 'Por Aprobar'),
+            ('en_progreso', 'En Progreso'),
+            ('terminado', 'Terminado'),
+            ('cancelado', 'Cancelado'),
         ],
-        default='en_progreso',
+        default='por_aprobar',
     )
     ejecutor_id = fields.Many2one(
         string='Ejecutor',
@@ -524,10 +530,11 @@ class plan_mejoramiento_accion(models.Model):
         comodel_name='hr.department',
         ondelete='restrict',
         help='''Unidad''',
+        default=lambda self: self.env.user.department_id.id,
     )
     jefe_dependencia_id = fields.Many2one(
         string='Jefe Dependencia',
-        required=False,
+        required=True,
         readonly=True,
         track_visibility='onchange',
         related='dependencia_id.manager_id.user_id',
@@ -539,6 +546,7 @@ class plan_mejoramiento_accion(models.Model):
         string='Auditor',
         required=True,
         readonly=True,
+        store=True,
         track_visibility='onchange',
         related='hallazgo_id.user_id',
         comodel_name='res.users',
@@ -583,13 +591,13 @@ class plan_mejoramiento_accion(models.Model):
     )
     fecha_inicio = fields.Date(
         string='Fecha Inicio',
-        required=False,
+        required=True,
         track_visibility='onchange',
         help='''Fecha Inicio''',
     )
     fecha_fin = fields.Date(
         string='Fecha Fin',
-        required=False,
+        required=True,
         track_visibility='onchange',
         help='''Fecha Fin''',
     )
@@ -620,11 +628,13 @@ class plan_mejoramiento_accion(models.Model):
     plan_tipo = fields.Selection(
         required=False,
         readonly=True,
+        store=True,
         related='hallazgo_id.plan_tipo',
     )
     plan_id = fields.Many2one(
         required=False,
         readonly=True,
+        store=True,
         related='hallazgo_id.plan_id',
         comodel_name='plan_mejoramiento.plan',
         ondelete='restrict',
