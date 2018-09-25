@@ -431,6 +431,7 @@
         <field name="arch" type="xml">
             <form>
                 <header>
+                    <field name="state" widget="statusbar" clickable="1"/>
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
@@ -553,17 +554,17 @@
                 <field name="fecha_fin" />
                 <field name="state" />
                 <filter name="filtro_state_en_progreso"
-                    string="en_progreso"
+                    string="En Progreso"
                     help="Filtrar Estado en_progreso"
                     domain="[('state', '=', 'en_progreso')]"
                 />
                 <filter name="filtro_state_terminado"
-                    string="terminado"
+                    string="Terminado"
                     help="Filtrar Estado terminado"
                     domain="[('state', '=', 'terminado')]"
                 />
                 <filter name="filtro_state_cancelado"
-                    string="cancelado"
+                    string="Cancelado"
                     help="Filtrar Estado cancelado"
                     domain="[('state', '=', 'cancelado')]"
                 />
@@ -574,7 +575,7 @@
                     <filter string="Unidad" context="{'group_by':'dependencia_id'}"/>
                     <filter string="Estado" context="{'group_by':'state'}"/>
                     <filter string="Plan de Mejoramiento" context="{'group_by':'plan_id'}"/>
-                    <filter string="Tipo Plan de Mejoramiento" context="{'group_by':'plan_tipo'}"/>
+                    <filter string="Tipo" context="{'group_by':'plan_tipo'}"/>
                 </group>
             </search>
         </field>
@@ -585,7 +586,7 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <field name="state" widget="statusbar" />
+                    <field name="state" widget="statusbar" clickable="1"/>
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
@@ -623,7 +624,7 @@
                     </group>
                     <notebook>
                         <page string='Acciones' attrs="{'invisible': [('id','=',False)]}">
-                            <field name="acciones_ids" />
+                            <field name="acciones_ids" context="{'hallazgo_id': active_id}"/>
                         </page>
                     </notebook>
                 </sheet>
@@ -710,11 +711,10 @@
                     <filter string="Estado" context="{'group_by':'state'}"/>
                     <filter string="Ejecutor" context="{'group_by':'ejecutor_id'}"/>
                     <filter string="Unidad" context="{'group_by':'dependencia_id'}"/>
-                    <filter string="Jefe Dependencia" context="{'group_by':'jefe_dependencia_id'}"/>
                     <filter string="Auditor" context="{'group_by':'user_id'}"/>
                     <filter string="Hallazgo" context="{'group_by':'hallazgo_id'}"/>
-                    <filter string="None" context="{'group_by':'plan_tipo'}"/>
-                    <filter string="None" context="{'group_by':'plan_id'}"/>
+                    <filter string="Tipo" context="{'group_by':'plan_tipo'}"/>
+                    <filter string="Plan" context="{'group_by':'plan_id'}"/>
                 </group>
             </search>
         </field>
@@ -733,8 +733,25 @@
                             <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
                         </button>
                     </div>
+                    <group name="informacion_relacionada" col='4'>
+                        <group name="informacion_hallazgo" col='2'>
+                            <separator colspan ='2' string="Información Hallazgo" />
+                            <field name="hallazgo_id" placeholder="Seleccione Hallazgo" />
+                            <field name="hallazgo_dependencia_id" />
+                        </group>
+                        <group name="informacion_plan" col='2'>
+                             <separator colspan ='2' string="Información Plan"/>
+                            <field name="plan_tipo" />
+                            <field name="plan_id" />
+                        </group>
+                    </group>
+                    <separator string="Registro de Acción"/>
+                    <field name="id" invisible="1" required="0"/>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" string="Nombre" />
+                        <h1><field name="name" placeholder="Nombre Acción"/></h1>
+                    </div>
                     <group>
-                        <field name="name" />
                         <field name="descripcion" />
                         <field name="tipo" />
                         <field name="ejecutor_id" />
@@ -749,10 +766,6 @@
                         <field name="fecha_inicio" />
                         <field name="fecha_fin" />
                         <field name="fecha_creacion" />
-                        <field name="hallazgo_id" />
-                        <field name="hallazgo_dependencia_id" />
-                        <field name="plan_tipo" />
-                        <field name="plan_id" />
                     </group>
                     <notebook>
                         <page string='Avances'>
