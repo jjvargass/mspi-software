@@ -394,6 +394,8 @@
         <field name="model">plan_mejoramiento.plan</field>
         <field name="arch" type="xml">
             <search>
+                <field name="name" string="Nombre"/>
+                <field name="user_id" string="Auditor"/>
                 <field name="tipo" />
                 <filter name="filtro_tipo_interno"
                     string="Interno"
@@ -418,6 +420,7 @@
                 <group string="Agrupar por...">
                     <filter string="Tipo" context="{'group_by':'tipo'}"/>
                     <filter string="Unidad" context="{'group_by':'dependencia_id'}"/>
+                    <filter string="Auditor" context="{'group_by':'user_id'}"/>
                 </group>
             </search>
         </field>
@@ -484,10 +487,17 @@
                         />
                     </group>
                     <notebook>
-                        <page string='Hallazgos'>
-                            <group>
-                                <field name="hallazgo_ids" context="{'parent_id': edt_raiz_id, 'plan_id': active_id, 'plan_dependencia_id': dependencia_id}"/>
-                            </group>
+                        <page string='Hallazgos' attrs="{'invisible': [('edt_raiz_id','=',False)]}">
+                            <field name="hallazgo_ids" context="{'parent_id': edt_raiz_id, 'plan_id': active_id, 'plan_dependencia_id': dependencia_id}">
+                                <tree>
+                                    <field name="name"/>
+                                     <field name="descripcion"/>
+                                     <field name="user_id"/>
+                                     <field name="dependencia_id"/>
+                                    <field name="fecha_inicio" />
+                                    <field name="fecha_fin" />
+                                </tree>
+                            </field>
                         </page>
                     </notebook>
                 </sheet>
@@ -507,6 +517,7 @@
                     string="Nombre"
                 />
                 <field name="tipo" />
+                <field name="user_id" string="Auditor"/>
                 <field name="dependencia_id" />
                 <field name="fecha" />
             </tree>
@@ -591,6 +602,7 @@
                         <field name="plan_tipo" />
                     </group>
                     <separator string="Registro de Hallazgo"/>
+                    <field name="id" invisible="1" required="0"/>
                     <div class="oe_title">
                         <label for="name" class="oe_edit_only" string="Nombre" />
                         <h1><field name="name" placeholder="Nombre del Hallazgo"/></h1>
@@ -610,10 +622,8 @@
                         <field name="fecha_fin" />
                     </group>
                     <notebook>
-                        <page string='Acciones'>
-                            <group>
-                                <field name="acciones_ids" />
-                            </group>
+                        <page string='Acciones' attrs="{'invisible': [('id','=',False)]}">
+                            <field name="acciones_ids" />
                         </page>
                     </notebook>
                 </sheet>
