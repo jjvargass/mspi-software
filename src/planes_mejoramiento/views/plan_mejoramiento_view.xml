@@ -725,7 +725,7 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <field name="state" widget="statusbar" />
+                    <field name="state" widget="statusbar" clickable="1" />
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
@@ -753,7 +753,12 @@
                     </div>
                     <group>
                         <field name="descripcion" />
-                        <field name="tipo" />
+                        <field name="tipo"
+                            attrs="{
+                                'invisible':[('plan_tipo','!=','interno')],
+                                'required':[('plan_tipo','=','interno')],
+                            }"
+                        />
                         <field name="ejecutor_id" />
                         <field name="dependencia_id" />
                         <field name="jefe_dependencia_id" />
@@ -795,14 +800,14 @@
                 <field name="name" />
                 <field name="descripcion" />
                 <field name="state" />
-                <field name="ejecutor_id" />
+                <field name="ejecutor_id" invisible="1"/>
                 <field name="dependencia_id" />
-                <field name="jefe_dependencia_id" />
+                <field name="jefe_dependencia_id" invisible="1"/>
                 <field name="user_id" />
                 <field name="fecha_inicio" />
                 <field name="fecha_fin" />
-                <field name="fecha_creacion" />
-                <field name="hallazgo_id" />
+                <field name="fecha_creacion" invisible="1"/>
+                <field name="hallazgo_id" invisible="1"/>
             </tree>
         </field>
     </record>
@@ -861,11 +866,24 @@
                     <field name="state" widget="statusbar" />
                 </header>
                 <sheet>
-                    <div class="oe_button_box" name="button_box">
-                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
-                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
-                        </button>
-                    </div>
+                    <group name="ingormacion_relacionada">
+                        <group>
+                            <separator colspan ='2' string="Información Acción" />
+                            <field name="accion_id" />
+                            <field name="accion_descripcion" />
+	                        <field name="dependencia_id" />
+	                        <field name="jefe_dependencia_id" />
+	                        <field name="ejecutor_id" />
+                        </group>
+                        <group>
+                            <separator colspan ='2' string="Información Plan" />
+                             <field name="plan_id" />
+                            <field name="plan_tipo" />
+                            <field name="user_id" />
+                            <field name="dependencia_user_registrador_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <separator string="Registro de Avance" />
                     <group>
                         <field name="descripcion" />
                         <field name="fecha_creacion" />
@@ -873,12 +891,6 @@
                         <field name="tipo_calificacion_id" />
                         <field name="porcentaje_avance" />
                         <field name="observacion" />
-                        <field name="accion_id" />
-                        <field name="dependencia_id" />
-                        <field name="accion_descripcion" />
-                        <field name="plan_tipo" />
-                        <field name="jefe_dependencia_id" />
-                        <field name="ejecutor_id" />
                     </group>
                     <notebook>
                     </notebook>
