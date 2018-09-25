@@ -353,6 +353,7 @@ class plan_mejoramiento_hallazgo(models.Model):
         comodel_name='plan_mejoramiento.causa',
         ondelete='restrict',
         help='''Causas''',
+        domain="[('activo_sistema','=',True)]",
     )
     proceso_id = fields.Many2one(
         string='Proceso',
@@ -492,10 +493,10 @@ class plan_mejoramiento_accion(models.Model):
         track_visibility='onchange',
         help='''Topo''',
         selection=[
-            ('preventivo', 'preventivo'),
-            ('correctivo', 'correctivo'),
-            ('mejoramiento', 'mejoramiento'),
-            ('correccion', 'correccion'),
+            ('preventivo', 'Preventivo'),
+            ('correctivo', 'Correctivo'),
+            ('mejoramiento', 'Mejoramiento'),
+            ('correccion', 'Corrección'),
         ],
     )
     state = fields.Selection(
@@ -544,7 +545,7 @@ class plan_mejoramiento_accion(models.Model):
     )
     user_id = fields.Many2one(
         string='Auditor',
-        required=True,
+        required=False,
         readonly=True,
         store=True,
         track_visibility='onchange',
@@ -588,6 +589,7 @@ class plan_mejoramiento_accion(models.Model):
         comodel_name='plan_mejoramiento.recurso',
         ondelete='restrict',
         help='''Recursos''',
+        domain="[('activo_sistema','=',True)]",
     )
     fecha_inicio = fields.Date(
         string='Fecha Inicio',
@@ -615,6 +617,7 @@ class plan_mejoramiento_accion(models.Model):
         comodel_name='plan_mejoramiento.hallazgo',
         ondelete='restrict',
         help='''Hallazgo''',
+        domain="[('dependencia_id', '=', dependencia_id )]",
         default=lambda self: self._context.get('hallazgo_id', self.env['plan_mejoramiento.hallazgo'].browse()),
     )
     hallazgo_dependencia_id = fields.Many2one(
@@ -712,14 +715,25 @@ class plan_mejoramiento_avance(models.Model):
         track_visibility='onchange',
         help='''Observaciones''',
     )
+    dependencia_user_registrador_id = fields.Many2one(
+        string='Unidad Usuario Registrador',
+        required=False,
+        readonly=True,
+        store=False,
+        comodel_name='hr.department',
+        ondelete='restrict',
+        help='''Unidad Usuario Registrador''',
+        default=lambda self: self.env.user.department_id.id,
+    )
+
     accion_id = fields.Many2one(
-        string='Actividad',
+        string='Acción',
         required=True,
         track_visibility='onchange',
         comodel_name='plan_mejoramiento.accion',
         ondelete='restrict',
-        help='''Actividad''',
-        domain="[('state','=','en_progreso')]",
+        help='''Acción''',
+        domain="[('state','=','en_progreso'),('dependencia_id', '=', dependencia_user_registrador_id )]",
         default=lambda self: self._context.get('accion_id', self.env['plan_mejoramiento.accion'].browse()),
     )
     dependencia_id = fields.Many2one(
@@ -747,6 +761,14 @@ class plan_mejoramiento_avance(models.Model):
         related='accion_id.plan_tipo',
         help='''Tipo Plan de Mejoramiento''',
     )
+    plan_id = fields.Many2one(
+        required=False,
+        readonly=True,
+        store=True,
+        related='accion_id.plan_id',
+        comodel_name='plan_mejoramiento.plan',
+        ondelete='restrict',
+    )
     jefe_dependencia_id = fields.Many2one(
         string='Jefe Dependencia',
         required=False,
@@ -764,6 +786,17 @@ class plan_mejoramiento_avance(models.Model):
         related='accion_id.ejecutor_id',
         ondelete='restrict',
         help='''Ejecutor''',
+    )
+    user_id = fields.Many2one(
+        string='Auditor',
+        required=False,
+        readonly=True,
+        store=True,
+        track_visibility='onchange',
+        related='accion_id.user_id',
+        comodel_name='res.users',
+        ondelete='restrict',
+        help='''Auditro''',
     )
 
     # -------------------
