@@ -277,10 +277,13 @@ class plan_mejoramiento_plan(models.Model):
         help='''Fecha Registro''',
         default=fields.Date.today,
     )
-    hallazgo_ids = fields.Text(
+    hallazgo_ids = fields.One2many(
         string='Hallazgos',
         required=False,
         help='''Hallazgos''',
+        comodel_name='plan_mejoramiento.hallazgo',
+        inverse_name='plan_id',
+        ondelete='restrict',
     )
 
     # -------------------
