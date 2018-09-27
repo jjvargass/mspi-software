@@ -56,7 +56,7 @@ class plan_mejoramiento_tipo_calificacion(models.Model):
         string='Tipo',
         required=True,
         track_visibility='onchange',
-        help='''Topo''',
+        help='''Tipo''',
     )
     state = fields.Selection(
         string='Estado',
@@ -71,10 +71,6 @@ class plan_mejoramiento_tipo_calificacion(models.Model):
             ('terminado_con_retraso', 'Terminado Con Retraso'),
         ],
     )
-
-    _sql_constraints = [
-        ('unique_name', 'unique(name)', 'Este name ya está registrado'),
-    ]
 
     # -------------------
     # methods
@@ -648,10 +644,13 @@ class plan_mejoramiento_accion(models.Model):
         track_visibility='onchange',
         help='''Tareas''',
     )
-    avance_ids = fields.Text(
+    avance_ids = fields.One2many(
         string='Avances',
         required=False,
         help='''Avances''',
+        comodel_name='plan_mejoramiento.avance',
+        inverse_name='accion_id',
+        ondelete='restrict',
     )
 
     # -------------------
@@ -699,11 +698,12 @@ class plan_mejoramiento_avance(models.Model):
     state = fields.Selection(
         string='Estado',
         required=False,
+        store=True,
         track_visibility='onchange',
         related='tipo_calificacion_id.state',
         help='''Estado''',
     )
-    porcentaje_avance = fields.Text(
+    porcentaje_avance = fields.Char(
         string='% de Avance',
         required=False,
         track_visibility='onchange',
@@ -729,6 +729,7 @@ class plan_mejoramiento_avance(models.Model):
     accion_id = fields.Many2one(
         string='Acción',
         required=True,
+        store=True,
         track_visibility='onchange',
         comodel_name='plan_mejoramiento.accion',
         ondelete='restrict',
@@ -740,6 +741,7 @@ class plan_mejoramiento_avance(models.Model):
         string='Unidad',
         required=False,
         readonly=True,
+        store=True,
         track_visibility='onchange',
         related='accion_id.dependencia_id',
         ondelete='restrict',
@@ -757,6 +759,7 @@ class plan_mejoramiento_avance(models.Model):
         string='Tipo Plan de Mejoramiento',
         required=False,
         readonly=True,
+        store=True,
         track_visibility='onchange',
         related='accion_id.plan_tipo',
         help='''Tipo Plan de Mejoramiento''',

@@ -15,6 +15,7 @@
         'security/security.xml',
         'security/ir.model.access.csv',
         'views/plan_mejoramiento_view.xml',
+        'data/plan_mejoramiento.tipo_calificacion.csv',
     ],
     'test': [
     ],

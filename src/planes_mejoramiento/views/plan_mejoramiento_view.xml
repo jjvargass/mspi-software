@@ -773,15 +773,20 @@
                         <field name="fecha_creacion" />
                     </group>
                     <notebook>
-                        <page string='Avances'>
-                            <group>
-                                <field name="avance_ids" />
-                            </group>
+                        <page string='Avances' attrs="{'invisible': [('id','=',False)]}">
+                            <field name="avance_ids" >
+                                <tree>
+                                    <field name="descripcion"/>
+                                    <field name="aprobacion_jefe_dependencia"/>
+                                    <field name="fecha_creacion"/>
+                                    <field name="state"/>
+                                     <field name="tipo_calificacion_id"/>
+                                     <field name="observacion"/>
+                                </tree>
+                            </field>
                         </page>
-                        <page string='Tareas'>
-                            <group>
-                                <field name="task_ids" />
-                            </group>
+                        <page string='Tareas' attrs="{'invisible': [('id','=', False)]}">
+                            <field name="task_ids" />
                         </page>
                     </notebook>
                 </sheet>
@@ -845,14 +850,26 @@
                 <field name="plan_tipo" />
                 <field name="jefe_dependencia_id" />
                 <field name="ejecutor_id" />
+                <filter name="filtro_tipo_interno"
+                    string="Interno"
+                    help="Filtrar Tipo interno"
+                    domain="[('plan_tipo', '=', 'interno')]"
+                />
+                <filter name="filtro_tipo_contraloria_bog"
+                    string="Contraloria Bogota"
+                    help="Filtrar Tipo contraloria_bog"
+                    domain="[('plan_tipo', '=', 'contraloria_bog')]"
+                />
+                <filter name="filtro_tipo_contraloria_gral"
+                    string="Contraloria General"
+                    help="Filtrar Tipo contraloria_gral"
+                    domain="[('plan_tipo', '=', 'contraloria_gral')]"
+                />
                 <group string="Agrupar por...">
-                    <filter string="Tipo Calificación" context="{'group_by':'tipo_calificacion_id'}"/>
                     <filter string="Estado" context="{'group_by':'state'}"/>
-                    <filter string="Actividad" context="{'group_by':'accion_id'}"/>
+                    <filter string="Acción" context="{'group_by':'accion_id'}"/>
                     <filter string="Unidad" context="{'group_by':'dependencia_id'}"/>
-                    <filter string="Tipo Plan de Mejoramiento" context="{'group_by':'plan_tipo'}"/>
-                    <filter string="Jefe Dependencia" context="{'group_by':'jefe_dependencia_id'}"/>
-                    <filter string="Ejecutor" context="{'group_by':'ejecutor_id'}"/>
+                    <filter string="Tipo" context="{'group_by':'plan_tipo'}"/>
                 </group>
             </search>
         </field>
@@ -886,8 +903,11 @@
                     <separator string="Registro de Avance" />
                     <group>
                         <field name="descripcion" />
-                        <field name="fecha_creacion" />
                         <field name="aprobacion_jefe_dependencia" />
+                        <field name="fecha_creacion" />
+                    </group>
+                    <separator string="Calificación Auditoria" />
+                    <group>
                         <field name="tipo_calificacion_id" />
                         <field name="porcentaje_avance" />
                         <field name="observacion" />
@@ -907,16 +927,12 @@
         <field name="model">plan_mejoramiento.avance</field>
         <field name="arch" type="xml">
             <tree>
+                <field name="descripcion" />
                 <field name="fecha_creacion" />
                 <field name="aprobacion_jefe_dependencia" />
-                <field name="tipo_calificacion_id" />
                 <field name="state" />
-                <field name="accion_id" />
+                <field name="tipo_calificacion_id" />
                 <field name="dependencia_id" />
-                <field name="accion_descripcion" />
-                <field name="plan_tipo" />
-                <field name="jefe_dependencia_id" />
-                <field name="ejecutor_id" />
             </tree>
         </field>
     </record>
