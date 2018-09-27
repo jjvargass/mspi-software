@@ -16,6 +16,8 @@
         'security/ir.model.access.csv',
         'views/plan_mejoramiento_view.xml',
         'data/plan_mejoramiento.tipo_calificacion.csv',
+        'data/ir.config_parameter.csv',
+        'wizards/reporte_plan_view.xml',
     ],
     'test': [
     ],

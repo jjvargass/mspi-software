@@ -13,6 +13,10 @@
         parent="planes_mejoramiento_nav"
         sequence="10"
     />
+     <menuitem id="planes_mejoramiento_reporte_menu" parent="planes_mejoramiento_nav"
+        name="Reportes"
+        sequence="20"
+     />
      <menuitem id="planes_mejoramiento_conf_menu" parent="planes_mejoramiento_nav"
         name="Configuración Planes de Mejoramiento"
         groups="base.group_configuration"
