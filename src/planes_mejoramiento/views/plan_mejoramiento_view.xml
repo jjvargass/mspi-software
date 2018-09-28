@@ -439,18 +439,18 @@
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
-                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
-                        </button>
-                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
-                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
-                        </button>
-                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
-                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
-                        </button>
-                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
-                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
-                        </button>
+                        <button
+                            class="oe_stat_button" type="object"
+                            icon="fa-cubes" name="hallazgo_view_button" string="Hallazgo"
+                        />
+                        <button
+                            class="oe_stat_button" type="object"
+                            icon="fa-dashboard" name="accion_view_button" string="Acción"
+                        />
+                        <button
+                            class="oe_stat_button" type="object"
+                            icon="fa-signal" name="avance_view_button" string="Avances"
+                        />
                     </div>
                     <div class="oe_title">
                         <label for="name" class="oe_edit_only" string="Nombre" />
@@ -594,12 +594,14 @@
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
-                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
-                        </button>
-                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
-                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
-                        </button>
+                        <button
+                            class="oe_stat_button" type="object"
+                            icon="fa-dashboard" name="accion_view_button" string="Acción"
+                        />
+                        <button
+                            class="oe_stat_button" type="object"
+                            icon="fa-signal" name="avance_view_button" string="Avances"
+                        />
                     </div>
                     <div class="oe_title oe_horizontal_separator"> Información del Plan </div>
                     <group>
@@ -733,9 +735,10 @@
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
-                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
-                        </button>
+                        <button
+                            class="oe_stat_button" type="object"
+                            icon="fa-signal" name="avance_view_button" string="Avances"
+                        />
                     </div>
                     <group name="informacion_relacionada" col='4'>
                         <group name="informacion_hallazgo" col='2'>
