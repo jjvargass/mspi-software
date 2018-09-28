@@ -42,9 +42,31 @@ class plan_mejoramientos_wizard_reporte_plan(models.TransientModel):
 
     @api.multi
     def crear_reporte_plan(self):
-        proyecto = {}
+        all_data = []
+        plan = {}
         # construir diccionario
-        #proyecto['nombre'] = self.proyecto_id.name or ''
+        plan['plan_id'] = self.plan_id.id or ''
+        plan['plan_fecha'] = self.plan_id.fecha or ''
+        plan['plan_origen'] = self.plan_id.origen_id.name or ''
+        plan['plan_sub_origen'] = self.plan_id.sub_origen_id.name or ''
+        plan['plan_unidad'] = self.plan_id.dependencia_id.name or ''
+        plan['plan_usuario'] = self.plan_id.user_id.name or ''
+        plan['plan_radicado'] = self.plan_id.radicado or ''
+        if (self.plan_id.hallazgo_ids):
+            for hallazgo in self.plan_id.hallazgo_ids:
+                plan['hallazgo_nombre'] = self.hallazgo.name or ''
+                plan['hallazgo_nombre'] = self.hallazgo.name or ''
+                plan['hallazgo_unidad'] = self.hallazgo.dependencia_id or ''
+                if (hallazgo.acciones_ids):
+                    for accion in hallazgo.acciones_ids:
+                        plan['accion_descripcion'] = self.accion.descripcion or ''
+                else:
+                    print "vacio accion"
+                    print "vacio avance"
+        else:
+            print "vacio hallazgo"
+            print "vacio accion"
+            print "vacio avance"
 
         # crear reporte
         documento = reportes.crear_reporte(
