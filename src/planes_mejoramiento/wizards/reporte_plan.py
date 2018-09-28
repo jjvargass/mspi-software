@@ -36,14 +36,12 @@ class plan_mejoramientos_wizard_reporte_plan(models.TransientModel):
         domain="[('tipo','=',tipo)]",
     )
 
-
     # -------------------
     # methods
     # -------------------
 
     @api.multi
     def crear_reporte_plan(self):
-        print "AAAAAAAAAAAAA"
         proyecto = {}
         # construir diccionario
         #proyecto['nombre'] = self.proyecto_id.name or ''
@@ -52,24 +50,25 @@ class plan_mejoramientos_wizard_reporte_plan(models.TransientModel):
         documento = reportes.crear_reporte(
             self,
             proyecto,
-            'VISITAS',
-            'pdf',
-            'plantilla_visitas.odt',
-            'urbamizadores_ruta_plantillas'
+            'PLAN_INTERNO',
+            'xls',
+            'plan_interno.ods',
+            'plan_mejoramiento_ruta_plantilla_reportes'
         )
         # eliminar imagenes
         reportes.limpiar_carpeta('/tmp/img_reporte')
         # nombre del reporte para campos de odoo
-        self.archivo_encuesta = documento[0]
-        self.nombre_archivo_encuesta = documento[1]
+        self.archivo = documento[0]
+        self.nombre_archivo = documento[1]
         # buscamos el wizar de descarga
         view_ids = self.env['ir.ui.view'].search([('model','=','plan_mejoramiento.wizard.reporte_plan'),
-                                                  ('name','=','plan_mejoramiento_wizard_reporte_visitas_download')])
+                                                  ('name','=','plan_mejoramiento.wizard.reporte_plan_download')])
+        print view_ids
         ids = self.id
         return {
                 'view_type':'form',
                 'view_mode':'form',
-                'res_model':'urbanizadores.wizard.reporte_visitas',
+                'res_model':'plan_mejoramiento.wizard.reporte_plan',
                 'target':'new',
                 'type':'ir.actions.act_window',
                 'view_id':view_ids.id,
