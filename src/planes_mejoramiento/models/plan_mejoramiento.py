@@ -313,6 +313,41 @@ class plan_mejoramiento_plan(models.Model):
             })
         return res
 
+    @api.multi
+    def hallazgo_view_button(self):
+        return {
+            'name': 'Hallazgos',
+            'res_model': 'plan_mejoramiento.hallazgo',
+            'domain': [('plan_id', '=', self.id)],
+            'context': {'plan_id': self.id},
+            'type': 'ir.actions.act_window',
+            'view_mode': 'tree,form',
+            'view_type': 'form',
+        }
+
+    @api.multi
+    def accion_view_button(self):
+        return {
+            'name': 'Acciones',
+            'res_model': 'plan_mejoramiento.accion',
+            'domain': [('plan_id', '=', self.id)],
+            'context': {'plan_id': self.id},
+            'type': 'ir.actions.act_window',
+            'view_mode': 'tree,form',
+            'view_type': 'form',
+        }
+
+    @api.multi
+    def avance_view_button(self):
+        return {
+            'name': 'Avances',
+            'res_model': 'plan_mejoramiento.avance',
+            'domain': [('plan_id', '=', self.id)],
+            'context': {'plan_id': self.id},
+            'type': 'ir.actions.act_window',
+            'view_mode': 'tree,form',
+            'view_type': 'form',
+        }
 
 class plan_mejoramiento_hallazgo(models.Model):
     _name = 'plan_mejoramiento.hallazgo'
@@ -463,6 +498,30 @@ class plan_mejoramiento_hallazgo(models.Model):
                      """, (hallazgo.id,))
         date_max = self.env.cr.fetchall()[0][0]
         self.fecha_fin = date_max
+
+    @api.multi
+    def accion_view_button(self):
+        return {
+            'name': 'Acciones',
+            'res_model': 'plan_mejoramiento.accion',
+            'domain': [('hallazgo_id', '=', self.id)],
+            'context': {'hallazgo_id': self.id},
+            'type': 'ir.actions.act_window',
+            'view_mode': 'tree,form',
+            'view_type': 'form',
+        }
+
+    @api.multi
+    def avance_view_button(self):
+        return {
+            'name': 'Avances',
+            'res_model': 'plan_mejoramiento.avance',
+            'domain': [('hallazgo_id', '=', self.id)],
+            'context': {'hallazgo_id': self.id},
+            'type': 'ir.actions.act_window',
+            'view_mode': 'tree,form',
+            'view_type': 'form',
+        }
 
 class plan_mejoramiento_accion(models.Model):
     _name = 'plan_mejoramiento.accion'
@@ -741,6 +800,17 @@ class plan_mejoramiento_accion(models.Model):
             self.task_ids.write({'project_id': self.hallazgo_id.plan_id.project_id.id, 'edt_id': self.hallazgo_id.plan_id.project_id.edt_raiz_id.id, 'revisor_id': self.ejecutor_id.id, 'accion_id': self.id})
         return result
 
+    @api.multi
+    def avance_view_button(self):
+        return {
+            'name': 'Avances',
+            'res_model': 'plan_mejoramiento.avance',
+            'domain': [('accion_id', '=', self.id)],
+            'context': {'accion_id': self.id},
+            'type': 'ir.actions.act_window',
+            'view_mode': 'tree,form',
+            'view_type': 'form',
+        }
 
 class plan_mejoramiento_avance(models.Model):
     _name = 'plan_mejoramiento.avance'
@@ -855,6 +925,14 @@ class plan_mejoramiento_avance(models.Model):
         store=True,
         related='accion_id.plan_id',
         comodel_name='plan_mejoramiento.plan',
+        ondelete='restrict',
+    )
+    hallazgo_id = fields.Many2one(
+        required=False,
+        readonly=True,
+        store=True,
+        related='accion_id.hallazgo_id',
+        comodel_name='plan_mejoramiento.hallazgo',
         ondelete='restrict',
     )
     jefe_dependencia_id = fields.Many2one(
