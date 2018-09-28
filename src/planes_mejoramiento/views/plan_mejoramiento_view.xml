@@ -789,8 +789,18 @@
                                 </tree>
                             </field>
                         </page>
-                        <page string='Tareas' attrs="{'invisible': [('id','=', False)]}">
-                            <field name="task_ids" />
+                        <page string='Tareas' >
+                            <field name="task_ids" context="{'accion_id': active_id}" >
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="dependencia_id" required="1"/>
+                                    <field name="user_id" domain="[('department_id','=', dependencia_id)]" required="1"/>
+                                    <field name="fecha_inicio" required="1"/>
+                                    <field name="fecha_fin" required="1"/>
+                                    <field name="project_id" invisible="1"/>
+                                    <field name="stage_id"/>
+                                </tree>
+                            </field>
                         </page>
                     </notebook>
                 </sheet>

@@ -20,6 +20,8 @@
 
 from openerp import models, fields, api
 from openerp.exceptions import ValidationError
+from datetime import datetime, timedelta
+from dateutil.relativedelta import relativedelta
 from openid import store
 
 
@@ -476,12 +478,20 @@ class plan_mejoramiento_accion(models.Model):
         track_visibility='onchange',
         size=255,
         help='''Nombre''',
+        readonly=True,
+        states={
+            'nuevo': [('readonly', False)],
+        }
     )
     descripcion = fields.Text(
         string='Descripción',
         required=True,
         track_visibility='onchange',
         help='''Descripción''',
+        readonly=True,
+        states={
+            'nuevo': [('readonly', False)],
+        }
     )
     tipo = fields.Selection(
         string='Tipo',
@@ -494,6 +504,10 @@ class plan_mejoramiento_accion(models.Model):
             ('mejoramiento', 'Mejoramiento'),
             ('correccion', 'Corrección'),
         ],
+        readonly=True,
+        states={
+            'nuevo': [('readonly', False)],
+        }
     )
     state = fields.Selection(
         string='Estado',
@@ -507,7 +521,7 @@ class plan_mejoramiento_accion(models.Model):
             ('terminado', 'Terminado'),
             ('cancelado', 'Cancelado'),
         ],
-        default='por_aprobar',
+        default='nuevo',
     )
     ejecutor_id = fields.Many2one(
         string='Ejecutor',
@@ -556,6 +570,10 @@ class plan_mejoramiento_accion(models.Model):
         track_visibility='onchange',
         size=255,
         help='''Objetivo''',
+        readonly=True,
+        states={
+            'nuevo': [('readonly', False)],
+        }
     )
     indicador = fields.Char(
         string='Indicador',
@@ -563,6 +581,10 @@ class plan_mejoramiento_accion(models.Model):
         track_visibility='onchange',
         size=255,
         help='''Indicador''',
+        readonly=True,
+        states={
+            'nuevo': [('readonly', False)],
+        }
     )
     unidad_medida = fields.Char(
         string='Unidad de Medida',
@@ -570,6 +592,10 @@ class plan_mejoramiento_accion(models.Model):
         track_visibility='onchange',
         size=255,
         help='''Unidad de Medida''',
+        readonly=True,
+        states={
+            'nuevo': [('readonly', False)],
+        }
     )
     meta = fields.Char(
         string='Meta',
@@ -577,6 +603,10 @@ class plan_mejoramiento_accion(models.Model):
         track_visibility='onchange',
         size=255,
         help='''Meta''',
+        readonly=True,
+        states={
+            'nuevo': [('readonly', False)],
+        }
     )
     recurso_ids = fields.Many2many(
         string='Recursos',
@@ -586,18 +616,30 @@ class plan_mejoramiento_accion(models.Model):
         ondelete='restrict',
         help='''Recursos''',
         domain="[('activo_sistema','=',True)]",
+        readonly=True,
+        states={
+            'nuevo': [('readonly', False)],
+        }
     )
     fecha_inicio = fields.Date(
         string='Fecha Inicio',
         required=True,
         track_visibility='onchange',
         help='''Fecha Inicio''',
+        readonly=True,
+        states={
+            'nuevo': [('readonly', False)],
+        }
     )
     fecha_fin = fields.Date(
         string='Fecha Fin',
         required=True,
         track_visibility='onchange',
         help='''Fecha Fin''',
+        readonly=True,
+        states={
+            'nuevo': [('readonly', False)],
+        }
     )
     fecha_creacion = fields.Date(
         string='Fecha Registro',
@@ -615,6 +657,10 @@ class plan_mejoramiento_accion(models.Model):
         help='''Hallazgo''',
         domain="[('dependencia_id', '=', dependencia_id )]",
         default=lambda self: self._context.get('hallazgo_id', self.env['plan_mejoramiento.hallazgo'].browse()),
+        readonly=True,
+        states={
+            'nuevo': [('readonly', False)],
+        }
     )
     hallazgo_dependencia_id = fields.Many2one(
         string='Unidad Del Hallazgo',
@@ -638,11 +684,12 @@ class plan_mejoramiento_accion(models.Model):
         comodel_name='plan_mejoramiento.plan',
         ondelete='restrict',
     )
-    task_ids = fields.Text(
+    task_ids = fields.One2many(
         string='Tareas',
         required=False,
-        track_visibility='onchange',
-        help='''Tareas''',
+        comodel_name='project.task',
+        inverse_name='accion_id',
+        ondelete='restrict',
     )
     avance_ids = fields.One2many(
         string='Avances',
@@ -656,6 +703,44 @@ class plan_mejoramiento_accion(models.Model):
     # -------------------
     # methods
     # -------------------
+    @api.one
+    @api.constrains('fecha_inicio')
+    def _check_fecha_inicio(self):
+        self._check_fechas()
+
+    @api.one
+    @api.constrains('fecha_fin')
+    def _check_fecha_fin(self):
+        self._check_fechas()
+        fecha_inicio = datetime.strptime(self.fecha_inicio, '%Y-%m-%d')
+        fecha_fin = datetime.strptime(self.fecha_fin, '%Y-%m-%d')
+        year = relativedelta(years=1)
+        tope = fecha_inicio + year
+        #if fecha_fin > tope:
+        #    raise ValidationError('No se permite que la vigencia de una acción sea superior a un año')
+
+    @api.one
+    def _check_fechas(self):
+        if(self.fecha_inicio and self.fecha_fin and
+           self.fecha_inicio > self.fecha_fin
+            ):
+            raise ValidationError("Fecha de inicio no puede ser posterior a la de finalización")
+
+    @api.model
+    def create(self, vals):
+        accion = super(plan_mejoramiento_accion, self).create(vals)
+        accion.task_ids.write({'project_id': self.hallazgo_id.plan_id.project_id.id, 'edt_id': self.hallazgo_id.plan_id.project_id.edt_raiz_id.id, 'revisor_id': accion.ejecutor_id.id, 'accion_id': accion.id})
+        return accion
+
+    @api.one
+    def write(self, vals):
+        if ('task_ids' in vals or 'avances_ids' in vals) and self.state != 'en_progreso':
+            raise ValidationError('No se permite adicionar tareas o avances en una Acción que no esta en progreso')
+        result = super(plan_mejoramiento_accion, self).write(vals)
+        if 'dependencia_id' in vals or 'jefe_dependencia_id' in vals or 'task_ids' in vals:
+            self.task_ids.write({'project_id': self.hallazgo_id.plan_id.project_id.id, 'edt_id': self.hallazgo_id.plan_id.project_id.edt_raiz_id.id, 'revisor_id': self.ejecutor_id.id, 'accion_id': self.id})
+        return result
+
 
 class plan_mejoramiento_avance(models.Model):
     _name = 'plan_mejoramiento.avance'
