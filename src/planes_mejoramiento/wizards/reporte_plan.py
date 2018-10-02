@@ -43,6 +43,7 @@ class plan_mejoramientos_wizard_reporte_plan(models.TransientModel):
     def definir_plan(self, dic_plan, obj_plan={}):
         if obj_plan:
             dic_plan['plan_id'] = obj_plan.id or ''
+            dic_plan['plan_nombre'] = obj_plan.name or ''
             dic_plan['plan_fecha'] = obj_plan.fecha or ''
             dic_plan['plan_origen'] = obj_plan.origen_id.name or ''
             dic_plan['plan_sub_origen'] = obj_plan.sub_origen_id.name or ''
@@ -51,6 +52,7 @@ class plan_mejoramientos_wizard_reporte_plan(models.TransientModel):
             dic_plan['plan_radicado'] = obj_plan.radicado or ''
         else:
             dic_plan['plan_id'] = ''
+            dic_plan['plan_nombre'] = ''
             dic_plan['plan_fecha'] = ''
             dic_plan['plan_origen'] = ''
             dic_plan['plan_sub_origen'] = ''
@@ -61,16 +63,16 @@ class plan_mejoramientos_wizard_reporte_plan(models.TransientModel):
     def definir_hallazgo(self, dic_hallazgo, obj_hallazgo={}):
         if obj_hallazgo:
             dic_hallazgo['hallazgo_nombre'] = obj_hallazgo.name or ''
-            dic_hallazgo['hallazgo_nombre'] = obj_hallazgo.name or ''
+            dic_hallazgo['hallazgo_descripcion'] = obj_hallazgo.descripcion or ''
             dic_hallazgo['hallazgo_unidad'] = obj_hallazgo.dependencia_id.name or ''
         else:
             dic_hallazgo['hallazgo_nombre'] = ''
-            dic_hallazgo['hallazgo_nombre'] = ''
+            dic_hallazgo['hallazgo_descripcion'] = ''
             dic_hallazgo['hallazgo_unidad'] = ''
 
     def definir_accion(self, dic_accion, obj_accion={}):
         if obj_accion:
-            dic_accion['accion_descripcion'] = obj_accion.descripcion or ''
+            dic_accion['accion_descripcion'] = obj_accion.name or ''
             dic_accion['accion_tipo'] = obj_accion.tipo or ''
             dic_accion['accion_objetivo'] = obj_accion.objetivo or ''
             dic_accion['accion_indicador'] = obj_accion.indicador or ''
@@ -80,7 +82,7 @@ class plan_mejoramientos_wizard_reporte_plan(models.TransientModel):
             dic_accion['accion_recursos'] = 'muchos' # muchos
             dic_accion['accion_fecha_inicio'] = obj_accion.fecha_inicio or ''
             dic_accion['accion_fecha_fin'] = obj_accion.fecha_inicio or ''
-            dic_accion['accion_fecha_estado'] = obj_accion.state or ''
+            dic_accion['accion_estado'] = obj_accion.state or ''
         else:
             dic_accion['accion_descripcion'] = ''
             dic_accion['accion_tipo'] = ''
@@ -92,7 +94,7 @@ class plan_mejoramientos_wizard_reporte_plan(models.TransientModel):
             dic_accion['accion_recursos'] = 'muchos' # muchos
             dic_accion['accion_fecha_inicio'] = ''
             dic_accion['accion_fecha_fin'] = ''
-            dic_accion['accion_fecha_estado'] = ''
+            dic_accion['accion_estado'] = ''
 
     def definir_avance(self, dic_avance, obj_avance={}):
         if obj_avance:
@@ -110,6 +112,19 @@ class plan_mejoramientos_wizard_reporte_plan(models.TransientModel):
             dic_avance['avance_observacion'] = ''
             dic_avance['avance_fecha_creacion'] = ''
 
+    def avance_actual(self, plan_id, plan_tipo, accion_id):
+        # visitas = self.env['urbanizadores.proyecto.visita'].search([('proyecto_id', '=', proyecto.id)])
+        avance_max = self.env['plan_mejoramiento.avance'].search(
+            [
+                ('plan_id', '=', plan_id),
+                ('plan_tipo', '=', plan_tipo),
+                ('accion_id', '=', accion_id),
+            ],
+            order='fecha_creacion DESC',
+            limit=1,
+        )
+        return avance_max
+
     @api.multi
     def crear_reporte_plan(self):
         all_data = []
@@ -117,31 +132,40 @@ class plan_mejoramientos_wizard_reporte_plan(models.TransientModel):
         if (self.plan_id.hallazgo_ids):
             for hallazgo in self.plan_id.hallazgo_ids:
                 plan = {}
-                print hallazgo.name
                 if (hallazgo.acciones_ids):
                     for accion in hallazgo.acciones_ids:
-                        print accion.name
                         if(accion.avance_ids):
-                            for avance in accion.avance_ids:
-                                self.definir_avance(dic_avance, obj_avance)
+                            if (len(accion.avance_ids) >= 2):
+                                avance_max = self.avance_actual(self.plan_id.id, self.plan_id.tipo, accion.id)
+                            else:
+                                avance_max = avance
+                            self.definir_plan(plan, self.plan_id)
+                            self.definir_hallazgo(plan, hallazgo)
+                            self.definir_accion(plan, accion)
+                            self.definir_avance(plan, avance_max)
+                            all_data.append(plan)
+                            plan = {}
                         else:
                             self.definir_plan(plan, self.plan_id)
                             self.definir_hallazgo(plan, hallazgo)
                             self.definir_accion(plan, accion)
                             self.definir_avance(plan)
                             all_data.append(plan)
+                            plan = {}
                 else:
                     self.definir_plan(plan, self.plan_id)
                     self.definir_hallazgo(plan, hallazgo)
                     self.definir_accion(plan)
                     self.definir_avance(plan)
                     all_data.append(plan)
+                    plan = {}
         else:
             self.definir_plan(plan, self.plan_id)
             self.definir_hallazgo(plan)
             self.definir_accion(plan)
             self.definir_avance(plan)
             all_data.append(plan)
+            plan = {}
 
         # crear reporte
         documento = reportes.crear_reporte(
@@ -160,7 +184,6 @@ class plan_mejoramientos_wizard_reporte_plan(models.TransientModel):
         # buscamos el wizar de descarga
         view_ids = self.env['ir.ui.view'].search([('model','=','plan_mejoramiento.wizard.reporte_plan'),
                                                   ('name','=','plan_mejoramiento.wizard.reporte_plan_download')])
-        print view_ids
         ids = self.id
         return {
                 'view_type':'form',
