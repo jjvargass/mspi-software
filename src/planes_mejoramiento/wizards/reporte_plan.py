@@ -75,7 +75,8 @@ class plan_mejoramientos_wizard_reporte_plan(models.TransientModel):
 
     def definir_accion(self, dic_accion, obj_accion={}):
         if obj_accion:
-            dic_accion['accion_descripcion'] = obj_accion.name or ''
+            dic_accion['accion_nombre'] = obj_accion.name or ''
+            dic_accion['accion_descripcion'] = obj_accion.descripcion or ''
             dic_accion['accion_tipo'] = obj_accion.tipo or ''
             dic_accion['accion_objetivo'] = obj_accion.objetivo or ''
             dic_accion['accion_indicador'] = obj_accion.indicador or ''
@@ -88,6 +89,7 @@ class plan_mejoramientos_wizard_reporte_plan(models.TransientModel):
             dic_accion['accion_estado'] = obj_accion.state or ''
             dic_accion['accion_ejecutor'] = obj_accion.ejecutor_id.name or ''
         else:
+            dic_accion['accion_nombre'] = ''
             dic_accion['accion_descripcion'] = ''
             dic_accion['accion_tipo'] = ''
             dic_accion['accion_objetivo'] = ''
@@ -203,7 +205,15 @@ class plan_mejoramientos_wizard_reporte_plan(models.TransientModel):
                 'plan_bogota.ods',
                 'plan_mejoramiento_ruta_plantilla_reportes'
             )
-
+        elif (self.tipo == 'contraloria_gral'):
+            documento = reportes.crear_reporte(
+                self,
+                all_data,
+                'PLAN_GENERAL',
+                'xls',
+                'plan_general.ods',
+                'plan_mejoramiento_ruta_plantilla_reportes'
+            )
 
         # eliminar imagenes
         reportes.limpiar_carpeta('/tmp/img_reporte')
