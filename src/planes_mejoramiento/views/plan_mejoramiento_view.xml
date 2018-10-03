@@ -943,7 +943,7 @@
         <field name="name">plan_mejoramiento.avance.tree</field>
         <field name="model">plan_mejoramiento.avance</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree string="Semaforo" colors="red:state=='sin_iniciar';orange:state=='en_progreso';green:state=='terminado'">
                 <field name="descripcion" />
                 <field name="fecha_creacion" />
                 <field name="aprobacion_jefe_dependencia" />
