@@ -83,6 +83,7 @@ class plan_mejoramientos_wizard_reporte_plan(models.TransientModel):
             dic_accion['accion_fecha_inicio'] = obj_accion.fecha_inicio or ''
             dic_accion['accion_fecha_fin'] = obj_accion.fecha_inicio or ''
             dic_accion['accion_estado'] = obj_accion.state or ''
+            dic_accion['accion_ejecutor'] = obj_accion.ejecutor_id.name or ''
         else:
             dic_accion['accion_descripcion'] = ''
             dic_accion['accion_tipo'] = ''
@@ -95,6 +96,7 @@ class plan_mejoramientos_wizard_reporte_plan(models.TransientModel):
             dic_accion['accion_fecha_inicio'] = ''
             dic_accion['accion_fecha_fin'] = ''
             dic_accion['accion_estado'] = ''
+            dic_accion['accion_ejecutor'] = ''
 
     def definir_avance(self, dic_avance, obj_avance={}):
         if obj_avance:
@@ -138,7 +140,7 @@ class plan_mejoramientos_wizard_reporte_plan(models.TransientModel):
                             if (len(accion.avance_ids) >= 2):
                                 avance_max = self.avance_actual(self.plan_id.id, self.plan_id.tipo, accion.id)
                             else:
-                                avance_max = avance
+                                avance_max = accion.avance_ids
                             self.definir_plan(plan, self.plan_id)
                             self.definir_hallazgo(plan, hallazgo)
                             self.definir_accion(plan, accion)
@@ -167,15 +169,27 @@ class plan_mejoramientos_wizard_reporte_plan(models.TransientModel):
             all_data.append(plan)
             plan = {}
 
-        # crear reporte
-        documento = reportes.crear_reporte(
-            self,
-            all_data,
-            'PLAN_INTERNO',
-            'xls',
-            'plan_interno.ods',
-            'plan_mejoramiento_ruta_plantilla_reportes'
-        )
+        if (self.tipo == 'interno'):
+            # crear reporte
+            documento = reportes.crear_reporte(
+                self,
+                all_data,
+                'PLAN_INTERNO',
+                'xls',
+                'plan_interno.ods',
+                'plan_mejoramiento_ruta_plantilla_reportes'
+            )
+        elif (self.tipo == 'contraloria_bog'):
+            documento = reportes.crear_reporte(
+                self,
+                all_data,
+                'PLAN_BOGOTA',
+                'xls',
+                'plan_bogota.ods',
+                'plan_mejoramiento_ruta_plantilla_reportes'
+            )
+
+
         # eliminar imagenes
         reportes.limpiar_carpeta('/tmp/img_reporte')
         # nombre del reporte para campos de odoo
