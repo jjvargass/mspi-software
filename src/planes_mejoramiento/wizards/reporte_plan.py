@@ -3,6 +3,7 @@
 from openerp import models, fields, api, exceptions
 from openerp.exceptions import Warning, ValidationError
 from openerp.addons.base_idu.tools import reportes
+from reportlab.lib.textsplit import ALL_CANNOT_END
 
 TIPO_PLAN = [
     ('interno', 'Interno'),
@@ -65,10 +66,12 @@ class plan_mejoramientos_wizard_reporte_plan(models.TransientModel):
             dic_hallazgo['hallazgo_nombre'] = obj_hallazgo.name or ''
             dic_hallazgo['hallazgo_descripcion'] = obj_hallazgo.descripcion or ''
             dic_hallazgo['hallazgo_unidad'] = obj_hallazgo.dependencia_id.name or ''
+            dic_hallazgo['hallazgo_causa'] = self.consolidar_causa (obj_hallazgo.causa_ids) or ''
         else:
             dic_hallazgo['hallazgo_nombre'] = ''
             dic_hallazgo['hallazgo_descripcion'] = ''
             dic_hallazgo['hallazgo_unidad'] = ''
+            dic_hallazgo['hallazgo_causa'] = ''
 
     def definir_accion(self, dic_accion, obj_accion={}):
         if obj_accion:
@@ -79,7 +82,7 @@ class plan_mejoramientos_wizard_reporte_plan(models.TransientModel):
             dic_accion['accion_meta'] = obj_accion.meta or ''
             dic_accion['accion_unidad_medida'] = obj_accion.unidad_medida or ''
             dic_accion['accion_unidad'] = obj_accion.dependencia_id.name or ''
-            dic_accion['accion_recursos'] = 'muchos' # muchos
+            dic_accion['accion_recursos'] = self.consolidar_recurso(obj_accion.recurso_ids) or ''
             dic_accion['accion_fecha_inicio'] = obj_accion.fecha_inicio or ''
             dic_accion['accion_fecha_fin'] = obj_accion.fecha_inicio or ''
             dic_accion['accion_estado'] = obj_accion.state or ''
@@ -92,7 +95,7 @@ class plan_mejoramientos_wizard_reporte_plan(models.TransientModel):
             dic_accion['accion_meta'] = ''
             dic_accion['accion_unidad_medida'] = ''
             dic_accion['accion_unidad'] = ''
-            dic_accion['accion_recursos'] = 'muchos' # muchos
+            dic_accion['accion_recursos'] = ''
             dic_accion['accion_fecha_inicio'] = ''
             dic_accion['accion_fecha_fin'] = ''
             dic_accion['accion_estado'] = ''
@@ -126,6 +129,18 @@ class plan_mejoramientos_wizard_reporte_plan(models.TransientModel):
             limit=1,
         )
         return avance_max
+
+    def consolidar_causa(self, causa_ids):
+        all_causa = ''
+        for causa in causa_ids:
+            all_causa = all_causa + causa.name + ', '
+        return all_causa
+
+    def consolidar_recurso(self, recurso_ids):
+        all_recurso = ''
+        for recurso in recurso_ids:
+            all_recurso = all_recurso + recurso.name + ', '
+        return all_recurso
 
     @api.multi
     def crear_reporte_plan(self):
