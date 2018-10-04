@@ -1,5 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
 <data>
+<!--
+=========================================================================
+ Groups Definition
+=========================================================================
+-->
+    <record model="ir.module.category" id="category_plan_mejoramiento">
+        <field name="name">Planes de Mejoramiento</field>
+        <field name="sequence">0</field>
+        <field name="visible" eval="1" />
+    </record>
+    <record id="analista" model="res.groups">
+        <field name="name">Analista</field>
+        <field name="category_id" ref="plan_mejoramiento.category_plan_mejoramiento"/>
+        <field name="implied_ids"
+            eval="[
+                (4, ref('base.group_user')),
+                (4, ref('project.group_project_user')),
+            ]"
+        />
+    </record>
+    <record id="ejecutor" model="res.groups">
+        <field name="name">Ejecutor</field>
+        <field name="category_id" ref="plan_mejoramiento.category_plan_mejoramiento"/>
+        <field name="implied_ids"
+            eval="[
+                (4, ref('base.group_user')),
+                (4, ref('project.group_project_user')),
+                (4, ref('plan_mejoramiento.analista')),
+            ]"
+        />
+    </record>
+
+    <record id="base_idu.group_jefe_dependencia" model="res.groups">
+        <field name="implied_ids"
+            eval="[
+                (4, ref('project.group_project_user')),
+                (4, ref('plan_mejoramiento.ejecutor')),
+            ]"
+        />
+    </record>
+
+    <record id="auditor" model="res.groups">
+        <field name="name">Auditor</field>
+        <field name="category_id" ref="plan_mejoramiento.category_plan_mejoramiento"/>
+        <field name="implied_ids"
+            eval="[
+                (6, 0, [ref('project.group_project_manager'), ref('plan_mejoramiento.analista')])
+            ]"
+        />
+    </record>
+    <record id="administrador" model="res.groups">
+        <field name="name">Administrador</field>
+        <field name="category_id" ref="plan_mejoramiento.category_plan_mejoramiento"/>
+        <field name="implied_ids"
+            eval="[
+                (6, 0, [ref('project.group_project_manager'), ref('plan_mejoramiento.analista')])
+            ]"
+        />
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+    </record>
+<!--
+=============================================================================
+ Domain Constraints
+=============================================================================
+-->
+    <!-- Domain plan_mejoramiento.analista -->
+    <!-- Domain plan_mejoramiento.ejecutor -->
+    <!-- Domain base_idu.group_jefe_dependencia -->
+    <!-- Domain plan_mejoramiento.auditor -->
+    <!-- Domain plan_mejoramiento.administrador -->
 </data>
 </openerp>
