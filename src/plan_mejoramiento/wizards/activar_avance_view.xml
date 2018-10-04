@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <record model="ir.ui.view" id="activar_avance_visita">
+        <field name="name">plan_mejoramiento.wizard.activar_avance</field>
+        <field name="model">plan_mejoramiento.wizard.activar_avance</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <separator name="string1" string="Vigencia Para Registrar Avnaces"/>
+                    <group>
+                        <field name="fecha_inicio" />
+                        <field name="fecha_fin" />
+                    </group>
+                    <footer>
+                        <button string="Crear Reporte" name="activar_avance" type="object" class="btn-primary"/>
+                        <button string="Cancelar" special="cancel" />
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_activar_avance">
+        <field name="name">Activar Registro de Avances</field>
+        <field name="res_model">plan_mejoramiento.wizard.activar_avance</field>
+        <field name="target">new</field>
+        <field name="view_mode">form</field>
+    </record>
+
+    <menuitem id="wizard_activar_avance"
+        parent="plan_mejoramiento_conf_menu"
+        name="Activar Registro de Avances"
+        sequence="30"
+        action="action_activar_avance"
+    />
+</data>
+</openerp>

@@ -31,6 +31,34 @@ TIPO_PLAN = [
     ('contraloria_gral', 'Contraloría General'),
 ]
 
+class plan_mejoramiento_parametro_activar_avance(models.Model):
+    _name = 'plan_mejoramiento.parametro_activar_avance'
+
+    # -------------------
+    # Fields
+    # -------------------
+    fecha_inicio = fields.Date(
+        string='Fecha Inicio',
+        required=True,
+        help='''Fecha inicio para registra avances''',
+    )
+    fecha_fin = fields.Date(
+        string='Fecha Fin',
+        required=True,
+        help='''Fecha fin para registrar avances''',
+    )
+    facha_creacion = fields.Date(
+        string='Fecha Registro',
+        required=True,
+        readonly=True,
+        help='''Fecha Registro''',
+        default=fields.Date.today,
+    )
+
+    # -------------------
+    # methods
+    # -------------------
+
 class plan_mejoramiento_tipo_calificacion(models.Model):
     _name = 'plan_mejoramiento.tipo_calificacion'
     _description = 'Tipo Calificación'
