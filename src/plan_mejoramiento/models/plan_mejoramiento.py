@@ -33,7 +33,8 @@ TIPO_PLAN = [
 
 class plan_mejoramiento_parametro_activar_avance(models.Model):
     _name = 'plan_mejoramiento.parametro_activar_avance'
-
+    _description = 'Parametro Activar Avance'
+    _inherit = ['mail.thread', 'models.soft_delete.mixin']
     # -------------------
     # Fields
     # -------------------
