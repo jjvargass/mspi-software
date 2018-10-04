@@ -780,8 +780,8 @@
                         <field name="fecha_creacion" />
                     </group>
                     <notebook>
-                        <page string='Avances' attrs="{'invisible': [('id','=',False)]}">
-                            <field name="avance_ids" >
+                        <page string='Avances' attrs="{'invisible': [('state','in',['nuevo','por_aprobar'])]}">
+                            <field name="avance_ids" context="{'accion_id': active_id}" >
                                 <tree>
                                     <field name="descripcion"/>
                                     <field name="aprobacion_jefe_dependencia"/>
@@ -792,7 +792,7 @@
                                 </tree>
                             </field>
                         </page>
-                        <page string='Tareas' >
+                        <page string='Tareas' attrs="{'invisible': [('state','in',['nuevo','por_aprobar'])]}">
                             <field name="task_ids" context="{'accion_id': active_id}" >
                                 <tree editable="bottom">
                                     <field name="name"/>
