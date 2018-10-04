@@ -11,9 +11,9 @@ class Test_plan_mejoramiento_origen(common.TransactionCase):
     def test_crud_validaciones(self):
         origen_model = self.env['plan_mejoramiento.origen']
         vals = {
-            'name': "Government skill throw at.",
-            'descripcion': "Culture quite exactly professor manage herself treat.",
-            'parent_id': self.ref('planes_mejoramiento.parent_id_01'),
+            'name': "Natural center half impact off along exactly.",
+            'descripcion': "Anything represent imagine environmental former.",
+            'parent_id': self.ref('plan_mejoramiento.parent_id_01'),
             'activo_sistema': False,
         }
         origen = origen_model.create(vals)

@@ -47,7 +47,7 @@
     </record>
 
     <menuitem id="wizard_crear_reporte_plan"
-        parent="planes_mejoramiento_reporte_menu"
+        parent="plan_mejoramiento_reporte_menu"
         name="Plan Mejoramiento"
         sequence="150"
         action="action_crear_reporte_plan"

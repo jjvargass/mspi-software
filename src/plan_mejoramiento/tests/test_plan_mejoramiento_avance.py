@@ -11,13 +11,13 @@ class Test_plan_mejoramiento_avance(common.TransactionCase):
     def test_crud_validaciones(self):
         avance_model = self.env['plan_mejoramiento.avance']
         vals = {
-            'descripcion': "Business site television mention hold.",
-            'facha_creacion': "2003-05-22",
-            'aprobacion_jefe_dependencia': False,
-            'tipo_calificacion_id': self.ref('planes_mejoramiento.tipo_calificacion_id_01'),
-            'porcentaje_avance': "Plan door agency enjoy.",
-            'observacion': "Radio rise paper change subject.",
-            'accion_id': self.ref('planes_mejoramiento.accion_id_01'),
+            'descripcion': "On while throughout follow around success number rich.",
+            'facha_creacion': "1973-04-01",
+            'aprobacion_jefe_dependencia': True,
+            'tipo_calificacion_id': self.ref('plan_mejoramiento.tipo_calificacion_id_01'),
+            'porcentaje_avance': "Break house movement seek.",
+            'observacion': "Conference drop course black western determine north.",
+            'accion_id': self.ref('plan_mejoramiento.accion_id_01'),
         }
         avance = avance_model.create(vals)
 

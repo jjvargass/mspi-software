@@ -11,28 +11,28 @@ class Test_plan_mejoramiento_accion(common.TransactionCase):
     def test_crud_validaciones(self):
         accion_model = self.env['plan_mejoramiento.accion']
         vals = {
-            'name': "People more image act hear third.",
-            'descripcion': "Clearly expect may.",
-            'tipo': "mejoramiento",
-            'state': "nuevo",
-            'ejecutor_id': self.ref('planes_mejoramiento.ejecutor_id_01'),
-            'dependencia_id': self.ref('planes_mejoramiento.dependencia_id_01'),
-            'objetivo': "Trouble water already.",
-            'indicador': "Value including the one at can long according.",
-            'unidad_medida': "Mean treat vote alone.",
-            'meta': "Act could method accept state bit.",
+            'name': "Above participant finally western.",
+            'descripcion': "Election cultural human husband.",
+            'tipo': "correccion",
+            'state': "por_aprobar",
+            'ejecutor_id': self.ref('plan_mejoramiento.ejecutor_id_01'),
+            'dependencia_id': self.ref('plan_mejoramiento.dependencia_id_01'),
+            'objetivo': "Beyond federal candidate nice.",
+            'indicador': "Idea series want him movie about Mrs page.",
+            'unidad_medida': "Consumer cultural song minute himself author civil group.",
+            'meta': "There animal hot reflect.",
             'recurso_ids': [
-                (4, self.ref('planes_mejoramiento.recurso_ids_01')),
+                (4, self.ref('plan_mejoramiento.recurso_ids_01')),
                 (0, 0, {
                     'field_name': valor,
                 }),
             ],
-            'facha_inicio': "1996-02-13",
-            'facha_fin': "1979-10-31",
-            'facha_creacion': "1987-06-23",
-            'hallazgo_id': self.ref('planes_mejoramiento.hallazgo_id_01'),
-            'task_ids': "Stop true region life role few.",
-            'avance_ids': "Brother its number back miss allow court while.",
+            'facha_inicio': "2016-08-25",
+            'facha_fin': "1981-02-26",
+            'facha_creacion': "1974-05-23",
+            'hallazgo_id': self.ref('plan_mejoramiento.hallazgo_id_01'),
+            'task_ids': "Better court cold pattern city.",
+            'avance_ids': "Change home entire then teacher show out.",
         }
         accion = accion_model.create(vals)
 

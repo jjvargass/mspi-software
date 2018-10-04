@@ -11,10 +11,10 @@ class Test_plan_mejoramiento_recurso(common.TransactionCase):
     def test_crud_validaciones(self):
         recurso_model = self.env['plan_mejoramiento.recurso']
         vals = {
-            'name': "Fight build character could represent detail paper.",
-            'descripcion': "Turn look pressure energy.",
-            'activo_sistema': False,
-            'tipo': "tecnologico",
+            'name': "Big action fear foreign even early water.",
+            'descripcion': "Late ago training.",
+            'activo_sistema': True,
+            'tipo': "financiero",
         }
         recurso = recurso_model.create(vals)
 

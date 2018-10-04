@@ -1,9 +1,9 @@
 id,active,name,group_id/id,model_id/id,perm_create,perm_read,perm_write,perm_unlink
-tipo_calificacion_global,True,"plan_mejoramiento.tipo_calificacion global",,planes_mejoramiento.model_plan_mejoramiento_tipo_calificacion,0,1,0,0
-recurso_global,True,"plan_mejoramiento.recurso global",,planes_mejoramiento.model_plan_mejoramiento_recurso,0,1,0,0
-causa_global,True,"plan_mejoramiento.causa global",,planes_mejoramiento.model_plan_mejoramiento_causa,0,1,0,0
-origen_global,True,"plan_mejoramiento.origen global",,planes_mejoramiento.model_plan_mejoramiento_origen,0,1,0,0
-plan_global,True,"plan_mejoramiento.plan global",,planes_mejoramiento.model_plan_mejoramiento_plan,0,1,0,0
-hallazgo_global,True,"plan_mejoramiento.hallazgo global",,planes_mejoramiento.model_plan_mejoramiento_hallazgo,0,1,0,0
-accion_global,True,"plan_mejoramiento.accion global",,planes_mejoramiento.model_plan_mejoramiento_accion,0,1,0,0
-avance_global,True,"plan_mejoramiento.avance global",,planes_mejoramiento.model_plan_mejoramiento_avance,0,1,0,0
+tipo_calificacion_global,True,"plan_mejoramiento.tipo_calificacion global",,plan_mejoramiento.model_plan_mejoramiento_tipo_calificacion,0,1,0,0
+recurso_global,True,"plan_mejoramiento.recurso global",,plan_mejoramiento.model_plan_mejoramiento_recurso,0,1,0,0
+causa_global,True,"plan_mejoramiento.causa global",,plan_mejoramiento.model_plan_mejoramiento_causa,0,1,0,0
+origen_global,True,"plan_mejoramiento.origen global",,plan_mejoramiento.model_plan_mejoramiento_origen,0,1,0,0
+plan_global,True,"plan_mejoramiento.plan global",,plan_mejoramiento.model_plan_mejoramiento_plan,0,1,0,0
+hallazgo_global,True,"plan_mejoramiento.hallazgo global",,plan_mejoramiento.model_plan_mejoramiento_hallazgo,0,1,0,0
+accion_global,True,"plan_mejoramiento.accion global",,plan_mejoramiento.model_plan_mejoramiento_accion,0,1,0,0
+avance_global,True,"plan_mejoramiento.avance global",,plan_mejoramiento.model_plan_mejoramiento_avance,0,1,0,0

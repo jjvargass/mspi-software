@@ -11,20 +11,20 @@ class Test_plan_mejoramiento_hallazgo(common.TransactionCase):
     def test_crud_validaciones(self):
         hallazgo_model = self.env['plan_mejoramiento.hallazgo']
         vals = {
-            'name': "Continue partner total realize property audience camera.",
-            'descripcion': "Ability low however probably.",
-            'user_id': self.ref('planes_mejoramiento.user_id_01'),
+            'name': "Town should stuff morning.",
+            'descripcion': "Less oil owner article war option.",
+            'user_id': self.ref('plan_mejoramiento.user_id_01'),
             'causa_ids': [
-                (4, self.ref('planes_mejoramiento.causa_ids_01')),
+                (4, self.ref('plan_mejoramiento.causa_ids_01')),
                 (0, 0, {
                     'field_name': valor,
                 }),
             ],
-            'proceso_id': self.ref('planes_mejoramiento.proceso_id_01'),
-            'dependencia_id': self.ref('planes_mejoramiento.dependencia_id_01'),
-            'state': "terminado",
-            'plan_id': self.ref('planes_mejoramiento.plan_id_01'),
-            'acciones_ids': "Ahead thing organization main gas.",
+            'proceso_id': self.ref('plan_mejoramiento.proceso_id_01'),
+            'dependencia_id': self.ref('plan_mejoramiento.dependencia_id_01'),
+            'state': "en_progreso",
+            'plan_id': self.ref('plan_mejoramiento.plan_id_01'),
+            'acciones_ids': "Majority go weight return degree anyone land.",
         }
         hallazgo = hallazgo_model.create(vals)
 
