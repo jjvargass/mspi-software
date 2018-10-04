@@ -1,5 +1,5 @@
 model_name,name,type,params,comodel,string,help,required,unique,tracking,constrains,onchange,view_tree,view_form,view_search,view_search_group_by,view_form_tab,menu,description,view_description,inherits,inherit,overwrite_write,overwrite_create,data,views
-__openerp__,name,,planes_mejoramiento,,,,,,,,,,,,,,,,,,,,,,
+__openerp__,name,,plan_mejoramiento,,,,,,,,,,,,,,,,,,,,,,
 ,namespace,,plan_mejoramiento,,,,,,,,,,,,,,,,,,,,,,
 ,string,,Planes de Mejoramiento,,,,,,,,,,,,,,,,,,,,,,
 ,depends,,base|base_idu|model_security|document|operacion_por_procesos|project_portafolio_idu,,,,,,,,,,,,,,,,,,,,,,

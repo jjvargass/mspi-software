@@ -6,23 +6,23 @@
     Menú
     =================================================================
     -->
-     <menuitem id="planes_mejoramiento_nav" name="Planes de Mejoramiento"/>
+     <menuitem id="plan_mejoramiento_nav" name="Planes de Mejoramiento"/>
 
-     <menuitem id="planes_mejoramiento_menu"
+     <menuitem id="plan_mejoramiento_menu"
         name="Planes de Mejoramiento"
-        parent="planes_mejoramiento_nav"
+        parent="plan_mejoramiento_nav"
         sequence="10"
     />
-     <menuitem id="planes_mejoramiento_reporte_menu" parent="planes_mejoramiento_nav"
+     <menuitem id="plan_mejoramiento_reporte_menu" parent="plan_mejoramiento_nav"
         name="Reportes"
         sequence="20"
      />
-     <menuitem id="planes_mejoramiento_conf_menu" parent="planes_mejoramiento_nav"
+     <menuitem id="plan_mejoramiento_conf_menu" parent="plan_mejoramiento_nav"
         name="Configuración Planes de Mejoramiento"
         groups="base.group_configuration"
         sequence="30"
      />
-     <menuitem id="planes_mejoramiento_admin_menu" parent="planes_mejoramiento_nav"
+     <menuitem id="plan_mejoramiento_admin_menu" parent="plan_mejoramiento_nav"
         name="Administración Planes de Mejoramiento"
         groups="base.group_configuration"
         sequence="100"
@@ -138,7 +138,7 @@
         <field name="view_mode">tree,form</field>
     </record>
     <menuitem id="tipo_calificacion_menu"
-        parent="planes_mejoramiento_conf_menu"
+        parent="plan_mejoramiento_conf_menu"
         sequence="30"
         name="Tipo Calificación" action="tipo_calificacion_action"
     />
@@ -234,7 +234,7 @@
         <field name="view_mode">tree,form</field>
     </record>
     <menuitem id="recurso_menu"
-        parent="planes_mejoramiento_conf_menu"
+        parent="plan_mejoramiento_conf_menu"
         sequence="30"
         name="Recurso" action="recurso_action"
     />
@@ -306,7 +306,7 @@
         <field name="view_mode">tree,form</field>
     </record>
     <menuitem id="causa_menu"
-        parent="planes_mejoramiento_conf_menu"
+        parent="plan_mejoramiento_conf_menu"
         sequence="30"
         name="Causa" action="causa_action"
     />
@@ -382,7 +382,7 @@
         <field name="view_mode">tree,form</field>
     </record>
     <menuitem id="origen_menu"
-        parent="planes_mejoramiento_conf_menu"
+        parent="plan_mejoramiento_conf_menu"
         sequence="30"
         name="Origen" action="origen_action"
     />
@@ -534,7 +534,7 @@
         <field name="view_mode">tree,form</field>
     </record>
     <menuitem id="plan_menu"
-        parent="planes_mejoramiento_menu"
+        parent="plan_mejoramiento_menu"
         sequence="20"
         name="Plan" action="plan_action"
     />
@@ -662,7 +662,7 @@
         <field name="view_mode">tree,form</field>
     </record>
     <menuitem id="hallazgo_menu"
-        parent="planes_mejoramiento_menu"
+        parent="plan_mejoramiento_menu"
         sequence="20"
         name="Hallazgo" action="hallazgo_action"
     />
@@ -839,7 +839,7 @@
         <field name="view_mode">tree,form</field>
     </record>
     <menuitem id="accion_menu"
-        parent="planes_mejoramiento_menu"
+        parent="plan_mejoramiento_menu"
         sequence="20"
         name="Acción" action="accion_action"
     />
@@ -959,7 +959,7 @@
         <field name="view_mode">tree,form</field>
     </record>
     <menuitem id="avance_menu"
-        parent="planes_mejoramiento_menu"
+        parent="plan_mejoramiento_menu"
         sequence="20"
         name="Avances" action="avance_action"
     />
