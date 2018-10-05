@@ -7,22 +7,22 @@ from openerp.exceptions import ValidationError
 logging.basicConfig()
 _logger = logging.getLogger('TEST')
 
-class Test_mapa_procesos_proceso(common.TransactionCase):
+class Test_mapa_proceso_proceso(common.TransactionCase):
     def test_crud_validaciones(self):
-        proceso_model = self.env['mapa_procesos.proceso']
+        proceso_model = self.env['mapa_proceso.proceso']
         vals = {
-            'name': "What particular floor gas call.",
-            'objetivo': "Sure network building sing imagine.",
-            'alcance': "Time federal home baby.",
-            'tipo': "control",
+            'name': "New stop since blue design like image.",
+            'objetivo': "During something feel course position effort head.",
+            'alcance': "One box inside.",
+            'tipo': "misional",
             'dependencia_lider': self.ref('operacion_por_procesos.dependencia_lider_01'),
-            'dependencia_gestor': [
-                (4, self.ref('operacion_por_procesos.dependencia_gestor_01')),
+            'dependencia_gestor_ids': [
+                (4, self.ref('operacion_por_procesos.dependencia_gestor_ids_01')),
                 (0, 0, {
                     'field_name': valor,
                 }),
             ],
-            'actividad_ids': "Relate food speak partner investment purpose.",
+            'actividad_ids': "Technology stage later to mean cultural.",
         }
         proceso = proceso_model.create(vals)
 

@@ -1,1 +1,1 @@
-import mapa_procesos
+import mapa_proceso
