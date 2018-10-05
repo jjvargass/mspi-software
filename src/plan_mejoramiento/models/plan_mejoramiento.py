@@ -421,7 +421,7 @@ class plan_mejoramiento_hallazgo(models.Model):
         string='Proceso',
         required=True,
         track_visibility='onchange',
-        comodel_name='mapa_procesos.proceso',
+        comodel_name='mapa_proceso.proceso',
         ondelete='restrict',
         help='''Proceso''',
     )
