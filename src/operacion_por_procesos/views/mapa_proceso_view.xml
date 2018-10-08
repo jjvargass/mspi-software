@@ -26,13 +26,13 @@
 
     <!--
     =================================================================
-    mapa_procesos.proceso
+    mapa_proceso.proceso
     Procesos
     =================================================================
     -->
     <record model="ir.ui.view" id="proceso_search">
-        <field name="name">mapa_procesos.proceso.search</field>
-        <field name="model">mapa_procesos.proceso</field>
+        <field name="name">mapa_proceso.proceso.search</field>
+        <field name="model">mapa_proceso.proceso</field>
         <field name="arch" type="xml">
             <search>
                 <field name="name" />
@@ -69,8 +69,8 @@
         </field>
     </record>
     <record model="ir.ui.view" id="proceso_form">
-        <field name="name">mapa_procesos.proceso.form</field>
-        <field name="model">mapa_procesos.proceso</field>
+        <field name="name">mapa_proceso.proceso.form</field>
+        <field name="model">mapa_proceso.proceso</field>
         <field name="arch" type="xml">
             <form>
                 <header>
@@ -102,8 +102,8 @@
         </field>
     </record>
     <record model="ir.ui.view" id="proceso_tree">
-        <field name="name">mapa_procesos.proceso.tree</field>
-        <field name="model">mapa_procesos.proceso</field>
+        <field name="name">mapa_proceso.proceso.tree</field>
+        <field name="model">mapa_proceso.proceso</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="name" />
@@ -116,7 +116,7 @@
     </record>
     <record model="ir.actions.act_window" id="proceso_action">
         <field name="name">Procesos</field>
-        <field name="res_model">mapa_procesos.proceso</field>
+        <field name="res_model">mapa_proceso.proceso</field>
         <field name="view_mode">tree,form</field>
     </record>
     <menuitem id="proceso_menu"
@@ -127,13 +127,13 @@
 
     <!--
     =================================================================
-    mapa_procesos.actividad
+    mapa_proceso.actividad
     Actividad
     =================================================================
     -->
     <record model="ir.ui.view" id="actividad_search">
-        <field name="name">mapa_procesos.actividad.search</field>
-        <field name="model">mapa_procesos.actividad</field>
+        <field name="name">mapa_proceso.actividad.search</field>
+        <field name="model">mapa_proceso.actividad</field>
         <field name="arch" type="xml">
             <search>
                 <field name="name" />
@@ -170,8 +170,8 @@
         </field>
     </record>
     <record model="ir.ui.view" id="actividad_form">
-        <field name="name">mapa_procesos.actividad.form</field>
-        <field name="model">mapa_procesos.actividad</field>
+        <field name="name">mapa_proceso.actividad.form</field>
+        <field name="model">mapa_proceso.actividad</field>
         <field name="arch" type="xml">
             <form>
                 <header>
@@ -204,8 +204,8 @@
         </field>
     </record>
     <record model="ir.ui.view" id="actividad_tree">
-        <field name="name">mapa_procesos.actividad.tree</field>
-        <field name="model">mapa_procesos.actividad</field>
+        <field name="name">mapa_proceso.actividad.tree</field>
+        <field name="model">mapa_proceso.actividad</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="name" />
@@ -219,7 +219,7 @@
     </record>
     <record model="ir.actions.act_window" id="actividad_action">
         <field name="name">Actividad</field>
-        <field name="res_model">mapa_procesos.actividad</field>
+        <field name="res_model">mapa_proceso.actividad</field>
         <field name="view_mode">tree,form</field>
     </record>
     <menuitem id="actividad_menu"
@@ -230,13 +230,13 @@
 
     <!--
     =================================================================
-    mapa_procesos.actividad_entranda
+    mapa_proceso.actividad_entranda
     Actividad Entrada
     =================================================================
     -->
     <record model="ir.ui.view" id="actividad_entranda_search">
-        <field name="name">mapa_procesos.actividad_entranda.search</field>
-        <field name="model">mapa_procesos.actividad_entranda</field>
+        <field name="name">mapa_proceso.actividad_entranda.search</field>
+        <field name="model">mapa_proceso.actividad_entranda</field>
         <field name="arch" type="xml">
             <search>
                 <field name="name" />
@@ -263,8 +263,8 @@
         </field>
     </record>
     <record model="ir.ui.view" id="actividad_entranda_form">
-        <field name="name">mapa_procesos.actividad_entranda.form</field>
-        <field name="model">mapa_procesos.actividad_entranda</field>
+        <field name="name">mapa_proceso.actividad_entranda.form</field>
+        <field name="model">mapa_proceso.actividad_entranda</field>
         <field name="arch" type="xml">
             <form>
                 <header>
@@ -303,8 +303,8 @@
         </field>
     </record>
     <record model="ir.ui.view" id="actividad_entranda_tree">
-        <field name="name">mapa_procesos.actividad_entranda.tree</field>
-        <field name="model">mapa_procesos.actividad_entranda</field>
+        <field name="name">mapa_proceso.actividad_entranda.tree</field>
+        <field name="model">mapa_proceso.actividad_entranda</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="name" />
@@ -318,7 +318,7 @@
     </record>
     <record model="ir.actions.act_window" id="actividad_entranda_action">
         <field name="name">Actividad Entrada</field>
-        <field name="res_model">mapa_procesos.actividad_entranda</field>
+        <field name="res_model">mapa_proceso.actividad_entranda</field>
         <field name="view_mode">tree,form</field>
     </record>
     <menuitem id="actividad_entranda_menu"
@@ -329,13 +329,13 @@
 
     <!--
     =================================================================
-    mapa_procesos.actividad_salida
+    mapa_proceso.actividad_salida
     Actividad Salida
     =================================================================
     -->
     <record model="ir.ui.view" id="actividad_salida_search">
-        <field name="name">mapa_procesos.actividad_salida.search</field>
-        <field name="model">mapa_procesos.actividad_salida</field>
+        <field name="name">mapa_proceso.actividad_salida.search</field>
+        <field name="model">mapa_proceso.actividad_salida</field>
         <field name="arch" type="xml">
             <search>
                 <field name="name" />
@@ -372,8 +372,8 @@
         </field>
     </record>
     <record model="ir.ui.view" id="actividad_salida_form">
-        <field name="name">mapa_procesos.actividad_salida.form</field>
-        <field name="model">mapa_procesos.actividad_salida</field>
+        <field name="name">mapa_proceso.actividad_salida.form</field>
+        <field name="model">mapa_proceso.actividad_salida</field>
         <field name="arch" type="xml">
             <form>
                 <header>
@@ -386,8 +386,18 @@
                     <group>
                         <field name="descripcion" />
                         <field name="tipo" />
-                        <field name="proceso_ids" />
-                        <field name="cliente_ids" />
+                        <field name="proceso_ids"
+                          attrs="{
+                                'invisible':[('tipo','!=','interno')],
+                                'required':[('tipo','=','interno')],
+                            }"
+                        />
+                        <field name="cliente_ids"
+                            attrs="{
+                                'invisible':[('tipo','!=','externo')],
+                                'required':[('tipo','=','externo')],
+                            }"
+                        />
                         <field name="actividad_id" />
                     </group>
                     <notebook>
@@ -401,8 +411,8 @@
         </field>
     </record>
     <record model="ir.ui.view" id="actividad_salida_tree">
-        <field name="name">mapa_procesos.actividad_salida.tree</field>
-        <field name="model">mapa_procesos.actividad_salida</field>
+        <field name="name">mapa_proceso.actividad_salida.tree</field>
+        <field name="model">mapa_proceso.actividad_salida</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="name" />
@@ -416,7 +426,7 @@
     </record>
     <record model="ir.actions.act_window" id="actividad_salida_action">
         <field name="name">Actividad Salida</field>
-        <field name="res_model">mapa_procesos.actividad_salida</field>
+        <field name="res_model">mapa_proceso.actividad_salida</field>
         <field name="view_mode">tree,form</field>
     </record>
     <menuitem id="actividad_salida_menu"

@@ -33,7 +33,7 @@ plan_mejoramiento.hallazgo,name,char,,,Nombre,Nombre,1,0,1,0,0,1,1,1,0,0,main,Ha
 ,descripcion,text,,,Descripción,Descripción,1,0,1,0,0,1,1,1,0,0,,,,,,,,,
 ,user_id,many2one,default:_CURRENT_USER_,res.users,Auditor,Auditro,1,0,1,0,0,1,1,1,1,0,,,,,,,,,
 ,causa_ids,many2many,,plan_mejoramiento.causa,Causas,Causas,0,0,0,0,0,0,1,0,0,Causas,,,,,,,,,
-,proceso_id,many2one,,mapa_procesos.proceso,Proceso,Proceso,1,0,1,0,0,0,1,0,0,0,,,,,,,,,
+,proceso_id,many2one,,mapa_proceso.proceso,Proceso,Proceso,1,0,1,0,0,0,1,0,0,0,,,,,,,,,
 ,dependencia_id,many2one,,hr.department,Unidad,Unidad,1,0,1,0,0,1,1,1,1,0,,,,,,,,,
 ,fecha_inicio,date,compute:True;readonly:True,,Fecha Inicio,Comprendida entre la fecha menor de sus Acciones,0,0,1,0,0,1,1,1,0,0,,,,,,,,,
 ,fecha_fin,date,compute:True;readonly:True,,Fecha Fin,Comprendida entre la fecha mayor de sus Acciones,0,0,1,0,0,1,1,1,0,0,,,,,,,,,

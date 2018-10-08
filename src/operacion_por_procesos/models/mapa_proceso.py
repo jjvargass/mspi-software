@@ -27,8 +27,8 @@ TIPO_ENTRADA_SALIDAS = [
     ('externo', 'Externo'),
 ]
 
-class mapa_procesos_proceso(models.Model):
-    _name = 'mapa_procesos.proceso'
+class mapa_proceso_proceso(models.Model):
+    _name = 'mapa_proceso.proceso'
     _description = 'Procesos'
     _inherit = ['mail.thread', 'models.soft_delete.mixin']
 
@@ -88,7 +88,7 @@ class mapa_procesos_proceso(models.Model):
         string='Actividades',
         required=False,
         track_visibility='onchange',
-        comodel_name='mapa_procesos.actividad',
+        comodel_name='mapa_proceso.actividad',
         inverse_name='proceso_id',
         ondelete='restrict',
         help='''Actividades''',
@@ -98,8 +98,8 @@ class mapa_procesos_proceso(models.Model):
     # methods
     # -------------------
 
-class mapa_procesos_actividad(models.Model):
-    _name = 'mapa_procesos.actividad'
+class mapa_proceso_actividad(models.Model):
+    _name = 'mapa_proceso.actividad'
     _description = 'Actividad'
     _inherit = ['mail.thread', 'models.soft_delete.mixin']
 
@@ -135,7 +135,7 @@ class mapa_procesos_actividad(models.Model):
         string='Proceso',
         required=True,
         track_visibility='onchange',
-        comodel_name='mapa_procesos.proceso',
+        comodel_name='mapa_proceso.proceso',
         ondelete='restrict',
         help='''Proceso''',
         default=lambda self: self._context.get('proceso_id', None),
@@ -144,7 +144,7 @@ class mapa_procesos_actividad(models.Model):
         string='Entradas',
         required=False,
         track_visibility='onchange',
-        comodel_name='mapa_procesos.actividad_entranda',
+        comodel_name='mapa_proceso.actividad_entranda',
         inverse_name='actividad_id',
         ondelete='restrict',
         help='''Entradas''',
@@ -153,7 +153,7 @@ class mapa_procesos_actividad(models.Model):
         string='Salidas',
         required=False,
         track_visibility='onchange',
-        comodel_name='mapa_procesos.actividad_salida',
+        comodel_name='mapa_proceso.actividad_salida',
         inverse_name='actividad_id',
         ondelete='restrict',
         help='''Salidas''',
@@ -167,8 +167,8 @@ class mapa_procesos_actividad(models.Model):
     # methods
     # -------------------
 
-class mapa_procesos_actividad_entranda(models.Model):
-    _name = 'mapa_procesos.actividad_entranda'
+class mapa_proceso_actividad_entranda(models.Model):
+    _name = 'mapa_proceso.actividad_entranda'
     _description = 'Actividad Entrada'
     _inherit = ['mail.thread', 'models.soft_delete.mixin']
 
@@ -199,7 +199,7 @@ class mapa_procesos_actividad_entranda(models.Model):
         string='Procesos',
         required=False,
         track_visibility='onchange',
-        comodel_name='mapa_procesos.proceso',
+        comodel_name='mapa_proceso.proceso',
         ondelete='restrict',
         help='''Insumo Interno''',
     )
@@ -215,10 +215,10 @@ class mapa_procesos_actividad_entranda(models.Model):
         string='Actividad',
         required=True,
         track_visibility='onchange',
-        comodel_name='mapa_procesos.actividad',
+        comodel_name='mapa_proceso.actividad',
         ondelete='restrict',
         help='''Actividad''',
-        default=lambda self: self._context.get('actividad_id', self.env['mapa_procesos.actividad'].browse()),
+        default=lambda self: self._context.get('actividad_id', self.env['mapa_proceso.actividad'].browse()),
     )
 
     _sql_constraints = [
@@ -229,8 +229,8 @@ class mapa_procesos_actividad_entranda(models.Model):
     # methods
     # -------------------
 
-class mapa_procesos_actividad_salida(models.Model):
-    _name = 'mapa_procesos.actividad_salida'
+class mapa_proceso_actividad_salida(models.Model):
+    _name = 'mapa_proceso.actividad_salida'
     _description = 'Actividad Salida'
     _inherit = ['mail.thread', 'models.soft_delete.mixin']
 
@@ -261,7 +261,7 @@ class mapa_procesos_actividad_salida(models.Model):
         string='Procesos',
         required=False,
         track_visibility='onchange',
-        comodel_name='mapa_procesos.proceso',
+        comodel_name='mapa_proceso.proceso',
         ondelete='restrict',
         help='''Producto Interno''',
     )
@@ -277,10 +277,10 @@ class mapa_procesos_actividad_salida(models.Model):
         string='Actividad',
         required=True,
         track_visibility='onchange',
-        comodel_name='mapa_procesos.actividad',
+        comodel_name='mapa_proceso.actividad',
         ondelete='restrict',
         help='''Actividad''',
-        default=lambda self: self._context.get('actividad_id', self.env['mapa_procesos.actividad'].browse()),
+        default=lambda self: self._context.get('actividad_id', self.env['mapa_proceso.actividad'].browse()),
     )
 
     _sql_constraints = [

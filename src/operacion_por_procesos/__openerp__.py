@@ -12,8 +12,8 @@
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
-        'views/mapa_procesos_view.xml',
-        'data/mapa_procesos.proceso.csv',
+        'views/mapa_proceso_view.xml',
+        'data/mapa_proceso.proceso.csv',
     ],
     'test': [
     ],
