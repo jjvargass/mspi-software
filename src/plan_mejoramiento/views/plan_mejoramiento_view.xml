@@ -6,7 +6,9 @@
     Menú
     =================================================================
     -->
-     <menuitem id="plan_mejoramiento_nav" name="Planes de Mejoramiento"/>
+     <menuitem id="plan_mejoramiento_nav" name="Planes de Mejoramiento"
+        groups="plan_mejoramiento.analista"
+     />
 
      <menuitem id="plan_mejoramiento_menu"
         name="Planes de Mejoramiento"
@@ -16,10 +18,11 @@
      <menuitem id="plan_mejoramiento_reporte_menu" parent="plan_mejoramiento_nav"
         name="Reportes"
         sequence="20"
+        groups="plan_mejoramiento.analista"
      />
      <menuitem id="plan_mejoramiento_conf_menu" parent="plan_mejoramiento_nav"
         name="Configuración Planes de Mejoramiento"
-        groups="base.group_configuration"
+        groups="base.group_configuration,plan_mejoramiento.auditor"
         sequence="30"
      />
      <menuitem id="plan_mejoramiento_admin_menu" parent="plan_mejoramiento_nav"
