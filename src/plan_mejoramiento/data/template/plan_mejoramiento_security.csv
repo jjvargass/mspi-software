@@ -8,7 +8,8 @@ plan_mejoramiento.analista,,plan_mejoramiento.parametro_activar_avance,0,1,0,0
 ,,plan_mejoramiento.hallazgo,0,1,0,0
 ,,plan_mejoramiento.accion,0,1,0,0
 ,,plan_mejoramiento.avance,0,1,0,0
-plan_mejoramiento.ejecutor,plan_mejoramiento.analista,plan_mejoramiento.accion,1,1,1,0
+plan_mejoramiento.ejecutor,plan_mejoramiento.analista,plan_mejoramiento.recurso,1,1,1,0
+,,plan_mejoramiento.accion,1,1,1,0
 ,,plan_mejoramiento.avance,1,1,1,0
 base_idu.group_jefe_dependencia,plan_mejoramiento.ejecutor,plan_mejoramiento.parametro_activar_avance,0,1,0,0
 ,,plan_mejoramiento.tipo_calificacion,0,1,0,0
