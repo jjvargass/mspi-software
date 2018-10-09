@@ -928,9 +928,15 @@
                     </group>
                     <separator string="Calificación Auditoria" />
                     <group>
-                        <field name="tipo_calificacion_id" />
-                        <field name="porcentaje_avance" />
-                        <field name="observacion" />
+                        <field name="tipo_calificacion_id" 
+                            readonly="1"
+                        />
+                        <field name="porcentaje_avance" 
+                            readonly="1"
+                        />
+                        <field name="observacion" 
+                            readonly="1"
+                        />
                     </group>
                     <notebook>
                     </notebook>
@@ -966,6 +972,42 @@
         sequence="20"
         name="Avances" action="avance_action"
     />
+
+    <!--
+    =================================================================
+    plan_mejoramiento.avance  Para los Auditores
+    Avances Para los Auditores
+    =================================================================
+    -->
+    <record id="avance_form_for_oci" model="ir.ui.view">
+        <field name="model">plan_mejoramiento.avance</field>
+        <field name="inherit_id" ref="avance_form"/>
+        <field name="groups_id" eval="[(6, 0, [ref('plan_mejoramiento.auditor') ])]"/>
+        <field name="arch" type="xml">
+            <field name="accion_id" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </field>
+            <field name="descripcion" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </field>
+            <field name="aprobacion_jefe_dependencia" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </field>
+            <field name="tipo_calificacion_id" position="attributes">
+                <attribute name="readonly">0</attribute>
+                <attribute name="required">1</attribute>
+            </field>
+            <field name="porcentaje_avance" position="attributes">
+                <attribute name="readonly">0</attribute>
+                <attribute name="required">1</attribute>
+            </field>
+            <field name="observacion" position="attributes">
+                <attribute name="readonly">0</attribute>
+                <attribute name="required">1</attribute>
+            </field>
+
+        </field>
+    </record>
 
 </data>
 </openerp>

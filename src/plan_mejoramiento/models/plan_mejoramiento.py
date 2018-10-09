@@ -632,14 +632,14 @@ class plan_mejoramiento_accion(models.Model):
         default=lambda self: self.env.user.department_id.id,
     )
     jefe_dependencia_id = fields.Many2one(
-        string='Jefe Dependencia',
+        string='Jefe Unidad',
         required=True,
         readonly=True,
         track_visibility='onchange',
         related='dependencia_id.manager_id.user_id',
         comodel_name='res.users',
         ondelete='restrict',
-        help='''Jefe Dependencia''',
+        help='''Jefe Unidad''',
     )
     user_id = fields.Many2one(
         string='Auditor',
@@ -965,13 +965,13 @@ class plan_mejoramiento_avance(models.Model):
         ondelete='restrict',
     )
     jefe_dependencia_id = fields.Many2one(
-        string='Jefe Dependencia',
+        string='Jefe Unidad',
         required=False,
         readonly=True,
         track_visibility='onchange',
         related='accion_id.jefe_dependencia_id',
         ondelete='restrict',
-        help='''Jefe Dependencia''',
+        help='''Jefe Unidad''',
     )
     ejecutor_id = fields.Many2one(
         string='Ejecutor',
@@ -1021,3 +1021,45 @@ class plan_mejoramiento_avance(models.Model):
 
         if not fecha_inicio or not fecha_fin:
             raise Warning('No se ha definido fechas para el registro de avances')
+
+        if fecha_inicio and fecha_fin and not (fecha_inicio <= hoy <= fecha_fin):
+            raise Warning('Aún no se ha habilitado las fechas para realizar avances')
+
+        # Unico registro de avance en el mes
+        if fecha_inicio and fecha_fin:
+            avance = self.env['plan_mejoramiento.avance'].search([
+                ('accion_id', '=', vals['accion_id']),
+                ('fecha_creacion', '>=', fecha_inicio),
+                ('fecha_creacion', '<=', fecha_fin),
+            ])
+            if len(avance) >= 1:
+                raise Warning('Solo se permite un avance por periodo de registro')
+
+        # Campo aprobación jefe Unidad
+        accion_select = self.env['plan_mejoramiento.accion'].browse([vals['accion_id']])
+        es_jefe_dependencia = accion_select.jefe_dependencia_id.id == self.env.uid
+        if vals.get('aprobacion_jefe_dependencia', False) and not es_jefe_dependencia:
+            raise AccessError('El Campo [Aprobación Jefe Unidad] solo lo puede diligenciar el usuario Jefe de la Unidad')
+
+        avance = super(plan_mejoramiento_avance, self).create(vals)
+        return avance
+
+    @api.one
+    def write(self, vals):
+        # Se valida que los avances ya calificados no sean modificados
+        es_ejecutor = self.env.user.has_group_v8('plan_mejoramiento.ejecutor')[0]
+        if len(vals) == 1 and self.tipo_calificacion_id and es_ejecutor:
+            raise AccessError('No se permite modificar un avance que ya ha sido calificado')
+
+        # Se valida que solo el jefe_dependencia apruebe el avance
+        es_jefe_dependencia = self.accion_id.jefe_dependencia_id.id == self.env.uid
+        if 'aprobacion_jefe_dependencia' in vals and not es_jefe_dependencia:
+            raise AccessError('El Campo [Aprobación Jefe Unidad] solo lo puede diligenciar el usuario Jefe de la Unidad')
+
+        # Se valida que el usuario auditor solo pueda realizar la calificación una vez este aprobado el avance por el usuario jefe_dependencia
+        es_auditor = self.env.user.has_group_v8('plan_mejoramiento.auditor')[0]
+        if ('tipo_calificacion_id' in vals or 'porcentaje' in vals) and es_auditor and self.aprobacion_jefe_dependencia == False:
+            raise AccessError('Se podrá calificar este avance hasta que el usuario Jefe Depedencia lo apruebe')
+
+        result = super(plan_mejoramiento_avance, self).write(vals)
+        return result
