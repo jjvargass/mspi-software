@@ -1,0 +1,23 @@
+-
+  CREAR ORIGEN DE PLAN DE MEJORAMIENTO
+-
+  !record {model: plan_mejoramiento.origen, id: id_origen_01}:
+    name: 'Auditoria y/o evaluación de procesos'
+    descripcion: 'Descripción Origen'
+-
+  !record {model: plan_mejoramiento.origen, id: id_sub_origen_01}:
+    name: 'Sub Origen Auditoria y/o evaluación de procesos'
+    descripcion: 'Descripción Sub Origen'
+-
+  CREAR CAUSA DE HALLAZGOS
+-
+  !record {model: plan_mejoramiento.causa, id: id_causa_01}:
+    name: 'Causa Test 01'
+    descripcion: 'Descripción Causa test'
+-
+  CREAR RECURSO DE HALLAZGOS
+-
+  !record {model: plan_mejoramiento.recurso, id: id_recusro_01}:
+    name: 'Recursos Test 01'
+    descripcion: 'Descripción Recurso test'
+    tipo: 'financiero'

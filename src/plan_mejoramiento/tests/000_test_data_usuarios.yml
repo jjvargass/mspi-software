@@ -83,6 +83,14 @@
     user_id: id_user_auditor_oaci
     department_id: base_idu.hr_department_7
 -
+ ASIGNAR JEFE A DEPARTAMENTO
+-
+  !record {model: hr.department, id: base_idu.hr_department_9}:
+    manager_id: id_employee_jefe_oas
+-
+  !record {model: hr.department, id: base_idu.hr_department_5}:
+    manager_id: id_employee_jefe_oapc
+-
   ASIGNAR USUARIO AL GRUPO
 -
   !record {model: res.groups, id: plan_mejoramiento.analista}:

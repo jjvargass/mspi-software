@@ -887,7 +887,7 @@ class plan_mejoramiento_avance(models.Model):
         related='tipo_calificacion_id.state',
         help='''Estado''',
     )
-    porcentaje_avance = fields.Char(
+    porcentaje_avance = fields.Integer(
         string='% de Avance',
         required=False,
         track_visibility='onchange',
@@ -997,3 +997,14 @@ class plan_mejoramiento_avance(models.Model):
     # -------------------
     # methods
     # -------------------
+    @api.onchange('porcentaje_avance')
+    def onchange_porcentaje_avance(self):
+        if self.porcentaje_avance and (self.porcentaje_avance < 0 or self.porcentaje_avance > 100):
+            return {
+                'warning': {'message': 'Valor Fuera del Rango Permitido'}
+            }
+
+    @api.constrains('porcentaje_avance')
+    def check_porcentaje_avance(self):
+        if self.porcentaje_avance < 0 or self.porcentaje_avance > 100:
+            raise Warning('No se Permite Guardar un Valor Mayor a 100 y Menor a 0 para el Porcentaje de Avance')

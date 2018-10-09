@@ -1,0 +1,77 @@
+-
+  CREAR ACCIONES INTERNAS
+-
+  ACCION I 01 OAS
+-
+  !record {model: plan_mejoramiento.accion, id: id_accion_i_01}:
+    name: 'Accion Interna 01'
+    descripcion: 'Descripción Acción Interna Preventiva de ...'
+    tipo: 'preventivo'
+    state: 'nuevo'
+    ejecutor_id: id_user_ejecutor_oas
+    dependencia_id: base_idu.hr_department_9
+    objetivo: 'Objetivo de accion Interna'
+    indicador: 'tareas asignadas/tareas resueltas'
+    unidad_medida: 'tareas resueltas'
+    meta: 'lograr realizar...'
+    recurso_ids: [id_recusro_01,]
+    fecha_inicio: '2018-10-09'
+    fecha_fin: '2018-10-30'
+    hallazgo_id: id_hallazgo_i_01
+-
+  !record {model: plan_mejoramiento.accion, id: id_accion_i_01}:
+    ejecutor_id: id_user_ejecutor_oas
+-
+  !assert {model: plan_mejoramiento.accion, id: id_accion_i_01, string: id_accion_i_01}:
+    - user_id.id == ref('id_user_auditor_oaci')
+    - ejecutor_id.id == ref('id_user_ejecutor_oas')
+-
+  ACCION I 02 AOS
+-
+  !record {model: plan_mejoramiento.accion, id: id_accion_i_02}:
+    name: 'Accion Interna 02'
+    descripcion: 'Descripción Acción Interna Preventiva de ...'
+    tipo: 'preventivo'
+    state: 'en_progreso'
+    ejecutor_id: id_user_ejecutor_oas
+    dependencia_id: base_idu.hr_department_9
+    objetivo: 'Objetivo de accion Interna'
+    indicador: 'tareas asignadas/tareas resueltas'
+    unidad_medida: 'tareas resueltas'
+    meta: 'lograr realizar...'
+    recurso_ids: [id_recusro_01,]
+    fecha_inicio: '2018-10-09'
+    fecha_fin: '2018-10-30'
+    hallazgo_id: id_hallazgo_i_01
+-
+  !record {model: plan_mejoramiento.accion, id: id_accion_i_02}:
+    ejecutor_id: id_user_ejecutor_oas
+-
+  !assert {model: plan_mejoramiento.accion, id: id_accion_i_02, string: id_accion_i_02}:
+    - user_id.id == ref('id_user_auditor_oaci')
+    - ejecutor_id.id == ref('id_user_ejecutor_oas')
+-
+  ACCION I 03 OAPC
+-
+  !record {model: plan_mejoramiento.accion, id: id_accion_i_03}:
+    name: 'Accion General 03'
+    descripcion: 'Descripción Acción Interna Preventiva de ...'
+    tipo: 'preventivo'
+    state: 'en_progreso'
+    ejecutor_id: id_user_ejecutor_oapc
+    dependencia_id: base_idu.hr_department_5
+    objetivo: 'Objetivo de accion Interna'
+    indicador: 'tareas asignadas/tareas resueltas'
+    unidad_medida: 'tareas resueltas'
+    meta: 'lograr realizar...'
+    recurso_ids: [id_recusro_01,]
+    fecha_inicio: '2018-10-09'
+    fecha_fin: '2018-10-30'
+    hallazgo_id: id_hallazgo_i_03
+-
+  !record {model: plan_mejoramiento.accion, id: id_accion_i_03}:
+    ejecutor_id: id_user_ejecutor_oapc
+-
+  !assert {model: plan_mejoramiento.accion, id: id_accion_i_03, string: id_accion_i_03}:
+    - user_id.id == ref('id_user_auditor_oapc')
+    - ejecutor_id.id == ref('id_user_ejecutor_oapc')

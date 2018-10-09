@@ -1,0 +1,59 @@
+-
+  PLAN INTERNO 01
+-
+  !record {model: plan_mejoramiento.plan, id: id_plan_i_01}:
+    name: 'Plan M. INTERNO 01'
+    radicado: 'A001'
+    tipo: 'interno'
+    dependencia_id: base_idu.hr_department_7
+    origen_id: id_origen_01
+    sub_origen_id: id_sub_origen_01
+-
+  !record {model: plan_mejoramiento.plan, id: id_plan_i_01}:
+    user_id: id_user_auditor_oaci
+-
+  !assert {model: plan_mejoramiento.plan, id: id_plan_i_01, string: id_plan_i_01}:
+    - user_id.id == ref('id_user_auditor_oaci')
+    - edt_raiz_id.user_id.id == ref('id_user_auditor_oaci')
+    - project_id.user_id.id == ref('id_user_auditor_oaci')
+    - edt_raiz_id.name == name
+    - project_id.name == name
+    - proyecto_tipo == 'plan_mejoramiento'
+-
+  PLAN BOGOTA 01
+-
+  !record {model: plan_mejoramiento.plan, id: id_plan_b_02}:
+    name: 'Plan M. BOGOTA 02'
+    radicado: 'A0055'
+    tipo: 'contraloria_bog'
+    dependencia_id: base_idu.hr_department_7
+-
+  !record {model: plan_mejoramiento.plan, id: id_plan_b_02}:
+    user_id: id_user_auditor_oaci
+-
+  !assert {model: plan_mejoramiento.plan, id: id_plan_b_02, string: id_plan_b_02}:
+    - user_id.id == ref('id_user_auditor_oaci')
+    - edt_raiz_id.user_id.id == ref('id_user_auditor_oaci')
+    - project_id.user_id.id == ref('id_user_auditor_oaci')
+    - edt_raiz_id.name == name
+    - project_id.name == name
+    - proyecto_tipo == 'plan_mejoramiento'
+-
+  PLAN GENERAL 01
+-
+  !record {model: plan_mejoramiento.plan, id: id_plan_g_03}:
+    name: 'Plan M. GENERAL 03'
+    radicado: 'A00PP885'
+    tipo: 'contraloria_gral'
+    dependencia_id: base_idu.hr_department_5
+-
+  !record {model: plan_mejoramiento.plan, id: id_plan_g_03}:
+    user_id: id_user_auditor_oapc
+-
+  !assert {model: plan_mejoramiento.plan, id: id_plan_g_03, string: id_plan_g_03}:
+    - user_id.id == ref('id_user_auditor_oapc')
+    - edt_raiz_id.user_id.id == ref('id_user_auditor_oapc')
+    - project_id.user_id.id == ref('id_user_auditor_oapc')
+    - edt_raiz_id.name == name
+    - project_id.name == name
+    - proyecto_tipo == 'plan_mejoramiento'

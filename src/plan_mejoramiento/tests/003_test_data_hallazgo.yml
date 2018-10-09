@@ -1,0 +1,54 @@
+-
+  HALLAZGOS INTERNOS 01 OAS
+-
+  !record {model: plan_mejoramiento.hallazgo, id: id_hallazgo_i_01}:
+    plan_id: id_plan_i_01
+    name: 'Hallazgo Interno 01'
+    descripcion: 'Descripción de Hallazgo Interno 01'
+    causa_ids: [id_causa_01,]
+    proceso_id: operacion_por_procesos.mapa_proceso_proceso_7
+    dependencia_id: base_idu.hr_department_9
+    state: 'en_progreso'
+    user_id: id_user_auditor_oaci
+-
+  !record {model: plan_mejoramiento.hallazgo, id: id_hallazgo_i_01}:
+    user_id: id_user_auditor_oaci
+-
+  !assert {model: plan_mejoramiento.hallazgo, id: id_hallazgo_i_01, string: id_hallazgo_i_01}:
+    - user_id.id == ref('id_user_auditor_oaci')
+-
+  HALLAZGOS INTERNOS 02 OACI
+-
+  !record {model: plan_mejoramiento.hallazgo, id: id_hallazgo_i_02}:
+    plan_id: id_plan_i_01
+    name: 'Hallazgo Interno 02'
+    descripcion: 'Descripción de Hallazgo Interno 01'
+    causa_ids: [id_causa_01,]
+    proceso_id: operacion_por_procesos.mapa_proceso_proceso_7
+    dependencia_id: base_idu.hr_department_7
+    state: 'en_progreso'
+    user_id: id_user_auditor_oaci
+-
+  !record {model: plan_mejoramiento.hallazgo, id: id_hallazgo_i_02}:
+    user_id: id_user_auditor_oaci
+-
+  !assert {model: plan_mejoramiento.hallazgo, id: id_hallazgo_i_02, string: id_hallazgo_i_02}:
+    - user_id.id == ref('id_user_auditor_oaci')
+-
+  HALLAZGOS INTERNOS 03 OAPC
+-
+  !record {model: plan_mejoramiento.hallazgo, id: id_hallazgo_i_03}:
+    plan_id: id_plan_g_03
+    name: 'Hallazgo Interno 03'
+    descripcion: 'Descripción de Hallazgo Interno 01'
+    causa_ids: [id_causa_01,]
+    proceso_id: operacion_por_procesos.mapa_proceso_proceso_7
+    dependencia_id: base_idu.hr_department_5
+    state: 'en_progreso'
+    user_id: id_user_auditor_oapc
+-
+  !record {model: plan_mejoramiento.hallazgo, id: id_hallazgo_i_03}:
+    user_id: id_user_auditor_oapc
+-
+  !assert {model: plan_mejoramiento.hallazgo, id: id_hallazgo_i_03, string: id_hallazgo_i_03}:
+    - user_id.id == ref('id_user_auditor_oapc')

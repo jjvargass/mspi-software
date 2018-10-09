@@ -23,10 +23,18 @@
         'wizards/activar_avance_view.xml',
     ],
     'test': [
-         'tests/000_test_data_usuarios.yml',
+        'tests/000_test_data_usuarios.yml',
+        'tests/001_test_data_config.yml',
+        'tests/002_test_data_plan.yml',
+        'tests/003_test_data_hallazgo.yml',
+        'tests/004_test_data_accion.yml',
     ],
     'demo': [
         'tests/000_test_data_usuarios.yml',
+        'tests/001_test_data_config.yml',
+        'tests/002_test_data_plan.yml',
+        'tests/003_test_data_hallazgo.yml',
+        'tests/004_test_data_accion.yml',
     ],
     'installable': True,
     'description': """
