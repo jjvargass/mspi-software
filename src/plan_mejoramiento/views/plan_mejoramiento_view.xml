@@ -633,7 +633,7 @@
                     </group>
                     <notebook>
                         <page string='Acciones' attrs="{'invisible': [('id','=',False)]}">
-                            <field name="acciones_ids" context="{'hallazgo_id': active_id}"/>
+                            <field name="accion_ids" context="{'hallazgo_id': active_id}"/>
                         </page>
                     </notebook>
                 </sheet>

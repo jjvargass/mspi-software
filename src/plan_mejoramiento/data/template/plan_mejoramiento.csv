@@ -40,7 +40,7 @@ plan_mejoramiento.hallazgo,name,char,,,Nombre,Nombre,1,0,1,0,0,1,1,1,0,0,main,Ha
 ,state,selection,selection:en_progreso|terminado|cancelado;default:'en_progreso',,Estado,Estado,0,0,1,0,0,0,1,1,1,0,,,,,,,,,
 ,plan_id,many2one,default:_CONTEXT_,plan_mejoramiento.plan,Plan de Mejoramiento,Plan de Mejoramiento,1,0,1,0,0,1,1,1,1,0,,,,,,,,,
 ,plan_tipo,selection,related:plan_id.tipo;readonly:True;store=True,,Tipo Plan de Mejoramiento,Tipo Plan de Mejoramiento,0,0,1,0,0,0,1,1,1,0,,,,,,,,,
-,acciones_ids,text,,,Acciones,Acciones,0,0,0,0,0,0,1,0,0,Acciones,,,,,,,,,
+,accion_ids,text,,,Acciones,Acciones,0,0,0,0,0,0,1,0,0,Acciones,,,,,,,,,
 plan_mejoramiento.accion,name,char,,,Nombre,Nombre,1,0,1,0,0,1,1,1,0,0,main,Hallazgo,Acción,,"mail.thread,models.soft_delete.mixin,models.fields.security.mixin",0,0,0,new
 ,descripcion,text,,,Descripción,Descripción,1,0,1,0,0,1,1,1,0,0,,,,,,,,,
 ,tipo,selection,selection:preventivo|correctivo|mejoramiento|correccion,,Tipo,Topo,0,0,1,0,0,0,1,0,0,0,,,,,,,,,

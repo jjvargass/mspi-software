@@ -479,7 +479,7 @@ class plan_mejoramiento_hallazgo(models.Model):
         related='plan_id.tipo',
         help='''Tipo Plan de Mejoramiento''',
     )
-    acciones_ids = fields.One2many(
+    accion_ids = fields.One2many(
         string='Acciones',
         required=False,
         help='''Acciones''',

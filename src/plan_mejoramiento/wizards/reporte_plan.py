@@ -151,8 +151,8 @@ class plan_mejoramientos_wizard_reporte_plan(models.TransientModel):
         if (self.plan_id.hallazgo_ids):
             for hallazgo in self.plan_id.hallazgo_ids:
                 plan = {}
-                if (hallazgo.acciones_ids):
-                    for accion in hallazgo.acciones_ids:
+                if (hallazgo.accion_ids):
+                    for accion in hallazgo.accion_ids:
                         if(accion.avance_ids):
                             if (len(accion.avance_ids) >= 2):
                                 avance_max = self.avance_actual(self.plan_id.id, self.plan_id.tipo, accion.id)

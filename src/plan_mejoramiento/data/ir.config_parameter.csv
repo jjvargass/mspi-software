@@ -1,2 +1,2 @@
 id,key,value
-ir_config_parameter_1,plan_mejoramiento_ruta_plantilla_reportes,/ruta_fuentes_odoo/mspi-software/src/plan_mejoramiento/reports
+ir_config_parameter_1,plan_mejoramiento_ruta_plantilla_reportes,/home/jjvargass/git/odoo-ud/mspi-software/src/plan_mejoramiento/reports/

@@ -24,7 +24,7 @@ class Test_plan_mejoramiento_hallazgo(common.TransactionCase):
             'dependencia_id': self.ref('plan_mejoramiento.dependencia_id_01'),
             'state': "en_progreso",
             'plan_id': self.ref('plan_mejoramiento.plan_id_01'),
-            'acciones_ids': "Majority go weight return degree anyone land.",
+            'accion_ids': "Majority go weight return degree anyone land.",
         }
         hallazgo = hallazgo_model.create(vals)
 
