@@ -19,7 +19,7 @@
 ##############################################################################
 
 from openerp import models, fields, api
-from openerp.exceptions import ValidationError
+from openerp.exceptions import  Warning, AccessError, ValidationError
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 from openid import store
@@ -1008,3 +1008,16 @@ class plan_mejoramiento_avance(models.Model):
     def check_porcentaje_avance(self):
         if self.porcentaje_avance < 0 or self.porcentaje_avance > 100:
             raise Warning('No se Permite Guardar un Valor Mayor a 100 y Menor a 0 para el Porcentaje de Avance')
+
+    @api.model
+    def create(self, vals):
+        hoy = fields.Date.today()
+        fecha_max = self.env['plan_mejoramiento.parametro_activar_avance'].search([],
+            order='create_date DESC',
+            limit=1,
+        )
+        fecha_inicio = fecha_max.fecha_inicio
+        fecha_fin = fecha_max.fecha_fin
+
+        if not fecha_inicio or not fecha_fin:
+            raise Warning('No se ha definido fechas para el registro de avances')
