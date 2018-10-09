@@ -179,12 +179,12 @@ class plan_mejoramientos_wizard_reporte_plan(models.TransientModel):
                     all_data.append(plan)
                     plan = {}
         else:
+            plan = {}
             self.definir_plan(plan, self.plan_id)
             self.definir_hallazgo(plan)
             self.definir_accion(plan)
             self.definir_avance(plan)
             all_data.append(plan)
-            plan = {}
 
         if (self.tipo == 'interno'):
             # crear reporte
