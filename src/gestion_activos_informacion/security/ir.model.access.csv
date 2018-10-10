@@ -1,3 +1,0 @@
-id,active,name,group_id/id,model_id/id,perm_create,perm_read,perm_write,perm_unlink
-activo_tipo_global,True,"activo_informacion.activo_tipo global",,gestion_activos_informacion.model_activo_informacion_activo_tipo,0,1,0,0
-activo_global,True,"activo_informacion.activo global",,gestion_activos_informacion.model_activo_informacion_activo,0,1,0,0

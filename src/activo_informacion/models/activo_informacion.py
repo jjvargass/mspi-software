@@ -84,40 +84,70 @@ class activo_informacion_activo(models.Model):
         track_visibility='onchange',
         size=255,
         help='''Nombre''',
+        readonly=True,
+        states={
+            'definido': [('readonly', False)],
+            'actualizado': [('readonly', False)],
+        }
     )
     descripcion = fields.Text(
         string='Descripción',
         required=True,
         track_visibility='onchange',
         help='''Descripción''',
+        readonly=True,
+        states={
+            'definido': [('readonly', False)],
+            'actualizado': [('readonly', False)],
+        }
     )
     proceso_id = fields.Many2one(
         string='Proceso',
         required=True,
         track_visibility='onchange',
-        comodel_name='mapa_procesos.proceso',
+        comodel_name='mapa_proceso.proceso',
         ondelete='restrict',
         help='''Proceso''',
+        readonly=True,
+        states={
+            'definido': [('readonly', False)],
+            'actualizado': [('readonly', False)],
+        }
     )
     propietario = fields.Text(
         string='Propietario',
         required=True,
         track_visibility='onchange',
         help='''Propietario''',
+        readonly=True,
+        states={
+            'definido': [('readonly', False)],
+            'actualizado': [('readonly', False)],
+        }
     )
     custodio = fields.Text(
         string='Custodio',
         required=True,
         track_visibility='onchange',
         help='''Custodio''',
+        readonly=True,
+        states={
+            'definido': [('readonly', False)],
+            'actualizado': [('readonly', False)],
+        }
     )
     tipo_para_busqueda = fields.Selection(
         TIPO_ACTIVO,
         string='Tipo',
         required=True,
         track_visibility='onchange',
-        store=False,
+        store=True,
         help='''Tipo''',
+        readonly=True,
+        states={
+            'definido': [('readonly', False)],
+            'actualizado': [('readonly', False)],
+        }
     )
     tipo = fields.Many2one(
         domain="[('tipo','=', tipo_para_busqueda)]",
@@ -127,12 +157,22 @@ class activo_informacion_activo(models.Model):
         comodel_name='activo_informacion.activo_tipo',
         ondelete='restrict',
         help='''Detalle Tipo''',
+        readonly=True,
+        states={
+            'definido': [('readonly', False)],
+            'actualizado': [('readonly', False)],
+        }
     )
     ubicacion = fields.Text(
         string='Ubicación',
         required=True,
         track_visibility='onchange',
         help='''Ubicación''',
+        readonly=True,
+        states={
+            'definido': [('readonly', False)],
+            'actualizado': [('readonly', False)],
+        }
     )
     confidencialidad = fields.Selection(
         string='Confidencialidad',
@@ -140,16 +180,26 @@ class activo_informacion_activo(models.Model):
         track_visibility='onchange',
         help='''Confidencialidad''',
         selection=[
-            ('ipr', 'IPR'),
-            ('ipc', 'IPC'),
-            ('ipb', 'IPB'),
+            ('IPR', 'Información Publica Reservada - IPR'),
+            ('IPC', 'Información Publica Clasificada - IPC'),
+            ('IPB', 'Información Publica - IPB'),
         ],
+        readonly=True,
+        states={
+            'definido': [('readonly', False)],
+            'actualizado': [('readonly', False)],
+        }
     )
     confidencialidad_justificacion = fields.Text(
         string='Justificación Confidencialidad',
         required=True,
         track_visibility='onchange',
         help='''describe el impacto que causaría la pérdida de la confidencialidad''',
+        readonly=True,
+        states={
+            'definido': [('readonly', False)],
+            'actualizado': [('readonly', False)],
+        }
     )
     integridad = fields.Selection(
         string='Integridad',
@@ -157,16 +207,26 @@ class activo_informacion_activo(models.Model):
         track_visibility='onchange',
         help='''Integridad''',
         selection=[
-            ('a', 'A'),
-            ('m', 'M'),
-            ('b', 'B'),
+            ('A', 'ALTA'),
+            ('M', 'MEDIA'),
+            ('B', 'BAJA'),
         ],
+        readonly=True,
+        states={
+            'definido': [('readonly', False)],
+            'actualizado': [('readonly', False)],
+        }
     )
     integridad_justificacion = fields.Text(
         string='Justificación Integridad',
         required=True,
         track_visibility='onchange',
         help='''describe el impacto que causaría la pérdida de la Integridad''',
+        readonly=True,
+        states={
+            'definido': [('readonly', False)],
+            'actualizado': [('readonly', False)],
+        }
     )
     disponibilidad = fields.Selection(
         string='Disponibilidad',
@@ -174,24 +234,42 @@ class activo_informacion_activo(models.Model):
         track_visibility='onchange',
         help='''Disponibilidad''',
         selection=[
-            ('1', '1'),
-            ('2', '2'),
-            ('3', '3'),
+            ('1', 'ALTA'),
+            ('2', 'MEDIA'),
+            ('3', 'BAJA'),
         ],
+        readonly=True,
+        states={
+            'definido': [('readonly', False)],
+            'actualizado': [('readonly', False)],
+        }
     )
     disponibilidad_justicicacion = fields.Text(
         string='Justificación Disponibilidad',
         required=True,
         track_visibility='onchange',
         help='''describe el impacto que causaría la pérdida de la disponibilidad''',
+        readonly=True,
+        states={
+            'definido': [('readonly', False)],
+            'actualizado': [('readonly', False)],
+        }
     )
     criticidad = fields.Char(
         string='Criticidad',
-        required=True,
+        required=False,
         track_visibility='onchange',
         size=255,
         compute='_compute_criticidad',
         help='''Valor general del Activo''',
+    )
+    fecha_creacion = fields.Date(
+        string='Fecha Registro',
+        required=False,
+        readonly=True,
+        track_visibility='onchange',
+        help='''Fecha Registro''',
+        default=fields.Date.today,
     )
     fecha_ingreso = fields.Date(
         string='Fecha Ingreso',
@@ -211,12 +289,13 @@ class activo_informacion_activo(models.Model):
         track_visibility='onchange',
         help='''Estado''',
         selection=[
-            ('edicion', 'edicion'),
-            ('por_aprobar', 'por_aprobar'),
-            ('ingresado', 'ingresado'),
-            ('retirado', 'retirado'),
+            ('definido', 'definido'),
+            ('revisado', 'revisado'),
+            ('publicado', 'publicado'),
+            ('actualizado', 'actualizado'),
+            ('cancelado', 'cancelado'),
         ],
-        default='edicion',
+        default='definido',
     )
 
     # -------------------

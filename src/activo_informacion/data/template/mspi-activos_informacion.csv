@@ -1,5 +1,5 @@
 model_name,name,type,params,comodel,string,help,required,unique,tracking,constrains,onchange,view_tree,view_form,view_search,view_search_group_by,view_form_tab,menu,description,view_description,inherits,inherit,overwrite_write,overwrite_create,data,views
-__openerp__,name,,gestion_activos_informacion,,,,,,,,,,,,,,,,,,,,,,
+__openerp__,name,,activo_informacion,,,,,,,,,,,,,,,,,,,,,,
 ,namespace,,activo_informacion,,,,,,,,,,,,,,,,,,,,,,
 ,string,,Gestion de Activos de Información,,,,,,,,,,,,,,,,,,,,,,
 ,depends,,base|base_idu|model_security|document|operacion_por_procesos,,,,,,,,,,,,,,,,,,,,,,
@@ -22,6 +22,7 @@ activo_informacion.activo,name,char,,,Nombre,Nombre,1,0,1,0,0,1,1,1,0,0,main,Act
 ,disponibilidad,selection,selection:1|2|3,,Disponibilidad,Disponibilidad,1,0,1,0,0,1,1,1,1,0,,,,,,,,,
 ,disponibilidad_justicicacion,text,,,Justificación Disponibilidad,describe el impacto que causaría la pérdida de la disponibilidad,1,0,1,0,0,1,1,1,0,0,,,,,,,,,
 ,criticidad,char,compute:True,,Criticidad,Valor general del Activo,1,0,1,0,0,1,1,1,1,0,,,,,,,,,
+,facha_creacion,date,default:_NOW_;readonly:True,,Fecha Registro,Fecha Registro,0,0,1,0,0,1,1,1,0,0,,,,,,,,,
 ,fecha_ingreso,date,readonly:True,,Fecha Ingreso,Fecha Ingreso,1,0,1,0,0,1,1,1,0,0,,,,,,,,,
 ,fecha_retiro,date,readonly:True,,Fecha Retiro,Fecha Retiro,1,0,1,0,0,1,1,1,0,0,,,,,,,,,
-,state,selection,selection:edicion|por_aprobar|ingresado|retirado;default:’edicion’,,Estado,Estado,1,0,1,0,0,1,1,1,1,0,,,,,,,,,
+,state,selection,selection:definido|revisado|publicado|actualizado|cancelado;default:’definido’,,Estado,Estado,1,0,1,0,0,1,1,1,1,0,,,,,,,,,

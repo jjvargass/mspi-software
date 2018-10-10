@@ -6,19 +6,19 @@
     Menú
     =================================================================
     -->
-     <menuitem id="gestion_activos_informacion_nav" name="Gestion de Activos de Información"/>
+     <menuitem id="activo_informacion_nav" name="Gestion de Activos de Información"/>
 
-     <menuitem id="gestion_activos_informacion_menu"
+     <menuitem id="activo_informacion_menu"
         name="Gestion"
-        parent="gestion_activos_informacion_nav"
+        parent="activo_informacion_nav"
         sequence="10"
     />
-     <menuitem id="gestion_activos_informacion_conf_menu" parent="gestion_activos_informacion_nav"
+     <menuitem id="activo_informacion_conf_menu" parent="activo_informacion_nav"
         name="Configuración"
         groups="base.group_configuration"
         sequence="30"
      />
-     <menuitem id="gestion_activos_informacion_admin_menu" parent="gestion_activos_informacion_nav"
+     <menuitem id="activo_informacion_admin_menu" parent="activo_informacion_nav"
         name="Administración Gestion de Activos de Información"
         groups="base.group_configuration"
         sequence="100"
@@ -125,7 +125,7 @@
         <field name="view_mode">tree,form</field>
     </record>
     <menuitem id="activo_tipo_menu"
-        parent="gestion_activos_informacion_conf_menu"
+        parent="activo_informacion_conf_menu"
         sequence="30"
         name="Tipo Activo de Información" action="activo_tipo_action"
     />
@@ -183,49 +183,49 @@
                 <filter name="filtro_confidencialidad_ipr"
                     string="IPR"
                     help="Filtrar Confidencialidad IPR"
-                    domain="[('confidencialidad', '=', 'ipr')]"
+                    domain="[('confidencialidad', '=', 'IPR')]"
                 />
                 <filter name="filtro_confidencialidad_ipc"
                     string="IPC"
                     help="Filtrar Confidencialidad IPC"
-                    domain="[('confidencialidad', '=', 'ipc')]"
+                    domain="[('confidencialidad', '=', 'IPC')]"
                 />
                 <filter name="filtro_confidencialidad_ipb"
                     string="IPB"
                     help="Filtrar Confidencialidad IPB"
-                    domain="[('confidencialidad', '=', 'ipb')]"
+                    domain="[('confidencialidad', '=', 'IPB')]"
                 />
                 <field name="confidencialidad_justificacion" />
                 <field name="integridad" />
                 <filter name="filtro_integridad_a"
-                    string="A"
+                    string="ALTA"
                     help="Filtrar Integridad A"
-                    domain="[('integridad', '=', 'a')]"
+                    domain="[('integridad', '=', 'A')]"
                 />
                 <filter name="filtro_integridad_m"
-                    string="M"
+                    string="MEDIA"
                     help="Filtrar Integridad M"
-                    domain="[('integridad', '=', 'm')]"
+                    domain="[('integridad', '=', 'M')]"
                 />
                 <filter name="filtro_integridad_b"
-                    string="B"
+                    string="BAJA"
                     help="Filtrar Integridad B"
-                    domain="[('integridad', '=', 'b')]"
+                    domain="[('integridad', '=', 'B')]"
                 />
                 <field name="integridad_justificacion" />
                 <field name="disponibilidad" />
                 <filter name="filtro_disponibilidad_1"
-                    string="1"
+                    string="ALTA"
                     help="Filtrar Disponibilidad 1"
                     domain="[('disponibilidad', '=', '1')]"
                 />
                 <filter name="filtro_disponibilidad_2"
-                    string="2"
+                    string="MEDIA"
                     help="Filtrar Disponibilidad 2"
                     domain="[('disponibilidad', '=', '2')]"
                 />
                 <filter name="filtro_disponibilidad_3"
-                    string="3"
+                    string="BAJA"
                     help="Filtrar Disponibilidad 3"
                     domain="[('disponibilidad', '=', '3')]"
                 />
@@ -234,25 +234,30 @@
                 <field name="fecha_ingreso" />
                 <field name="fecha_retiro" />
                 <field name="state" />
-                <filter name="filtro_state_edicion"
-                    string="edicion"
-                    help="Filtrar Estado edicion"
-                    domain="[('state', '=', 'edicion')]"
+                <filter name="filtro_state_definido"
+                    string="definido"
+                    help="Filtrar Estado definido"
+                    domain="[('state', '=', 'definido')]"
                 />
-                <filter name="filtro_state_por_aprobar"
-                    string="por_aprobar"
-                    help="Filtrar Estado por_aprobar"
-                    domain="[('state', '=', 'por_aprobar')]"
+                <filter name="filtro_state_revisado"
+                    string="revisado"
+                    help="Filtrar Estado revisado"
+                    domain="[('state', '=', 'revisado')]"
                 />
-                <filter name="filtro_state_ingresado"
-                    string="ingresado"
-                    help="Filtrar Estado ingresado"
-                    domain="[('state', '=', 'ingresado')]"
+                <filter name="filtro_state_publicado"
+                    string="publicado"
+                    help="Filtrar Estado publicado"
+                    domain="[('state', '=', 'publicado')]"
                 />
-                <filter name="filtro_state_retirado"
-                    string="retirado"
-                    help="Filtrar Estado retirado"
-                    domain="[('state', '=', 'retirado')]"
+                <filter name="filtro_state_actualizado"
+                    string="actualizado"
+                    help="Filtrar Estado actualizado"
+                    domain="[('state', '=', 'actualizado')]"
+                />
+                <filter name="filtro_state_cancelado"
+                    string="cancelado"
+                    help="Filtrar Estado cancelado"
+                    domain="[('state', '=', 'cancelado')]"
                 />
                 <group string="Agrupar por...">
                     <filter string="Proceso" context="{'group_by':'proceso_id'}"/>
@@ -272,7 +277,7 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <field name="state" widget="statusbar" />
+                    <field name="state" widget="statusbar" clickable="1" />
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
@@ -305,6 +310,7 @@
                     </group>
                     <separator string="Gestión"/>
                     <group>
+                        <field name="fecha_creacion" />
                         <field name="fecha_ingreso" />
                         <field name="fecha_retiro" />
                     </group>
@@ -330,16 +336,6 @@
                 <field name="custodio" />
                 <field name="tipo_para_busqueda" />
                 <field name="tipo" />
-                <field name="ubicacion" />
-                <field name="confidencialidad" />
-                <field name="confidencialidad_justificacion" />
-                <field name="integridad" />
-                <field name="integridad_justificacion" />
-                <field name="disponibilidad" />
-                <field name="disponibilidad_justicicacion" />
-                <field name="criticidad" />
-                <field name="fecha_ingreso" />
-                <field name="fecha_retiro" />
                 <field name="state" />
             </tree>
         </field>
@@ -350,7 +346,7 @@
         <field name="view_mode">tree,form</field>
     </record>
     <menuitem id="activo_menu"
-        parent="gestion_activos_informacion_menu"
+        parent="activo_informacion_menu"
         sequence="20"
         name="Activos de Información" action="activo_action"
     />

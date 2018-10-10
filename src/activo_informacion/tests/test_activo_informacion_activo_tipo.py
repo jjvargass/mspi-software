@@ -11,10 +11,10 @@ class Test_activo_informacion_activo_tipo(common.TransactionCase):
     def test_crud_validaciones(self):
         activo_tipo_model = self.env['activo_informacion.activo_tipo']
         vals = {
-            'active': False,
-            'name': "Above me blue organization see type know four.",
-            'descripcion': "Treatment source international bank business friend green.",
-            'tipo': "hardware",
+            'activo_sistema': True,
+            'name': "Nature tend power treatment since.",
+            'descripcion': "Mention ground seem.",
+            'tipo': "software",
         }
         activo_tipo = activo_tipo_model.create(vals)
 
