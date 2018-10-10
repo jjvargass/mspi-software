@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <record id="accion_workflow" model="workflow">
+        <field name="name">plan_mejoramiento.accion.workflow</field>
+        <field name="osv">plan_mejoramiento.accion</field>
+        <field name="on_create">True</field>
+    </record>
+<!--
+    ===================================================================================
+    Activities
+    ===================================================================================
+-->
+
+    <record id="accion_nuevo_act" model="workflow.activity">
+        <field name="wkf_id" ref="accion_workflow"/>
+        <field name="name">nuevo</field>
+        <field name="kind">function</field>
+        <field name="action">wkf_nuevo()</field>
+        <field name="flow_start" eval="True"/>
+    </record>
+
+    <record id="accion_cancelado_act" model="workflow.activity">
+        <field name="wkf_id" ref="accion_workflow"/>
+        <field name="name">cancelado</field>
+        <field name="kind">function</field>
+        <field name="action">wkf_cancelado()</field>
+        <field name="flow_stop" eval="True"/>
+    </record>
+
+    <record id="accion_en_progreso_act" model="workflow.activity">
+        <field name="wkf_id" ref="accion_workflow"/>
+        <field name="name">en_progreso</field>
+        <field name="kind">function</field>
+        <field name="action">wkf_en_progreso()</field>
+    </record>
+
+    <record id="accion_por_aprobar_act" model="workflow.activity">
+        <field name="wkf_id" ref="accion_workflow"/>
+        <field name="name">por_aprobar</field>
+        <field name="kind">function</field>
+        <field name="action">wkf_por_aprobar()</field>
+    </record>
+
+    <record id="accion_terminado_act" model="workflow.activity">
+        <field name="wkf_id" ref="accion_workflow"/>
+        <field name="name">terminado</field>
+        <field name="kind">function</field>
+        <field name="action">wkf_terminado()</field>
+        <field name="flow_stop" eval="True"/>
+    </record>
+
+    <!--
+    ===================================================================================
+    Transitions
+    ===================================================================================
+     -->
+
+    <record id="accion_nuevo__por_aprobar_transition" model="workflow.transition">
+        <field name="act_from" ref="accion_nuevo_act"/>
+        <field name="act_to" ref="accion_por_aprobar_act"/>
+        <field name="condition">True</field>
+        <field name="group_id" ref="plan_mejoramiento.ejecutor"/>
+        <field name="signal">wkf_nuevo__por_aprobar</field></record>
+
+    <record id="accion_por_aprobar__nuevo_transition" model="workflow.transition">
+        <field name="act_from" ref="accion_por_aprobar_act"/>
+        <field name="act_to" ref="accion_nuevo_act"/>
+        <field name="condition">True</field>
+        <field name="group_id" ref="plan_mejoramiento.auditor"/>
+        <field name="signal">wkf_por_aprobar__nuevo</field></record>
+
+    <record id="accion_por_aprobar__en_progreso_transition" model="workflow.transition">
+        <field name="act_from" ref="accion_por_aprobar_act"/>
+        <field name="act_to" ref="accion_en_progreso_act"/>
+        <field name="condition">True</field>
+        <field name="group_id" ref="plan_mejoramiento.auditor"/>
+        <field name="signal">wkf_por_aprobar__en_progreso</field></record>
+
+    <record id="accion_por_aprobar__cancelado_transition" model="workflow.transition">
+        <field name="act_from" ref="accion_por_aprobar_act"/>
+        <field name="act_to" ref="accion_cancelado_act"/>
+        <field name="condition">True</field>
+        <field name="group_id" ref="plan_mejoramiento.auditor"/>
+        <field name="signal">wkf_por_aprobar__cancelado</field></record>
+
+    <record id="accion_en_progreso__terminado_transition" model="workflow.transition">
+        <field name="act_from" ref="accion_en_progreso_act"/>
+        <field name="act_to" ref="accion_terminado_act"/>
+        <field name="condition">True</field>
+        <field name="group_id" ref="plan_mejoramiento.auditor"/>
+        <field name="signal">wkf_en_progreso__terminado</field></record>
+
+</data>
+</openerp>

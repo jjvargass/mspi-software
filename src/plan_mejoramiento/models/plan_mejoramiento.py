@@ -841,6 +841,24 @@ class plan_mejoramiento_accion(models.Model):
             'view_type': 'form',
         }
 
+    # -------------------
+    # Workflow methods
+    # -------------------
+    def wkf_nuevo(self):
+        self.state = 'nuevo'
+
+    def wkf_cancelado(self):
+        self.state = 'cancelado'
+
+    def wkf_en_progreso(self):
+        self.state = 'en_progreso'
+
+    def wkf_por_aprobar(self):
+        self.state = 'por_aprobar'
+
+    def wkf_terminado(self):
+        self.state = 'terminado'
+
 class plan_mejoramiento_avance(models.Model):
     _name = 'plan_mejoramiento.avance'
     _description = 'Avances'

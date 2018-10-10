@@ -21,6 +21,7 @@
         'data/ir.config_parameter.csv',
         'wizards/reporte_plan_view.xml',
         'wizards/activar_avance_view.xml',
+        'workflow/accion_workflow.xml',
     ],
     'test': [
         'tests/000_test_data_usuarios.yml',

@@ -734,6 +734,31 @@
         <field name="arch" type="xml">
             <form>
                 <header>
+                    <button string="Por Aprobar" type="workflow" class="oe_highlight"
+                        name="wkf_nuevo__por_aprobar"
+                        groups="plan_mejoramiento.ejecutor"
+                        states="nuevo"
+                    />
+                    <button string="Nuevo" type="workflow" class="oe_highlight"
+                        name="wkf_por_aprobar__nuevo"
+                        groups="plan_mejoramiento.auditor"
+                        states="por_aprobar"
+                    />
+                    <button string="En Progreso" type="workflow" class="oe_highlight"
+                        name="wkf_por_aprobar__en_progreso"
+                        groups="plan_mejoramiento.auditor"
+                        states="por_aprobar"
+                    />
+                    <button string="Cancelado" type="workflow" class="oe_highlight"
+                        name="wkf_por_aprobar__cancelado"
+                        groups="plan_mejoramiento.auditor"
+                        states="por_aprobar"
+                    />
+                    <button string="Terminado" type="workflow" class="oe_highlight"
+                        name="wkf_en_progreso__terminado"
+                        groups="plan_mejoramiento.auditor"
+                        states="en_progreso"
+                    />
                     <field name="state" widget="statusbar" clickable="1" />
                 </header>
                 <sheet>
