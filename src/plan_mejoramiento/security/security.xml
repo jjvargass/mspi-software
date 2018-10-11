@@ -68,6 +68,7 @@
 -->
 
 <!-- Domain plan_mejoramiento.administrador -->
+
     <record id="admin_todo_en_planes" model="ir.rule">
         <field name="name">El administrador tiene derecho de CRUD en todos los planes</field>
         <field name="model_id" ref="plan_mejoramiento.model_plan_mejoramiento_plan"/>
@@ -108,11 +109,148 @@
         <field name="perm_write" eval="True"/>
         <field name="perm_unlink" eval="True"/>
     </record>
-    <record id="admin_solo_edita_fechas_en_wizard" model="ir.rule">
-        <field name="name">El administrador solo podra editar fecha inicio y fecha fin</field>
-        <field name="model_id" ref="base.model_ir_config_parameter"/>
-        <field name="domain_force">[('key','like','plan_mejoramiento.activar_avances.%')]</field>
-        <field name="groups" eval="[(4, ref('plan_mejoramiento.administrador'))]"/>
+
+    <!-- Domain plan_mejoramiento.auditor -->
+
+    <record id="auditor_crud_planes_propios" model="ir.rule">
+        <field name="name">El auditor solo puede editar sus propios planes de mejoramiento</field>
+        <field name="model_id" ref="plan_mejoramiento.model_plan_mejoramiento_plan"/>
+        <field name="domain_force">[('user_id','=',user.id)]</field>
+        <field name="groups" eval="[(4, ref('plan_mejoramiento.auditor'))]"/>
+        <field name="perm_read" eval="False"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+    <record id="auditor_lee_todos_planes" model="ir.rule">
+        <field name="name">El auditor puede ver todos los planes de mejoramiento</field>
+        <field name="model_id" ref="plan_mejoramiento.model_plan_mejoramiento_plan"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="groups" eval="[(4, ref('plan_mejoramiento.auditor'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+    <record id="auditor_crud_hallazgo_propios" model="ir.rule">
+        <field name="name">El auditor solo puede editar sus propios hallazgos</field>
+        <field name="model_id" ref="plan_mejoramiento.model_plan_mejoramiento_hallazgo"/>
+        <field name="domain_force">['|',('user_id','=',user.id),('user_id','=',False)]</field>
+        <field name="groups" eval="[(4, ref('plan_mejoramiento.auditor'))]"/>
+        <field name="perm_read" eval="False"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+    <record id="auditor_lee_todos_hallazgos" model="ir.rule">
+        <field name="name">El auditor puede ver todos los hallazgos</field>
+        <field name="model_id" ref="plan_mejoramiento.model_plan_mejoramiento_hallazgo"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="groups" eval="[(4, ref('plan_mejoramiento.auditor'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+    <record id="auditor_crud_acciones_propios" model="ir.rule">
+        <field name="name">El auditor solo puede editar sus propias acciones</field>
+        <field name="model_id" ref="plan_mejoramiento.model_plan_mejoramiento_accion"/>
+        <field name="domain_force">['|',('user_id','=',user.id),('user_id','=',False)]</field>
+        <field name="groups" eval="[(4, ref('plan_mejoramiento.auditor'))]"/>
+        <field name="perm_read" eval="False"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+    <record id="auditor_lee_todos_acciones" model="ir.rule">
+        <field name="name">El auditor lee todas las acciones</field>
+        <field name="model_id" ref="plan_mejoramiento.model_plan_mejoramiento_accion"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="groups" eval="[(4, ref('plan_mejoramiento.auditor'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+    <record id="auditor_crud_avances_propios" model="ir.rule">
+        <field name="name">El auditor solo puede editar sus propias avances</field>
+        <field name="model_id" ref="plan_mejoramiento.model_plan_mejoramiento_avance"/>
+        <field name="domain_force">['|',('user_id','=',user.id),('user_id','=',False)]</field>
+        <field name="groups" eval="[(4, ref('plan_mejoramiento.auditor'))]"/>
+        <field name="perm_read" eval="False"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+    <record id="auditor_lee_todos_avances" model="ir.rule">
+        <field name="name">El auditor lee todos los avances </field>
+        <field name="model_id" ref="plan_mejoramiento.model_plan_mejoramiento_avance"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="groups" eval="[(4, ref('plan_mejoramiento.auditor'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+    <record id="auditor_todo_en_proyectos" model="ir.rule">
+        <field name="name">El OCI tiene derecho de CRUD en todos los proyectos de plan de mejoramiento unicamente</field>
+        <field name="model_id" ref="project.model_project_project"/>
+        <field name="domain_force">[('proyecto_tipo','=','plan_mejoramiento')]</field>
+        <field name="groups" eval="[(4, ref('plan_mejoramiento.auditor'))]"/>
+        <field name="perm_read" eval="False"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+    <!-- Domain plan_mejoramiento.ejecutor -->
+
+   <record id="ejecutor_edita_accion_de_su_propiedad" model="ir.rule">
+        <field name="name">El ejecutor solo puede editar las acciones que tenga asignadas
+        </field>
+        <field name="model_id" ref="plan_mejoramiento.model_plan_mejoramiento_accion"/>
+        <field name="domain_force">[('ejecutor_id','=',user.id)]</field>
+        <field name="groups" eval="[(4, ref('plan_mejoramiento.ejecutor'))]"/>
+        <field name="perm_read" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <record id="ejecutor_edita_avances_de_su_dependencia" model="ir.rule">
+        <field name="name">El Ejecutor solo puede
+            editar los avances que sean de su dependencia o no estan asociados a ninguna dependencia
+            eso sucede al momento de crearlo debido a que dependencia es un related y solo luego de
+            creado se asigna la dependencia.
+        </field>
+        <field name="model_id" ref="plan_mejoramiento.model_plan_mejoramiento_avance"/>
+        <field name="domain_force">[('dependencia_id','in',[user.department_id.id, False])]</field>
+        <field name="groups" eval="[(4, ref('plan_mejoramiento.ejecutor'))]"/>
+        <field name="perm_read" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+    <record id="ejecutor_crea_tareas_plan_mejoramiento" model="ir.rule">
+        <field name="name">El ejecutor/jefe dependencia puede crear tareas en plan de mejoramiento sin restriccion</field>
+        <field name="model_id" ref="project.model_project_task"/>
+        <field name="domain_force">['|',('accion_id.ejecutor_id','=',user.id),('accion_id.jefe_dependencia_id','=',user.id)]</field>
+        <field name="groups" eval="[(4, ref('plan_mejoramiento.ejecutor'))]"/>
+        <field name="perm_read" eval="False"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <!-- Domain base_idu.group_jefe_dependencia -->
+    <!-- Domain base_idu.group_jefe_dependencia hereda todas las reglas del ejecutor-->
+
+    <record id="jefe_dependencia_edita_accion_de_su_dependencia" model="ir.rule">
+        <field name="name">El jefe dependencia solo puede editar las acciones que sean de su dependencia
+        </field>
+        <field name="model_id" ref="plan_mejoramiento.model_plan_mejoramiento_accion"/>
+        <field name="domain_force">[('dependencia_id','=',user.department_id.id)]</field>
+        <field name="groups" eval="[(4, ref('base_idu.group_jefe_dependencia'))]"/>
         <field name="perm_read" eval="False"/>
         <field name="perm_create" eval="True"/>
         <field name="perm_write" eval="True"/>
@@ -120,9 +258,6 @@
     </record>
 
     <!-- Domain plan_mejoramiento.analista -->
-    <!-- Domain plan_mejoramiento.ejecutor -->
-    <!-- Domain base_idu.group_jefe_dependencia -->
-    <!-- Domain plan_mejoramiento.auditor -->
 
 </data>
 </openerp>
