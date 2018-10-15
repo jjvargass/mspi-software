@@ -1,0 +1,24 @@
+-
+  CREAR AVANCES DE OCI
+-
+ ABRIR REGISTRO DE AVANCES WIZARD
+-
+  !record {model: plan_mejoramiento.wizard.activar_avance, id: id_wizard}:
+    fecha_inicio: !eval "datetime.now().strftime('%Y-%m-%d')"
+    fecha_fin: !eval "datetime.now().strftime('%Y-%m-%d')"
+-
+  !python {model: plan_mejoramiento.wizard.activar_avance}: |
+    wizard = self.browse(cr, uid, ref("id_wizard"), None)
+    wizard.activar_avance()
+-
+  AVANCE 01 OAS
+-
+  !record {model: plan_mejoramiento.avance, id: id_avance_i_01_oci}:
+    accion_id: id_accion_i_02
+    descripcion: 'Descripcion de avance 01 de accion perteneciente a oci'
+-
+  AVANCE 02
+-
+  !record {model: plan_mejoramiento.avance, id: id_avance_i_02_oapc}:
+    accion_id: id_accion_i_03
+    descripcion: 'Descripcion de avance 02 de accion perteneciente a oapc'

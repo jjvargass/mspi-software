@@ -1,0 +1,26 @@
+-
+  CREAR TAREAS PARA ACCION I. 02 AOS
+-
+  !record {model: project.task, id: id_task_01}:
+    'name': 'tarea test realizar proceso de documentación 01'
+    'dependencia_id': base_idu.hr_department_5
+    'user_id': id_user_jefe_oapc
+    'revisor_id': id_user_ejecutor_oas
+    'fecha_inicio': '2018-05-01'
+    'fecha_fin': '2018-05-01'
+    'accion_id': id_accion_i_02
+-
+  !record {model: project.task, id: id_task_02}:
+    'name': 'tarea test realizar proceso de documentación 02'
+    'dependencia_id': base_idu.hr_department_5
+    'user_id': id_user_ejecutor_oapc
+    'revisor_id': id_user_ejecutor_oas
+    'fecha_inicio': '2018-05-01'
+    'fecha_fin': '2018-05-01'
+    'accion_id': id_accion_i_02
+-
+ !python {model: plan_mejoramiento.plan}: |
+    proyect_id = self.browse(cr, uid, ref("id_plan_i_01")).project_id.id
+    edt_raiz = self.browse(cr, uid, ref("id_plan_i_01")).edt_raiz_id.id
+    self.pool.get('project.task').write(cr, uid, [ref("plan_mejoramiento.id_task_01")],{'edt_id': edt_raiz, 'project_id': proyect_id },None)
+    self.pool.get('project.task').write(cr, uid, [ref("plan_mejoramiento.id_task_02")],{'edt_id': edt_raiz, 'project_id': proyect_id },None)

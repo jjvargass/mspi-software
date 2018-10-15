@@ -29,6 +29,8 @@
         'tests/002_test_data_plan.yml',
         'tests/003_test_data_hallazgo.yml',
         'tests/004_test_data_accion.yml',
+        'tests/005_test_data_tareas.yml',
+        'tests/006_test_data_avance.yml',
     ],
     'demo': [
         'tests/000_test_data_usuarios.yml',
@@ -36,6 +38,8 @@
         'tests/002_test_data_plan.yml',
         'tests/003_test_data_hallazgo.yml',
         'tests/004_test_data_accion.yml',
+        'tests/005_test_data_tareas.yml',
+        'tests/006_test_data_avance.yml',
     ],
     'installable': True,
     'description': """

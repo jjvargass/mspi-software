@@ -203,6 +203,21 @@
         <field name="perm_unlink" eval="True"/>
     </record>
 
+    <!-- Domain base_idu.group_jefe_dependencia -->
+    <!-- Domain base_idu.group_jefe_dependencia hereda todas las reglas del ejecutor-->
+
+    <record id="jefe_dependencia_edita_accion_de_su_dependencia" model="ir.rule">
+        <field name="name">El jefe dependencia solo puede editar las acciones que sean de su dependencia
+        </field>
+        <field name="model_id" ref="plan_mejoramiento.model_plan_mejoramiento_accion"/>
+        <field name="domain_force">[('dependencia_id','=',user.department_id.id)]</field>
+        <field name="groups" eval="[(4, ref('base_idu.group_jefe_dependencia'))]"/>
+        <field name="perm_read" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
     <!-- Domain plan_mejoramiento.ejecutor -->
 
    <record id="ejecutor_edita_accion_de_su_propiedad" model="ir.rule">
@@ -216,7 +231,6 @@
         <field name="perm_write" eval="True"/>
         <field name="perm_unlink" eval="False"/>
     </record>
-
     <record id="ejecutor_edita_avances_de_su_dependencia" model="ir.rule">
         <field name="name">El Ejecutor solo puede
             editar los avances que sean de su dependencia o no estan asociados a ninguna dependencia
@@ -242,20 +256,6 @@
         <field name="perm_unlink" eval="False"/>
     </record>
 
-    <!-- Domain base_idu.group_jefe_dependencia -->
-    <!-- Domain base_idu.group_jefe_dependencia hereda todas las reglas del ejecutor-->
-
-    <record id="jefe_dependencia_edita_accion_de_su_dependencia" model="ir.rule">
-        <field name="name">El jefe dependencia solo puede editar las acciones que sean de su dependencia
-        </field>
-        <field name="model_id" ref="plan_mejoramiento.model_plan_mejoramiento_accion"/>
-        <field name="domain_force">[('dependencia_id','=',user.department_id.id)]</field>
-        <field name="groups" eval="[(4, ref('base_idu.group_jefe_dependencia'))]"/>
-        <field name="perm_read" eval="False"/>
-        <field name="perm_create" eval="True"/>
-        <field name="perm_write" eval="True"/>
-        <field name="perm_unlink" eval="False"/>
-    </record>
 
     <!-- Domain plan_mejoramiento.analista -->
 
