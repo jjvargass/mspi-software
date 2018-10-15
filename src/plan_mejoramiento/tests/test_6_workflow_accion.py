@@ -32,15 +32,27 @@ class Test_plan_mejoramiento_wrk_accion(common.TransactionCase):
         accion.sudo(ejecutor_oas_id).signal_workflow('wkf_nuevo__por_aprobar')
         self.assertEqual(accion.state, 'por_aprobar', 'wkf_nuevo__por_aprobar No Ejecutado')
 
-        # (4)
-#         accion.sudo(ejecutor_oas_id).write({ 
-#             'name': 'Sobreescrivir Nombre',
-#         })
+        # (4) Edición por usuario no autorizado
+        try:
+            accion.sudo(ejecutor_oapc_id).write({
+                'name': 'Sobreescrivir Nombre',
+            })
+        except AccessError:
+            pass
+        else:
+            self.fail('[No se generó exception]-Se Esperaba de validación domino de acceso')
 
         # (3) El Auditor aprueba la acción
         accion.sudo(auditor_id).signal_workflow('wkf_por_aprobar__en_progreso')
         self.assertEqual(accion.state, 'en_progreso', 'wkf_por_aprobar__en_progreso No Ejecutado')
 
+        # (4) Cambiar estado por un usuario no autorizado
+        accion.sudo(ejecutor_oas_id).signal_workflow('wkf_en_progreso__terminado')
+        self.assertEqual(accion.state, 'en_progreso', 'wkf_en_progreso__terminado No Ejecutado')
+
+        # (5) Cambiar estado por un usuario no autorizado
+        accion.sudo(auditor_id).signal_workflow('wkf_en_progreso__terminado')
+        self.assertEqual(accion.state, 'terminado', 'wkf_en_progreso__terminado No Ejecutado')
 
 
 if __name__ == '__main__':
