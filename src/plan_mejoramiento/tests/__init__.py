@@ -6,3 +6,4 @@ import test_5_plan_mejoramiento_avance
 import test_6_workflow_accion
 import test_7_security_domain_analista
 import test_8_security_domain_jefe_dep
+import test_9_security_domain_auditor
