@@ -10,6 +10,10 @@ _logger = logging.getLogger('TEST')
 class Test_plan_mejoramiento_plan(common.TransactionCase):
     def test_crud_validaciones(self):
         _logger.info("\n***** test_crud_validaciones Plan *****")
+        """
+            Se valida la creación del Plan y que la información 
+            corresponda conla herencia de proyectos
+        """
         plan_model = self.env['plan_mejoramiento.plan']
         auditro= self.browse_ref('plan_mejoramiento.id_user_auditor_oaci')
         

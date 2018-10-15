@@ -11,6 +11,11 @@ _logger = logging.getLogger('TEST')
 class Test_plan_mejoramiento_hallazgo(common.TransactionCase):
     def test_date_max_min_halazgo_validaciones(self):
         _logger.info("\n***** test_date_max_min_halazgo_validaciones *****")
+        """
+            Se valida que la fecha Inicio y Fin del Hallazgo este dado
+            Por la fecha minima y fecha maxima entre todas las acciones que
+            pertenesca al hallazgo
+        """
 
         plan_id = self.ref('plan_mejoramiento.id_plan_i_01')
         auditor_id = self.ref('plan_mejoramiento.id_user_auditor_oaci')
