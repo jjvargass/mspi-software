@@ -77,7 +77,7 @@ class Test_plan_mejoramiento_domain_jefe_dep(common.TransactionCase):
         wizard.activar_avance()
         # Crear Avance
         avance = self.env['plan_mejoramiento.avance'].sudo(jefe_oas_id).create({
-             'accion_id': self.ref('plan_mejoramiento.id_accion_i_02'),
+             'accion_id': accion_01.id,
              'descripcion': 'Descripcion Unit test de avance 01 de accion perteneciente a oci',
          })
 

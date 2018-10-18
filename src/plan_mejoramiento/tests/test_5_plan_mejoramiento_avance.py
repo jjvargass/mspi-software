@@ -57,9 +57,29 @@ class Test_plan_mejoramiento_avance(common.TransactionCase):
                 'fecha_fin': today + timedelta(days=20),
         })
         wizard.activar_avance()
+
+        # Crear Accion nuevo para asociar avance
+        # utilizando la referencia de los yml ya en test anteriores se agregavan avances
+        # y resultava error de solo un avance en mes
+        accion_01 = self.env['plan_mejoramiento.accion'].sudo(ejecutor_oas_id).create({
+            'name': 'accion Interna 01',
+            'descripcion': 'Descripción Acción Interna Preventiva de ...',
+            'tipo': 'preventivo',
+            'state': 'nuevo',
+            'ejecutor_id': ejecutor_oas_id,
+            'hallazgo_id': self.ref('plan_mejoramiento.id_hallazgo_i_01'),
+            'dependencia_id': self.ref('base_idu.hr_department_9'),
+            'objetivo': 'Objetivo de accion Interna',
+            'indicador': 'tareas asignadas/tareas resueltas',
+            'unidad_medida': 'tareas resueltas',
+            'meta': 'lograr realizar...',
+            #'recurso_ids': [id_recusro_01,],
+            'fecha_inicio': today,
+            'fecha_fin': today,
+        })
         # Crear avance en rango de fechas
         avance = self.env['plan_mejoramiento.avance'].sudo(ejecutor_oas_id).create({
-            'accion_id': self.ref('plan_mejoramiento.id_accion_i_02'),
+            'accion_id': accion_01.id,
             'descripcion': 'Descripcion de avance 01 de accion perteneciente a oci',
         })
 
