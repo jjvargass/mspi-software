@@ -114,28 +114,53 @@ class activo_informacion_activo(models.Model):
             'actualizado': [('readonly', False)],
         }
     )
-    propietario = fields.Text(
+
+    propietario_dependencia_id = fields.Many2one(
+        string='Unidad Propietario',
+        required=True,
+        track_visibility='onchange',
+        comodel_name='hr.department',
+        ondelete='restrict',
+        help='''Unidad Propietario''',
+        states={
+            'definido': [('readonly', False)],
+            'actualizado': [('readonly', False)],
+        }
+    )
+    propietario_id = fields.Many2one(
         string='Propietario',
-        required=True,
+        required=False,
+        readonly=True,
         track_visibility='onchange',
+        related='propietario_dependencia_id.manager_id.user_id',
+        comodel_name='res.users',
+        ondelete='restrict',
         help='''Propietario''',
-        readonly=True,
-        states={
-            'definido': [('readonly', False)],
-            'actualizado': [('readonly', False)],
-        }
     )
-    custodio = fields.Text(
-        string='Custodio',
+
+    custodio_dependencia_id = fields.Many2one(
+        string='Unidad Custodio',
         required=True,
         track_visibility='onchange',
-        help='''Custodio''',
-        readonly=True,
+        comodel_name='hr.department',
+        ondelete='restrict',
+        help='''Unidad Custodio''',
         states={
             'definido': [('readonly', False)],
             'actualizado': [('readonly', False)],
         }
     )
+    custodio_id = fields.Many2one(
+        string='Custodio',
+        required=False,
+        readonly=True,
+        track_visibility='onchange',
+        related='propietario_dependencia_id.manager_id.user_id',
+        comodel_name='res.users',
+        ondelete='restrict',
+        help='''Custodio''',
+    )
+
     tipo_para_busqueda = fields.Selection(
         TIPO_ACTIVO,
         string='Tipo',
@@ -173,6 +198,26 @@ class activo_informacion_activo(models.Model):
             'definido': [('readonly', False)],
             'actualizado': [('readonly', False)],
         }
+    )
+    user_id = fields.Many2one(
+        string='Registrador',
+        required=True,
+        readonly=True,
+        track_visibility='onchange',
+        comodel_name='res.users',
+        ondelete='restrict',
+        help='''Ejecutor''',
+        default=lambda self: self._context.get('uid', self.env['res.users'].browse()),
+    )
+    dependencia_id = fields.Many2one(
+        string='Unidad Registrador',
+        required=False,
+        track_visibility='onchange',
+        comodel_name='hr.department',
+        ondelete='restrict',
+        help='''Unidad''',
+        readonly=True,
+        default=lambda self: self.env.user.department_id.id,
     )
     confidencialidad = fields.Selection(
         string='Confidencialidad',
@@ -301,6 +346,17 @@ class activo_informacion_activo(models.Model):
     # -------------------
     # methods
     # -------------------
+
+    @api.onchange('proceso_id')
+    def _onchange_get_areas_lideres(self):
+        areas_lideres = list(set([i.id for i in self.proceso_id.dependencia_lider]))
+        areas_gestoras = list(set([i.id for i in self.proceso_id.dependencia_gestor_ids]))
+        return {
+            'domain':{
+                'custodio_dependencia_id': [('id','in', areas_gestoras)],
+                'propietario_dependencia_id': [('id','in', areas_lideres)],
+            }
+        }
 
     @api.one
     def _compute_criticidad(self):

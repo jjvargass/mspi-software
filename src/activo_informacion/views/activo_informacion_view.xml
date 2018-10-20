@@ -144,8 +144,8 @@
                 <field name="name" />
                 <field name="descripcion" />
                 <field name="proceso_id" />
-                <field name="propietario" />
-                <field name="custodio" />
+                <field name="propietario_id" />
+                <field name="custodio_id" />
                 <field name="tipo_para_busqueda" />
                 <filter name="filtro_tipo_para_busqueda_informacion"
                     string="informacion"
@@ -292,11 +292,15 @@
                     <group>
                         <field name="descripcion" />
                         <field name="proceso_id" />
-                        <field name="propietario" />
-                        <field name="custodio" />
+                        <field name="propietario_dependencia_id" />
+                        <field name="propietario_id" />
+                        <field name="custodio_dependencia_id" />
+                        <field name="custodio_id" />
                         <field name="tipo_para_busqueda" />
                         <field name="tipo" />
                         <field name="ubicacion" />
+                        <field name="user_id" />
+                        <field name="dependencia_id" />
                     </group>
                     <separator string="Protección de Información"/>
                     <group col='4'>
@@ -332,8 +336,8 @@
                 <field name="name" />
                 <field name="descripcion" />
                 <field name="proceso_id" />
-                <field name="propietario" />
-                <field name="custodio" />
+                <field name="propietario_id" />
+                <field name="custodio_id" />
                 <field name="tipo_para_busqueda" />
                 <field name="tipo" />
                 <field name="state" />
