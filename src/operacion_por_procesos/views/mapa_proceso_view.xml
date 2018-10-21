@@ -59,7 +59,7 @@
                     help="Filtrar Tipo control"
                     domain="[('tipo', '=', 'control')]"
                 />
-                <field name="dependencia_lider" />
+                <field name="dependencia_lider_ids" />
                 <field name="dependencia_gestor_ids" />
                 <field name="actividad_ids" />
                 <group string="Agrupar por...">
@@ -85,7 +85,7 @@
                         <field name="objetivo" />
                         <field name="alcance" />
                         <field name="tipo" />
-                        <field name="dependencia_lider" />
+                        <field name="dependencia_lider_ids" />
                         <field name="dependencia_gestor_ids" />
                     </group>
                     <notebook>
@@ -108,9 +108,8 @@
             <tree>
                 <field name="name" />
                 <field name="tipo" />
-                <field name="dependencia_lider" />
+                <field name="dependencia_lider_ids" />
                 <field name="dependencia_gestor_ids" />
-                <field name="actividad_ids" />
             </tree>
         </field>
     </record>

@@ -66,7 +66,7 @@ class mapa_proceso_proceso(models.Model):
             ('control', 'Control'),
         ],
     )
-    dependencia_lider = fields.Many2many(
+    dependencia_lider_ids = fields.Many2many(
         string='Dependencia Lider',
         required=True,
         track_visibility='onchange',
