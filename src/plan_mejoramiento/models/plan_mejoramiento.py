@@ -494,7 +494,7 @@ class plan_mejoramiento_hallazgo(models.Model):
 
     @api.onchange('proceso_id')
     def _onchange_proceso_id(self):
-        lideres = self.proceso_id.dependencia_lider
+        lideres = self.proceso_id.dependencia_lider_ids
         print lideres
         gestores = self.proceso_id.dependencia_gestor_ids
         all_areas = lideres + gestores

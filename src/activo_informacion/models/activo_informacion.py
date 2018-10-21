@@ -382,7 +382,7 @@ class activo_informacion_activo(models.Model):
 
     @api.onchange('proceso_id')
     def _onchange_get_areas_lideres(self):
-        areas_lideres = list(set([i.id for i in self.proceso_id.dependencia_lider]))
+        areas_lideres = list(set([i.id for i in self.proceso_id.dependencia_lider_ids]))
         areas_gestoras = list(set([i.id for i in self.proceso_id.dependencia_gestor_ids]))
         return {
             'domain':{
