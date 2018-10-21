@@ -155,7 +155,7 @@ class activo_informacion_activo(models.Model):
         required=False,
         readonly=True,
         track_visibility='onchange',
-        related='propietario_dependencia_id.manager_id.user_id',
+        related='custodio_dependencia_id.manager_id.user_id',
         comodel_name='res.users',
         ondelete='restrict',
         help='''Custodio''',
@@ -188,8 +188,41 @@ class activo_informacion_activo(models.Model):
             'actualizado': [('readonly', False)],
         }
     )
-    ubicacion = fields.Text(
-        string='Ubicación',
+    # ubicacion fisica
+    ubicacion_fisica = fields.Char(
+        string='Ubicación Fisica',
+        required=True,
+        track_visibility='onchange',
+        help='''Ubicación''',
+        readonly=True,
+        states={
+            'definido': [('readonly', False)],
+            'actualizado': [('readonly', False)],
+        }
+    )
+    company_location_id = fields.Many2one(
+        string='Sede',
+        comodel_name='res.company.location',
+        ondelete='restrict',
+        readonly=True,
+        track_visibility='onchange',
+        states={
+            'definido': [('readonly', False)],
+            'actualizado': [('readonly', False)],
+        }
+    )
+    company_location_piso = fields.Integer(
+        string='Piso',
+        readonly=True,
+        track_visibility='onchange',
+        states={
+            'definido': [('readonly', False)],
+            'actualizado': [('readonly', False)],
+        }
+    )
+    # ubicacion logica
+    ubicacion_logica = fields.Char(
+        string='Ubicación Lógica',
         required=True,
         track_visibility='onchange',
         help='''Ubicación''',

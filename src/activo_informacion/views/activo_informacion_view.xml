@@ -178,7 +178,7 @@
                     domain="[('tipo_para_busqueda', '=', 'otros')]"
                 />
                 <field name="tipo" />
-                <field name="ubicacion" />
+                <field name="ubicacion_fisica" />
                 <field name="confidencialidad" />
                 <filter name="filtro_confidencialidad_ipr"
                     string="IPR"
@@ -292,16 +292,22 @@
                     <group>
                         <field name="descripcion" />
                         <field name="proceso_id" />
+                    </group>
+                    <group col='4'>
                         <field name="propietario_dependencia_id" />
                         <field name="propietario_id" />
                         <field name="custodio_dependencia_id" />
                         <field name="custodio_id" />
                         <field name="tipo_para_busqueda" />
                         <field name="tipo" />
-                        <field name="ubicacion" />
+                        <field name="ubicacion_fisica" />
+                        <field name="company_location_id" />
+                        <field name="company_location_piso" />
+                        <field name="ubicacion_logica" />
                         <field name="user_id" />
                         <field name="dependencia_id" />
                     </group>
+                    <separator string="Acceso"/>
                     <separator string="Protección de Información"/>
                     <group col='4'>
                         <field name="confidencialidad" />
