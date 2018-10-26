@@ -1,0 +1,789 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <!--
+    =================================================================
+    Menú
+    =================================================================
+    -->
+     <menuitem id="riesgo_nav" name="Gestión de Riesgos"/>
+
+     <menuitem id="riesgo_menu"
+        name="Gestión de Riesgos"
+        parent="riesgo_nav"
+        sequence="10"
+    />
+     <menuitem id="riesgo_conf_menu" parent="riesgo_nav"
+        name="Configuración Gestión de Riesgos"
+        groups="base.group_configuration"
+        sequence="30"
+     />
+     <menuitem id="riesgo_admin_menu" parent="riesgo_nav"
+        name="Administración Gestión de Riesgos"
+        groups="base.group_configuration"
+        sequence="100"
+     />
+
+    <!--
+    =================================================================
+    riesgo.factor
+    Tipo Contexto
+    =================================================================
+    -->
+    <record model="ir.ui.view" id="factor_search">
+        <field name="name">riesgo.factor.search</field>
+        <field name="model">riesgo.factor</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="descripcion" />
+                <field name="tipo" />
+                <filter name="filtro_tipo_interno"
+                    string="interno"
+                    help="Filtrar Tipo interno"
+                    domain="[('tipo', '=', 'interno')]"
+                />
+                <filter name="filtro_tipo_externo"
+                    string="externo"
+                    help="Filtrar Tipo externo"
+                    domain="[('tipo', '=', 'externo')]"
+                />
+                <field name="activo_sistema" />
+                <group string="Agrupar por...">
+                    <filter string="Tipo" context="{'group_by':'tipo'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="factor_form">
+        <field name="name">riesgo.factor.form</field>
+        <field name="model">riesgo.factor</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name" />
+                        <field name="descripcion" />
+                        <field name="tipo" />
+                        <field name="activo_sistema" />
+                    </group>
+                    <notebook>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="factor_tree">
+        <field name="name">riesgo.factor.tree</field>
+        <field name="model">riesgo.factor</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="descripcion" />
+                <field name="tipo" />
+                <field name="activo_sistema" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="factor_action">
+        <field name="name">Tipo Contexto</field>
+        <field name="res_model">riesgo.factor</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="factor_menu"
+        parent="riesgo_conf_menu"
+        sequence="30"
+        name="Tipo Contexto" action="factor_action"
+    />
+
+    <!--
+    =================================================================
+    riesgo.contexto
+    Contexto
+    =================================================================
+    -->
+    <record model="ir.ui.view" id="contexto_search">
+        <field name="name">riesgo.contexto.search</field>
+        <field name="model">riesgo.contexto</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="descripcion" />
+                <field name="tipo" />
+                <filter name="filtro_tipo_interno"
+                    string="interno"
+                    help="Filtrar Tipo interno"
+                    domain="[('tipo', '=', 'interno')]"
+                />
+                <filter name="filtro_tipo_externo"
+                    string="externo"
+                    help="Filtrar Tipo externo"
+                    domain="[('tipo', '=', 'externo')]"
+                />
+                <field name="factor_id" />
+                <group string="Agrupar por...">
+                    <filter string="Tipo" context="{'group_by':'tipo'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="contexto_form">
+        <field name="name">riesgo.contexto.form</field>
+        <field name="model">riesgo.contexto</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name" />
+                        <field name="descripcion" />
+                        <field name="tipo" />
+                        <field name="factor_id" />
+                    </group>
+                    <notebook>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="contexto_tree">
+        <field name="name">riesgo.contexto.tree</field>
+        <field name="model">riesgo.contexto</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="descripcion" />
+                <field name="tipo" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="contexto_action">
+        <field name="name">Contexto</field>
+        <field name="res_model">riesgo.contexto</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="contexto_menu"
+        parent="riesgo_conf_menu"
+        sequence="30"
+        name="Contexto" action="contexto_action"
+    />
+
+    <!--
+    =================================================================
+    riesgo.causa
+    Causa
+    =================================================================
+    -->
+    <record model="ir.ui.view" id="causa_search">
+        <field name="name">riesgo.causa.search</field>
+        <field name="model">riesgo.causa</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="que" />
+                <field name="como" />
+                <field name="cuando" />
+                <field name="consecuencia" />
+                <group string="Agrupar por...">
+                </group>
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="causa_form">
+        <field name="name">riesgo.causa.form</field>
+        <field name="model">riesgo.causa</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="que" />
+                        <field name="como" />
+                        <field name="cuando" />
+                        <field name="consecuencia" />
+                    </group>
+                    <notebook>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="causa_tree">
+        <field name="name">riesgo.causa.tree</field>
+        <field name="model">riesgo.causa</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="que" />
+                <field name="como" />
+                <field name="cuando" />
+                <field name="consecuencia" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="causa_action">
+        <field name="name">Causa</field>
+        <field name="res_model">riesgo.causa</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="causa_menu"
+        parent="riesgo_conf_menu"
+        sequence="30"
+        name="Causa" action="causa_action"
+    />
+
+    <!--
+    =================================================================
+    riesgo.tipo_riesgo
+    Tipo Riesgo
+    =================================================================
+    -->
+    <record model="ir.ui.view" id="tipo_riesgo_search">
+        <field name="name">riesgo.tipo_riesgo.search</field>
+        <field name="model">riesgo.tipo_riesgo</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="descripcion" />
+                <field name="activo_sistema" />
+                <group string="Agrupar por...">
+                </group>
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="tipo_riesgo_form">
+        <field name="name">riesgo.tipo_riesgo.form</field>
+        <field name="model">riesgo.tipo_riesgo</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name" />
+                        <field name="descripcion" />
+                        <field name="activo_sistema" />
+                    </group>
+                    <notebook>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="tipo_riesgo_tree">
+        <field name="name">riesgo.tipo_riesgo.tree</field>
+        <field name="model">riesgo.tipo_riesgo</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="descripcion" />
+                <field name="activo_sistema" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="tipo_riesgo_action">
+        <field name="name">Tipo Riesgo</field>
+        <field name="res_model">riesgo.tipo_riesgo</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="tipo_riesgo_menu"
+        parent="riesgo_conf_menu"
+        sequence="30"
+        name="Tipo Riesgo" action="tipo_riesgo_action"
+    />
+
+    <!--
+    =================================================================
+    riesgo.probabilidad
+    Probabilidad
+    =================================================================
+    -->
+    <record model="ir.ui.view" id="probabilidad_search">
+        <field name="name">riesgo.probabilidad.search</field>
+        <field name="model">riesgo.probabilidad</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="descripcion" />
+                <field name="nivel" />
+                <field name="frecuencia" />
+                <field name="activo_sistema" />
+                <group string="Agrupar por...">
+                    <filter string="Nivel" context="{'group_by':'nivel'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="probabilidad_form">
+        <field name="name">riesgo.probabilidad.form</field>
+        <field name="model">riesgo.probabilidad</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name" />
+                        <field name="descripcion" />
+                        <field name="nivel" />
+                        <field name="frecuencia" />
+                        <field name="activo_sistema" />
+                    </group>
+                    <notebook>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="probabilidad_tree">
+        <field name="name">riesgo.probabilidad.tree</field>
+        <field name="model">riesgo.probabilidad</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="nivel" />
+                <field name="name" />
+                <field name="descripcion" />
+                <field name="frecuencia" />
+                <field name="activo_sistema" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="probabilidad_action">
+        <field name="name">Probabilidad</field>
+        <field name="res_model">riesgo.probabilidad</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="probabilidad_menu"
+        parent="riesgo_conf_menu"
+        sequence="30"
+        name="Probabilidad" action="probabilidad_action"
+    />
+
+    <!--
+    =================================================================
+    riesgo.impacto
+    Impacto
+    =================================================================
+    -->
+    <record model="ir.ui.view" id="impacto_search">
+        <field name="name">riesgo.impacto.search</field>
+        <field name="model">riesgo.impacto</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="nivel" />
+                <field name="cuantitativo" />
+                <field name="cualitativo" />
+                <field name="activo_sistema" />
+                <group string="Agrupar por...">
+                    <filter string="Nivel" context="{'group_by':'nivel'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="impacto_form">
+        <field name="name">riesgo.impacto.form</field>
+        <field name="model">riesgo.impacto</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name" />
+                        <field name="nivel" />
+                        <field name="cuantitativo" />
+                        <field name="cualitativo" />
+                        <field name="activo_sistema" />
+                    </group>
+                    <notebook>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="impacto_tree">
+        <field name="name">riesgo.impacto.tree</field>
+        <field name="model">riesgo.impacto</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="nivel" />
+                <field name="name" />
+                <field name="cuantitativo" />
+                <field name="cualitativo" />
+                <field name="activo_sistema" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="impacto_action">
+        <field name="name">Impacto</field>
+        <field name="res_model">riesgo.impacto</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="impacto_menu"
+        parent="riesgo_conf_menu"
+        sequence="30"
+        name="Impacto" action="impacto_action"
+    />
+
+    <!--
+    =================================================================
+    riesgo.control
+    Control
+    =================================================================
+    -->
+    <record model="ir.ui.view" id="control_search">
+        <field name="name">riesgo.control.search</field>
+        <field name="model">riesgo.control</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="descripcion" />
+                <field name="tipo" />
+                <filter name="filtro_tipo_preventivo"
+                    string="preventivo"
+                    help="Filtrar Tipo preventivo"
+                    domain="[('tipo', '=', 'preventivo')]"
+                />
+                <filter name="filtro_tipo_correctivo"
+                    string="correctivo"
+                    help="Filtrar Tipo correctivo"
+                    domain="[('tipo', '=', 'correctivo')]"
+                />
+                <field name="implementacion" />
+                <filter name="filtro_implementacion_automatico"
+                    string="automatico"
+                    help="Filtrar Implementación automatico"
+                    domain="[('implementacion', '=', 'automatico')]"
+                />
+                <filter name="filtro_implementacion_manual"
+                    string="manual"
+                    help="Filtrar Implementación manual"
+                    domain="[('implementacion', '=', 'manual')]"
+                />
+                <field name="documentado" />
+                <field name="periodicidad" />
+                <filter name="filtro_periodicidad_diario"
+                    string="diario"
+                    help="Filtrar Periodicidad diario"
+                    domain="[('periodicidad', '=', 'diario')]"
+                />
+                <filter name="filtro_periodicidad_quincenal"
+                    string="quincenal"
+                    help="Filtrar Periodicidad quincenal"
+                    domain="[('periodicidad', '=', 'quincenal')]"
+                />
+                <filter name="filtro_periodicidad_mensual"
+                    string="mensual"
+                    help="Filtrar Periodicidad mensual"
+                    domain="[('periodicidad', '=', 'mensual')]"
+                />
+                <filter name="filtro_periodicidad_trimestral"
+                    string="trimestral"
+                    help="Filtrar Periodicidad trimestral"
+                    domain="[('periodicidad', '=', 'trimestral')]"
+                />
+                <filter name="filtro_periodicidad_semestral"
+                    string="semestral"
+                    help="Filtrar Periodicidad semestral"
+                    domain="[('periodicidad', '=', 'semestral')]"
+                />
+                <filter name="filtro_periodicidad_anual"
+                    string="anual"
+                    help="Filtrar Periodicidad anual"
+                    domain="[('periodicidad', '=', 'anual')]"
+                />
+                <group string="Agrupar por...">
+                    <filter string="Tipo" context="{'group_by':'tipo'}"/>
+                    <filter string="Implementación" context="{'group_by':'implementacion'}"/>
+                    <filter string="¿Documentado?" context="{'group_by':'documentado'}"/>
+                    <filter string="Periodicidad" context="{'group_by':'periodicidad'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="control_form">
+        <field name="name">riesgo.control.form</field>
+        <field name="model">riesgo.control</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name" />
+                        <field name="descripcion" />
+                        <field name="tipo" />
+                        <field name="implementacion" />
+                        <field name="documentado" />
+                        <field name="responsables_ids" />
+                        <field name="periodicidad" />
+                    </group>
+                    <notebook>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="control_tree">
+        <field name="name">riesgo.control.tree</field>
+        <field name="model">riesgo.control</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="descripcion" />
+                <field name="tipo" />
+                <field name="implementacion" />
+                <field name="documentado" />
+                <field name="periodicidad" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="control_action">
+        <field name="name">Control</field>
+        <field name="res_model">riesgo.control</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="control_menu"
+        parent="riesgo_menu"
+        sequence="30"
+        name="Control" action="control_action"
+    />
+
+    <!--
+    =================================================================
+    riesgo.riesgo
+    Riesgo
+    =================================================================
+    -->
+    <record model="ir.ui.view" id="riesgo_search">
+        <field name="name">riesgo.riesgo.search</field>
+        <field name="model">riesgo.riesgo</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="descripcion" />
+                <field name="seguridad_de_la_informacion" />
+                <field name="tipo_riesgo_id" />
+                <field name="probabilidad_id" />
+                <field name="user_id" />
+                <field name="dependencia_id" />
+                <field name="impacto_id" />
+                <group string="Agrupar por...">
+                    <filter string="Tipo Riesgo" context="{'group_by':'tipo_riesgo_id'}"/>
+                    <filter string="Registrador" context="{'group_by':'user_id'}"/>
+                    <filter string="Unidad" context="{'group_by':'dependencia_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="riesgo_form">
+        <field name="name">riesgo.riesgo.form</field>
+        <field name="model">riesgo.riesgo</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name" />
+                        <field name="descripcion" />
+                        <field name="proceso_id" />
+                        <field name="seguridad_de_la_informacion" />
+                        <field name="activo_informacion_id" />
+                        <field name="causa_ids" />
+                        <field name="tipo_riesgo_id" />
+                        <field name="probabilidad_id" />
+                        <field name="user_id" />
+                        <field name="dependencia_id" />
+                        <field name="impacto_id" />
+                    </group>
+                    <notebook>
+                        <page string='Contexto'>
+                            <group>
+                                <separator colspan="4" string="Contexto" /><field name="contexto_ids" nolabel="1" colspan="4" />
+                            </group>
+                        </page>
+                        <page string='Evaluar Control'>
+                            <group>
+                                <field name="evaluar_control_ids" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="riesgo_tree">
+        <field name="name">riesgo.riesgo.tree</field>
+        <field name="model">riesgo.riesgo</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="descripcion" />
+                <field name="tipo_riesgo_id" />
+                <field name="probabilidad_id" />
+                <field name="user_id" />
+                <field name="dependencia_id" />
+                <field name="impacto_id" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="riesgo_action">
+        <field name="name">Riesgo</field>
+        <field name="res_model">riesgo.riesgo</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="riesgo_riesgo_menu"
+        parent="riesgo_menu"
+        sequence="20"
+        name="Riesgo" action="riesgo_action"
+    />
+
+    <!--
+    =================================================================
+    riesgo.evaluacion_control
+    Evaluar Control
+    =================================================================
+    -->
+    <record model="ir.ui.view" id="evaluacion_control_search">
+        <field name="name">riesgo.evaluacion_control.search</field>
+        <field name="model">riesgo.evaluacion_control</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="riesgo_id" />
+                <field name="control_id" />
+                <group string="Agrupar por...">
+                </group>
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="evaluacion_control_form">
+        <field name="name">riesgo.evaluacion_control.form</field>
+        <field name="model">riesgo.evaluacion_control</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name" />
+                        <field name="riesgo_id" />
+                        <field name="control_id" />
+                        <field name="existe_documentacion" />
+                    </group>
+                    <notebook>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="evaluacion_control_tree">
+        <field name="name">riesgo.evaluacion_control.tree</field>
+        <field name="model">riesgo.evaluacion_control</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="riesgo_id" />
+                <field name="control_id" />
+                <field name="existe_documentacion" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="evaluacion_control_action">
+        <field name="name">Evaluar Control</field>
+        <field name="res_model">riesgo.evaluacion_control</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="evaluacion_control_menu"
+        parent="riesgo_menu"
+        sequence="20"
+        name="Evaluar Control" action="evaluacion_control_action"
+    />
+
+</data>
+</openerp>

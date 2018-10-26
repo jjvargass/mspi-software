@@ -1,0 +1,10 @@
+id,active,name,group_id/id,model_id/id,perm_create,perm_read,perm_write,perm_unlink
+factor_global,True,"riesgo.factor global",,riesgo.model_riesgo_factor,0,1,0,0
+contexto_global,True,"riesgo.contexto global",,riesgo.model_riesgo_contexto,0,1,0,0
+causa_global,True,"riesgo.causa global",,riesgo.model_riesgo_causa,0,1,0,0
+tipo_riesgo_global,True,"riesgo.tipo_riesgo global",,riesgo.model_riesgo_tipo_riesgo,0,1,0,0
+probabilidad_global,True,"riesgo.probabilidad global",,riesgo.model_riesgo_probabilidad,0,1,0,0
+impacto_global,True,"riesgo.impacto global",,riesgo.model_riesgo_impacto,0,1,0,0
+control_global,True,"riesgo.control global",,riesgo.model_riesgo_control,0,1,0,0
+riesgo_global,True,"riesgo.riesgo global",,riesgo.model_riesgo_riesgo,0,1,0,0
+evaluacion_control_global,True,"riesgo.evaluacion_control global",,riesgo.model_riesgo_evaluacion_control,0,1,0,0

@@ -1,0 +1,8 @@
+id,name,descripcion
+__export__.riesgo_tipo_riesgo_1,Estratégico,"Se asocia con la forma en que se administra la Entidad, su manejo se enfoca a asuntos globales relacionados con la misión y el cumplimiento de los objetivos estratégicos, la clara definición de políticas, diseño y conceptualización de la entidad por parte de la alta gerencia."
+__export__.riesgo_tipo_riesgo_2,De Imagen,Están relacionados con la percepción y la confianza por parte de la ciudadanía hacia la institución.
+__export__.riesgo_tipo_riesgo_3,Operativos,"Comprenden riesgos provenientes del funcionamiento y operatividad de los sistemas de información institucional, de la definición de los procesos, de la estructura de la entidad, de la articulación entre dependencias."
+__export__.riesgo_tipo_riesgo_4,Financieros,"Se relacionan con el manejo de los recursos de la entidad que incluyen la ejecución presupuestal, la elaboración de los estados financieros, los pagos, manejos de excedentes de tesorería y el manejo sobre los bienes."
+__export__.riesgo_tipo_riesgo_5,Cumplimiento,"Se asocian con la capacidad de la entidad para cumplir con los requisitos legales, contractuales, de ética pública y en general con su compromiso ante la comunidad."
+__export__.riesgo_tipo_riesgo_6,De Tecnología,Están relacionados con la capacidad tecnológica de la Entidad para satisfacer sus necesidades actuales y futuras y el cumplimiento de la misión.
+__export__.riesgo_tipo_riesgo_7,De Corrupción,"Relacionados con acciones, omisiones, uso indebido del poder, de los recursos o de la información para la obtención de un beneficio particular o de un tercero."

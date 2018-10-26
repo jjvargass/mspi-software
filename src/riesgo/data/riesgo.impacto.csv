@@ -1,0 +1,69 @@
+id,nivel,name,cuantitativo,cualitativo
+__export__.riesgo_impacto_1,1,Insignificante,"- Impacto que afecte la ejecución presupuestal en un valor ≤0,5%
+- Pérdida de cobertura en la prestación de los servicios de la entidad ≤1%.
+- Pago de indemnizaciones a terceros por acciones legales que pueden
+afectar el presupuesto total de la entidad en un valor ≤0,5%
+- Pago de sanciones económicas por incumplimiento en la normativi-
+dad aplicable ante un ente regulador, las cuales afectan en un valor
+≤0,5%del presupuesto general de la entidad.","- No hay interrupción de las operaciones de la entidad.
+- No se generan sanciones económicas o administrativas.
+- No se afecta la imagen institucional de forma significativa."
+__export__.riesgo_impacto_2,2,Menor,"- Impacto que afecte la ejecución presupuestal en un valor ≤1%
+- Pérdida de cobertura en la prestación de los servicios de la entidad ≤5%.
+- Pago de indemnizaciones a terceros por acciones legales que pueden
+afectar el presupuesto total de la entidad en un valor ≤1%
+- Pago de sanciones económicas por incumplimiento en la normatividad
+aplicable ante un ente regulador, las cuales afectan en un valor ≤1%del
+presupuesto general de la entidad.","- Interrupción de las operaciones de la Entidad por algunas
+horas.
+- Reclamaciones o quejas de los usuarios que implican investi-
+gaciones internas disciplinarias.
+- Imagen institucional afectada localmente por retrasos en la
+prestación del servicio a los usuarios o ciudadanos"
+__export__.riesgo_impacto_3,3,Moderado,"- Impacto que afecte la ejecución presupuestal en un valor ≥5%
+- Pérdida de cobertura en la prestación de los servicios de la entidad ≥10%.
+- Pago de indemnizaciones a terceros por acciones legales que pueden
+afectar el presupuesto total de la entidad en un valor ≥5%
+- Pérdida de cobertura en la prestación de los servicios de la entidad ≥10%.
+- Impacto que afecte la ejecución presupuestal en un valor ≥5%","- Interrupción de las operaciones de la Entidad por un (1) día.
+- Reclamaciones o quejas de los usuarios que podrían implicar
+una denuncia ante los entes reguladores o una demanda de
+largo alcance para la entidad.
+- Inoportunidad en la información ocasionando retrasos en la
+atención a los usuarios.
+- Reproceso de actividades y aumento de carga operativa.
+- Imagen institucional afectada en el orden nacional o regional por
+retrasos en la prestación del servicio a los usuarios o ciudadanos.
+- Investigaciones penales, fiscales o disciplinarias."
+__export__.riesgo_impacto_4,4,Mayor,"- Impacto que afecte la ejecución presupuestal en un valor ≥20%
+- Pérdida de cobertura en la prestación de los servicios de la entidad ≥20%.
+- Pago de indemnizaciones a terceros por acciones legales que pueden
+afectar el presupuesto total de la entidad en un valor ≥20%
+- Pago de sanciones económicas por incumplimiento en la normatividad
+aplicable ante un ente regulador, las cuales afectan en un valor ≥20%
+del presupuesto general de la entidad","- Interrupción de las operaciones de la Entidad por más de dos
+(2) días.
+- Pérdida de información crítica que puede ser recuperada de
+forma parcial o incompleta.
+- Sanción por parte del ente de control u otro ente regulador.
+- Incumplimiento en las metas y objetivos institucionales afec-
+tando el cumplimiento en las metas de gobierno.
+- Imagen institucional afectada en el orden nacional o regio-
+nal por incumplimientos en la prestación del servicio a los
+usuarios o ciudadanos."
+__export__.riesgo_impacto_5,5,Catastrófico,"- Impacto que afecte la ejecución presupuestal en un valor ≥50%
+- Pérdida de cobertura en la prestación de los servicios de la entidad ≥50%.
+- Pago de indemnizaciones a terceros por acciones legales que pueden
+afectar el presupuesto total de la entidad en un valor ≥50%
+- Pago de sanciones económicas por incumplimiento en la normatividad
+aplicable ante un ente regulador, las cuales afectan en un valor ≥50%
+del presupuesto general de la entidad","- Interrupción de las operaciones de la Entidad por más de
+cinco (5) días.
+- Intervención por parte de un ente de control u otro ente
+regulador.
+- Pérdida de Información crítica para la entidad que no se
+puede recuperar.
+- Incumplimiento en las metas y objetivos institucionales afec-
+tando de forma grave la ejecución presupuestal.
+- Imagen institucional afectada en el orden nacional o regional
+por actos o hechos de corrupción comprobados."

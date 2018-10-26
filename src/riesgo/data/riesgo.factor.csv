@@ -1,0 +1,14 @@
+id,name,descripcion,tipo
+__export__.riesgo_factor_1,Financieros,"Presupuesto de funcionamiento, recursos de inversión, infraestructura, capacidad instalada.",interno
+__export__.riesgo_factor_2,Personal,"Competencia del personal, disponibilidad del personal, seguridad y salud ocupacional.",interno
+__export__.riesgo_factor_3,Procesos,"Capacidad, diseño, ejecución, proveedores, entradas, salidas, gestión del conocimiento.",interno
+__export__.riesgo_factor_4,Tecnología,"Integridad de datos, disponibilidad de datos y sistemas, desarrollo, producción, mantenimiento de sistemas de información.",interno
+__export__.riesgo_factor_5,Estratégicos,"Direccionamiento estratégico, planeación institucional, liderazgo, trabajo en equipo.",interno
+__export__.riesgo_factor_6,Comunicación Interna,"Canales utilizados y su efectividad, flujo de la información necesaria para el desarrollo de las operaciones.",interno
+__export__.riesgo_factor_7,Económicos,"Disponibilidad de capital, liquidez, mercados financieros, desempleo, competencia.",externo
+__export__.riesgo_factor_8,Políticos,"Cambios de gobierno, legislación, políticas públicas, regulación.",externo
+__export__.riesgo_factor_9,Sociales,"Demografía, responsabilidad social, orden público.",externo
+__export__.riesgo_factor_10,Tecnológicos,"Avances en tecnología, acceso a sistemas de información externos, gobierno en línea.",externo
+__export__.riesgo_factor_11,Medioambientales,"Emisiones y residuos, energía, catástrofes naturales, desarrollo sostenible",externo
+__export__.riesgo_factor_12,Comunicación Externa,"Mecanismos utilizados para entrar en contacto con los usuarios o ciudadanos, canales establecidos para que el
+mismo se comunique con la entidad.",externo

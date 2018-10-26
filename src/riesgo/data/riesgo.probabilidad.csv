@@ -1,0 +1,9 @@
+id,nivel,name,descripcion,frecuencia
+__export__.riesgo_probabilidad_1,1,Rara vez,"El evento puede ocurrir solo en circunstancias ex-
+cepcionales (poco comunes o anormales).",No se ha presentado en los últimos 5 años.
+__export__.riesgo_probabilidad_2,2,Improbable,El evento puede ocurrir en algún momento,Al menos 1 vez en los últimos 5 años.
+__export__.riesgo_probabilidad_3,3,Posible,El evento podrá ocurrir en algún momento,Al menos 1 vez en los últimos 2 años.
+__export__.riesgo_probabilidad_4,4,Probable,"Es viable que el evento ocurra en la mayoría de las
+Circunstancias",Al menos 1 vez en el último año.
+__export__.riesgo_probabilidad_5,5,Casi seguro,"Se espera que el evento ocurra en la mayoría de las
+Circunstancias",Más de 1 vez al año.
