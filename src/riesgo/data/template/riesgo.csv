@@ -1,0 +1,74 @@
+model_name,name,type,params,comodel,string,help,required,unique,tracking,constrains,onchange,view_tree,view_form,view_search,view_search_group_by,view_form_tab,menu,description,view_description,inherits,inherit,overwrite_write,overwrite_create,data,views
+__openerp__,name,,riesgo,,,,,,,,,,,,,,,,,,,,,,
+,namespace,,riesgo,,,,,,,,,,,,,,,,,,,,,,
+,string,,Gestión de Riesgos,,,,,,,,,,,,,,,,,,,,,,
+,depends,,base|base_idu|model_security|document|operacion_por_procesos|activo_informacion,,,,,,,,,,,,,,,,,,,,,,
+riesgo.factor,name,char,,,Nombre,Nombre,1,1,1,0,0,1,1,1,0,0,conf,Tipo Contexto,Tipo Contexto,,"mail.thread,models.soft_delete.mixin",0,0,0,new
+,descripcion,text,,,Descripción,Descripción,1,0,1,0,0,1,1,1,0,0,,,,,,,,,
+,tipo,selection,selection:interno|externo,,Tipo,Topo,1,0,1,0,0,1,1,1,1,0,,,,,,,,,
+,activo_sistema,boolean,default:True,,Habilitado en el sistema,Habilitado en el sistema,0,0,1,0,0,1,1,1,0,0,,,,,,,,,
+riesgo.contexto,name,char,,,Nombre,Nombre,1,0,1,0,0,1,1,1,0,0,conf,Contexto,Contexto,,"mail.thread,models.soft_delete.mixin",0,0,0,new
+,descripcion,text,,,Descripción,Descripción,1,0,1,0,0,1,1,1,0,0,,,,,,,,,
+,tipo,selection,selection:interno|externo,,Tipo,Topo,1,0,1,0,0,1,1,1,1,0,,,,,,,,,
+,factor_id,many2one,"domain:[('tipo','=',tipo)]",riesgo.factor,Factor,Factor,1,0,1,0,0,0,1,1,0,0,,,,,,,,,
+riesgo.causa,que,text,,,¿Qué Puede Suceder?,¿Qué Puede Suceder?,1,0,1,0,0,1,1,1,0,0,conf,Causa,Causa,,"mail.thread,models.soft_delete.mixin",0,0,0,new
+,como,text,,,¿Como Puede Suceder?,¿Como Puede Suceder?,1,0,1,0,0,1,1,1,0,0,,,,,,,,,
+,cuando,text,,,¿Cuándo Puede Suceder?,¿Cuándo Puede Suceder?,1,0,1,0,0,1,1,1,0,0,,,,,,,,,
+,consecuencia,text,,,¿Que Consecuencia Tendria su Materialización?,¿Que Consecuencia Tendria su Materialización?,1,0,1,0,0,1,1,1,0,0,,,,,,,,,
+riesgo.tipo_riesgo,name,char,,,Nombre,Nombre,1,1,1,0,0,1,1,1,0,0,conf,Tipo Riesgo,Tipo Riesgo,,"mail.thread,models.soft_delete.mixin",0,0,0,new
+,descripcion,text,,,Descripción,Descripción,1,0,1,0,0,1,1,1,0,0,,,,,,,,,
+,activo_sistema,boolean,default:True,,Habilitado en el sistema,Habilitado en el sistema,0,0,1,0,0,1,1,1,0,0,,,,,,,,,
+riesgo.probabilidad,name,char,,,Nombre,Nombre,1,1,1,0,0,1,1,1,0,0,conf,Probabilidad,Probabilidad,,"mail.thread,models.soft_delete.mixin",0,0,0,new
+,descripcion,text,,,Descripción,Descripción,1,0,1,0,0,1,1,1,0,0,,,,,,,,,
+,nivel,integer,,,Nivel,Nivel,1,1,1,0,0,1,1,1,1,0,,,,,,,,,
+,frecuencia,text,,,Frecuencia,Frecuencia,1,0,1,0,0,1,1,1,0,0,,,,,,,,,
+,activo_sistema,boolean,default:True,,Habilitado en el sistema,Habilitado en el sistema,0,0,1,0,0,1,1,1,0,0,,,,,,,,,
+riesgo.impacto,name,char,,,Nombre,Nombre,1,1,1,0,0,1,1,1,0,0,conf,Impacto,Impacto,,"mail.thread,models.soft_delete.mixin",0,0,0,new
+,nivel,integer,,,Nivel,Nivel,1,0,1,0,0,1,1,1,1,0,,,,,,,,,
+,cuantitativo,text,,,Impacto Cuantitativo,Impacto Cuantitativo,1,0,1,0,0,1,1,1,0,0,,,,,,,,,
+,cualitativo,text,,,Impacto Cualitativo,Impacto Cualitativo,1,0,1,0,0,1,1,1,0,0,,,,,,,,,
+,activo_sistema,boolean,default:True,,Habilitado en el sistema,Habilitado en el sistema,0,0,1,0,0,1,1,1,0,0,,,,,,,,,
+riesgo.control,name,char,,,Nombre,Nombre,1,0,1,0,0,1,1,1,0,0,main,Control,Control,,"mail.thread,models.soft_delete.mixin",0,0,0,new
+,descripcion,text,,,Descripción,Descripción,1,0,1,0,0,1,1,1,0,0,,,,,,,,,
+,tipo,selection,selection:preventivo|correctivo,,Tipo,Tipo,1,0,1,0,0,1,1,1,1,0,,,,,,,,,
+,implementacion,selection,selection:automatico|manual,,Implementación,Implementación,1,0,1,0,0,1,1,1,1,0,,,,,,,,,
+,documentado,boolean,,,¿Documentado?,¿Documentado?,1,0,1,0,0,1,1,1,1,0,,,,,,,,,
+,responsables_ids,many2many,,res.users,Responsables,Responsables,0,0,1,0,0,0,1,0,0,0,,,,,,,,,
+,periodicidad,selection,selection:diario|quincenal|mensual|trimestral|semestral|anual,,Periodicidad,Periodicidad,1,0,1,0,0,1,1,1,1,0,,,,,,,,,
+riesgo.riesgo,name,char,,,Nombre,Nombre,1,0,1,0,0,1,1,1,0,0,main,Riesgo,Riesgo,,"mail.thread,models.soft_delete.mixin",0,0,0,new
+,descripcion,text,,,Descripción,Descripción,1,0,1,0,0,1,1,1,0,0,,,,,,,,,
+,proceso_id,many2one,,mapa_proceso.proceso,Proceso,Proceso,1,0,1,0,0,0,1,0,0,0,,,,,,,,,
+,seguridad_de_la_informacion,boolean,default:True,,¿En seguridad de la información?,¿En seguridad de la información?,0,0,1,0,0,0,1,1,0,0,,,,,,,,,
+,activo_informacion_id,many2one,,activo_informacion.activo,Activo de Información,Activo de Información,0,0,1,0,0,0,1,0,0,0,,,,,,,,,
+,causa_ids,many2many,,riesgo.causa,Causas,Causas,0,0,0,0,0,0,1,0,0,0,,,,,,,,,
+,contexto_ids,many2many,,riesgo.contexto,Contexto,Contexto,0,0,0,0,0,0,1,0,0,Contexto,,,,,,,,,
+,tipo_riesgo_id,many2one,,riesgo.tipo_riesgo,Tipo Riesgo,Tipo Riesgo,1,0,1,0,0,1,1,1,1,0,,,,,,,,,
+,probabilidad_id,many2one,,riesgo.probabilidad,Probabilida,Probabilidad,1,0,1,0,0,1,1,1,0,0,,,,,,,,,
+,user_id,many2one,default:_CURRENT_USER_;readonly:True,res.users,Registrador,Registrador,1,0,1,0,0,1,1,1,1,0,,,,,,,,,
+,dependencia_id,many2one,,hr.department,Unidad Registrador,Unidad,1,0,1,0,0,1,1,1,1,0,,,,,,,,,
+,impacto_id,many2one,,riesgo.impacto,Impacto,Impacto,1,0,1,0,0,1,1,1,0,0,,,,,,,,,
+,evaluar_control_ids,text,,,Evaluar Control,Evaluar Control,0,0,0,0,0,0,1,0,0,Evaluar Control,,,,,,,,,
+riesgo.evaluacion_control,name,char,,,Nombre,Nombre,1,0,0,0,0,1,1,1,0,0,main,Evaluar Control,Evaluar Control,,"mail.thread,models.soft_delete.mixin",0,0,0,new
+,riesgo_id,many2one,,riesgo.riesgo,Riesgo,Riesgo,1,1,1,0,0,1,1,1,0,0,,,,,,,,,
+,control_id,many2one,,riesgo.control,Control,Control,1,0,1,0,0,1,1,1,0,0,,,,,,,,,
+,existe_documentacion,boolean,default:True,,"¿Existen Documentación?
+","¿Existen manuales, instructivos o procedimientos para el
+manejo del control?
+",1,0,1,0,0,1,1,0,0,0,,,,,,,,,
+,existe_responsable,boolean,default:True,,"¿Existen Responsables?
+","¿Está(n) definido(s) el(los) responsable(s) de la ejecución del
+control y del seguimiento?
+",,,,,,,,,,,,,,,,,,,
+,es_automatico,boolean,default:True,,¿El control es automático?,¿El control es automático?,,,,,,,,,,,,,,,,,,,
+,es_manual,boolean,default:True,,¿El control es manual?,¿El control es manual?,,,,,,,,,,,,,,,,,,,
+,frecuencia_adecuada,boolean,default:True,,"¿Frecuencia Adecuada?
+","¿La frecuencia de ejecución del control y seguimiento es
+adecuada?
+",,,,,,,,,,,,,,,,,,,
+,existe_evidencia,boolean,default:True,,¿Existe Evidencias de la Ejecución?,"¿Se cuenta con evidencias de la ejecución y seguimiento del
+control?
+",,,,,,,,,,,,,,,,,,,
+,es_efectiva,boolean,default:True,,"¿Es Efectivo?
+","¿En el tiempo que lleva la herramienta ha demostrado ser
+efectiva?
+",,,,,,,,,,,,,,,,,,,
