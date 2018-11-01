@@ -852,9 +852,23 @@ class plan_mejoramiento_accion(models.Model):
 
     def wkf_en_progreso(self):
         self.state = 'en_progreso'
+        # Correo Al Jefe Area y Auditor
+        self.message_post(
+            subject='WKF Acción Notificación',
+            type="notification",
+            body="Responsables de Acción, ha sido aprobada la Acción: (" + self.name  + ") del área " + self.dependencia_id.name + ", para su tratamiendo",
+            partner_ids=[self.jefe_dependencia_id.partner_id.id, self.ejecutor_id.partner_id.id]
+        )
 
     def wkf_por_aprobar(self):
         self.state = 'por_aprobar'
+        # Correo Al Auditor
+        self.message_post(
+            subject='WKF Acción Notificación',
+            type="notification",
+            body="Auditor, ha sido creado la Acción: (" + self.name  + ") del área " + self.dependencia_id.name + ", para su revición",
+            partner_ids=[self.user_id.partner_id.id]
+        )
 
     def wkf_terminado(self):
         self.state = 'terminado'
