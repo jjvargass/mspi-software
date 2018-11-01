@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record id="notificacion_acciones_a_vencer_15" model="ir.cron">
+            <field name="name">Mensaje Alerta Vencimiento Accion a 15 dias</field>
+            <field name="active">True</field>
+            <!-- información -->
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <!-- Datos Tecnicos -->
+            <field name="model" eval="'plan_mejoramiento.accion'" />
+            <field name="function" eval="'acciones_a_vencerse_cron'"/>
+            <field name="args" eval="'(15,)'" />
+        </record>
+    </data>
+    <data>
+        <record id="notificacion_acciones_a_vencer_30" model="ir.cron">
+            <field name="name">Mensaje Alerta Vencimiento Accion a 30 dias</field>
+            <field name="active">True</field>
+            <!-- información -->
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <!-- Datos Tecnicos -->
+            <field name="model" eval="'plan_mejoramiento.accion'" />
+            <field name="function" eval="'acciones_a_vencerse_cron'"/>
+            <field name="args" eval="'(30,)'" />
+        </record>
+    </data>
+    <data>
+        <record id="notificacion_acciones_a_vencer_60" model="ir.cron">
+            <field name="name">Mensaje Alerta Vencimiento Accion a 60 dias</field>
+            <field name="active">True</field>
+            <!-- información -->
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <!-- Datos Tecnicos -->
+            <field name="model" eval="'plan_mejoramiento.accion'" />
+            <field name="function" eval="'acciones_a_vencerse_cron'"/>
+            <field name="args" eval="'(60,)'" />
+        </record>
+    </data>
+    <data>
+        <record id="notificacion_acciones_a_vencer_180" model="ir.cron">
+            <field name="name">Mensaje Alerta Vencimiento Accion a 180 dias</field>
+            <field name="active">True</field>
+            <!-- información -->
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <!-- Datos Tecnicos -->
+            <field name="model" eval="'plan_mejoramiento.accion'" />
+            <field name="function" eval="'acciones_a_vencerse_cron'"/>
+            <field name="args" eval="'(180,)'" />
+        </record>
+    </data>
+    <!--Para notificar al jefe_dependencia de los avances creados en el dia-->
+    <data noupdate="1">
+        <record forcecreate="True" id="ir_cron_avances_creados_en_el_dia" model="ir.cron">
+            <field name="name">Notificar creación de avances en el día</field>
+            <field eval="True" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field eval="'plan_mejoramiento.avance'" name="model"/>
+            <field eval="'notificar_creacion_avances_en_el_dia_cron'" name="function"/>
+            <field eval="'()'" name="args"/>
+        </record>
+    </data>
+</openerp>

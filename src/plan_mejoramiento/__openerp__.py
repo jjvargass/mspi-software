@@ -19,6 +19,7 @@
         'views/project_view.xml',
         'data/plan_mejoramiento.tipo_calificacion.csv',
         'data/ir.config_parameter.csv',
+        'data/plan_mejoramiento_notification.xml',
         'wizards/reporte_plan_view.xml',
         'wizards/activar_avance_view.xml',
         'workflow/accion_workflow.xml',

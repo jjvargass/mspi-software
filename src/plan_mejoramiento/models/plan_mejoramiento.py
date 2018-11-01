@@ -859,6 +859,25 @@ class plan_mejoramiento_accion(models.Model):
     def wkf_terminado(self):
         self.state = 'terminado'
 
+    # -------------------
+    # Cron methods
+    # -------------------
+    def acciones_a_vencerse_cron(self, cr, uid, p_dias, context=None):
+        dias =  timedelta(days=p_dias)
+        hoy = fields.Date.today()
+        fecha_venciminto = datetime.strptime(hoy, '%Y-%m-%d') + dias
+        accion_ids = self.search(cr, uid, [('fecha_fin', '=',fecha_venciminto)])
+        acciones = self.browse(cr, uid, accion_ids)
+        for accion in acciones:
+            # enviar Correo
+            self.message_post(
+                cr, uid, accion.id, context=None,
+                type="notification",
+                body="Se le informa que la acción (" + accion.name + ") con Código: " + accion.id + " del área " + accion.dependencia_id.name +" está a " + str(p_dias) + " días de vencerse",
+                partner_ids=[accion.jefe_dependencia_id.partner_id.id, accion.ejecutor_id.partner_id.id]
+            )
+        return True
+
 class plan_mejoramiento_avance(models.Model):
     _name = 'plan_mejoramiento.avance'
     _description = 'Avances'
@@ -1081,3 +1100,37 @@ class plan_mejoramiento_avance(models.Model):
 
         result = super(plan_mejoramiento_avance, self).write(vals)
         return result
+
+    # -------------------
+    # Cron methods
+    # -------------------
+    @api.model
+    def notificar_creacion_avances_en_el_dia_cron(self):
+        hoy = fields.Date.today()
+        fecha_fin = datetime.strptime(hoy, '%Y-%m-%d') + timedelta(days=1)
+
+        avances = self.search([('create_date','>=',hoy), ('create_date','<',str(fecha_fin))])
+        dependencias = {}
+        for avance in avances:
+            if not avance.dependencia_id.abreviatura in dependencias:
+                dependencias[avance.dependencia_id.abreviatura] = []
+            dependencias[avance.dependencia_id.abreviatura].append(avance)
+
+        for k,v in dependencias.items():
+            partner_id = ''
+            mensaje = """Se han creado en el día {0} los siguiente avances y está a la espera de su aprobación.<br><br>""".format(hoy)
+            for avance in v:
+                # construir mensaje
+                mensaje+= """Avance N. {0}: {1} <br>""".format(avance.id, avance.descripcion)
+                # para el ultimo registro del for
+                if avance == v[-1]:
+                    partner_id = avance.jefe_dependencia_id.partner_id.id
+                    mensaje += """<br><br>Mensaje enviado automáticamente por el Sistema Planes de Mejoramiento"""
+                    self.message_post(
+                        #cr, uid, us.id, context=None,
+                        subject='Notificació de creació de avances en el día {}'.format(hoy),
+                        type="email",
+                        body=mensaje,
+                        partner_ids=[partner_id]
+                    )
+        return True
