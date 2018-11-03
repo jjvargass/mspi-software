@@ -491,6 +491,19 @@ class plan_mejoramiento_hallazgo(models.Model):
     # -------------------
     # methods
     # -------------------
+    @api.model
+    def create(self, vals):
+        hallazgo = super(plan_mejoramiento_hallazgo, self).create(vals)
+        # enviar correo a jefe de area
+        if hallazgo.dependencia_id.manager_id:
+            mensaje = "El Auditor {0} ha Creado el hallazgo  {1} para su devido tratamiento".format(hallazgo.user_id.name, hallazgo.name)
+            self.message_post(
+                subject='Creación de Hallazgo',
+                type="notification",
+                body=mensaje,
+                partner_ids=[hallazgo.dependencia_id.manager_id.user_id.partner_id.id]
+            )
+        return hallazgo
 
     @api.onchange('proceso_id')
     def _onchange_proceso_id(self):
