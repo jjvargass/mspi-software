@@ -20,6 +20,7 @@
 
 from openerp import models, fields, api
 from openerp.exceptions import ValidationError
+from _cffi_backend import string
 
 
 TIPO_ACTIVO = [
@@ -336,9 +337,9 @@ class activo_informacion_activo(models.Model):
     criticidad = fields.Char(
         string='Criticidad',
         required=False,
+        readonly=True,
         track_visibility='onchange',
         size=255,
-        compute='_compute_criticidad',
         help='''Valor general del Activo''',
     )
     fecha_creacion = fields.Date(
@@ -375,6 +376,18 @@ class activo_informacion_activo(models.Model):
         ],
         default='definido',
     )
+    acceso_id = fields.Many2one(
+        string="Acceso",
+        required=True,
+        track_visibility='onchage',
+        comodel_name='activo_informacion.acceso',
+        ondelete='restrict',
+        help='''Acceso''',
+        states={
+            'definido': [('readonly', False)],
+            'actualizado': [('readonly', False)],
+        }
+    )
 
     # -------------------
     # methods
@@ -391,6 +404,119 @@ class activo_informacion_activo(models.Model):
             }
         }
 
-    @api.one
-    def _compute_criticidad(self):
-        self.criticidad = "Adult hundred TV participant course."
+    @api.onchange('confidencialidad', 'integridad', 'disponibilidad')
+    def _onchage_get_criticidad(self):
+        if self.confidencialidad and self.integridad and self.disponibilidad:
+            data = self.env['activo_informacion.clasificacion'].search(
+                  [
+                      ('confidencialidad', '=', self.confidencialidad),
+                      ('integridad', '=', self.integridad),
+                      ('disponibilidad', '=', self.disponibilidad),
+                  ],
+                  limit=1,
+            )
+            self.criticidad = data.state
+        else:
+            self.criticidad = ''
+
+class activo_informacion_clasificacion(models.Model):
+    _name = 'activo_informacion.clasificacion'
+    _description = 'Clasificación'
+    _inherit = ['mail.thread', 'models.soft_delete.mixin']
+
+    # -------------------
+    # Fields
+    # -------------------
+    confidencialidad = fields.Selection(
+        string='Confidencialidad',
+        required=True,
+        track_visibility='onchange',
+        help='''Confidencialidad''',
+        selection=[
+            ('IPR', 'ALTA'),
+            ('IPC', 'MEDIA'),
+            ('IPB', 'BAJA'),
+        ],
+    )
+    integridad = fields.Selection(
+        string='Integridad',
+        required=True,
+        track_visibility='onchange',
+        help='''Integridad''',
+        selection=[
+            ('A', 'ALTA'),
+            ('M', 'MEDIA'),
+            ('B', 'BAJA'),
+        ],
+    )
+    disponibilidad = fields.Selection(
+        string='Disponibilidad',
+        required=True,
+        track_visibility='onchange',
+        help='''Disponibilidad''',
+        selection=[
+            ('1', 'ALTA'),
+            ('2', 'MEDIA'),
+            ('3', 'BAJA'),
+        ],
+    )
+    state = fields.Selection(
+        string='Estado',
+        required=True,
+        track_visibility='onchange',
+        help='''Estado''',
+        selection=[
+            ('ALTA', 'ALTA'),
+            ('MEDIA', 'MEDIA'),
+            ('BAJA', 'BAJA'),
+        ],
+    )
+    activo_sistema = fields.Boolean(
+        string='Habilitado en el sistema',
+        required=False,
+        track_visibility='onchange',
+        help='''Habilitado en el sistema''',
+        default=True,
+    )
+
+    # -------------------
+    # methods
+    # -------------------
+
+class activo_informacion_acceso(models.Model):
+    _name = 'activo_informacion.acceso'
+    _description = 'Acceso'
+    _inherit = ['mail.thread', 'models.soft_delete.mixin']
+
+    # -------------------
+    # Fields
+    # -------------------
+    name = fields.Char(
+        string='Nombre',
+        required=True,
+        track_visibility='onchange',
+        size=255,
+        help='''Nombre''',
+    )
+    descripcion = fields.Text(
+        string='Descripción',
+        required=True,
+        track_visibility='onchange',
+        help='''Descripción''',
+    )
+    activo_sistema = fields.Boolean(
+        string='Habilitado en el sistema',
+        required=False,
+        track_visibility='onchange',
+        help='''Habilitado en el sistema''',
+        default=True,
+    )
+
+    _sql_constraints = [
+        ('unique_name', 'unique(name)', 'Este name ya está registrado'),
+    ]
+
+    # -------------------
+    # methods
+    # -------------------
+

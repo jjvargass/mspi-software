@@ -308,6 +308,9 @@
                         <field name="dependencia_id" />
                     </group>
                     <separator string="Acceso"/>
+                    <group>
+                        <field name="acceso_id" />
+                    </group>
                     <separator string="Protección de Información"/>
                     <group col='4'>
                         <field name="confidencialidad" />
@@ -359,6 +362,216 @@
         parent="activo_informacion_menu"
         sequence="20"
         name="Activos de Información" action="activo_action"
+    />
+
+
+    <!--
+    =================================================================
+    activo_informacion.clasificacion
+    Clasificación
+    =================================================================
+    -->
+    <record model="ir.ui.view" id="clasificacion_search">
+        <field name="name">activo_informacion.clasificacion.search</field>
+        <field name="model">activo_informacion.clasificacion</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="confidencialidad" />
+                <filter name="filtro_confidencialidad_ipr"
+                    string="IPR"
+                    help="Filtrar Confidencialidad IPR"
+                    domain="[('confidencialidad', '=', 'IPR')]"
+                />
+                <filter name="filtro_confidencialidad_ipc"
+                    string="IPC"
+                    help="Filtrar Confidencialidad IPC"
+                    domain="[('confidencialidad', '=', 'IPC')]"
+                />
+                <filter name="filtro_confidencialidad_ipb"
+                    string="IPB"
+                    help="Filtrar Confidencialidad IPB"
+                    domain="[('confidencialidad', '=', 'IPB')]"
+                />
+                <field name="integridad" />
+                <filter name="filtro_integridad_a"
+                    string="A"
+                    help="Filtrar Integridad A"
+                    domain="[('integridad', '=', 'A')]"
+                />
+                <filter name="filtro_integridad_m"
+                    string="M"
+                    help="Filtrar Integridad M"
+                    domain="[('integridad', '=', 'M')]"
+                />
+                <filter name="filtro_integridad_b"
+                    string="B"
+                    help="Filtrar Integridad B"
+                    domain="[('integridad', '=', 'B')]"
+                />
+                <field name="disponibilidad" />
+                <filter name="filtro_disponibilidad_1"
+                    string="1"
+                    help="Filtrar Disponibilidad 1"
+                    domain="[('disponibilidad', '=', '1')]"
+                />
+                <filter name="filtro_disponibilidad_2"
+                    string="2"
+                    help="Filtrar Disponibilidad 2"
+                    domain="[('disponibilidad', '=', '2')]"
+                />
+                <filter name="filtro_disponibilidad_3"
+                    string="3"
+                    help="Filtrar Disponibilidad 3"
+                    domain="[('disponibilidad', '=', '3')]"
+                />
+                <field name="state" />
+                <filter name="filtro_state_alta"
+                    string="alta"
+                    help="Filtrar Estado alta"
+                    domain="[('state', '=', 'alta')]"
+                />
+                <filter name="filtro_state_media"
+                    string="media"
+                    help="Filtrar Estado media"
+                    domain="[('state', '=', 'media')]"
+                />
+                <filter name="filtro_state_baja"
+                    string="baja"
+                    help="Filtrar Estado baja"
+                    domain="[('state', '=', 'baja')]"
+                />
+                <field name="activo_sistema" />
+                <group string="Agrupar por...">
+                    <filter string="Estado" context="{'group_by':'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="clasificacion_form">
+        <field name="name">activo_informacion.clasificacion.form</field>
+        <field name="model">activo_informacion.clasificacion</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" clickable="1" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="confidencialidad" />
+                        <field name="integridad" />
+                        <field name="disponibilidad" />
+                        <field name="activo_sistema" />
+                    </group>
+                    <notebook>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="clasificacion_tree">
+        <field name="name">activo_informacion.clasificacion.tree</field>
+        <field name="model">activo_informacion.clasificacion</field>
+        <field name="arch" type="xml">
+            <tree string="Semaforo" colors="red:state=='alta';yellow:state=='media';green:state=='baja'">
+                <field name="confidencialidad" />
+                <field name="integridad" />
+                <field name="disponibilidad" />
+                <field name="state" />
+                <field name="activo_sistema" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="clasificacion_action">
+        <field name="name">Clasificación</field>
+        <field name="res_model">activo_informacion.clasificacion</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="clasificacion_menu"
+        parent="activo_informacion_conf_menu"
+        sequence="30"
+        name="Clasificación" action="clasificacion_action"
+    />
+
+    <!--
+    =================================================================
+    activo_informacion.acceso
+    Acceso
+    =================================================================
+    -->
+    <record model="ir.ui.view" id="acceso_search">
+        <field name="name">activo_informacion.acceso.search</field>
+        <field name="model">activo_informacion.acceso</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="descripcion" />
+                <field name="activo_sistema" />
+                <group string="Agrupar por...">
+                    <filter string="Habilitado en el sistema" context="{'group_by':'activo_sistema'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="acceso_form">
+        <field name="name">activo_informacion.acceso.form</field>
+        <field name="model">activo_informacion.acceso</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="base.group_configuration">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" string="Nombre" />
+                        <h1><field name="name" placeholder="Acceso o Usuarios"/></h1>
+                    </div>
+                    <group>
+                        <field name="descripcion" />
+                        <field name="activo_sistema" />
+                    </group>
+                    <notebook>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="acceso_tree">
+        <field name="name">activo_informacion.acceso.tree</field>
+        <field name="model">activo_informacion.acceso</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="descripcion" />
+                <field name="activo_sistema" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="acceso_action">
+        <field name="name">Acceso</field>
+        <field name="res_model">activo_informacion.acceso</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="acceso_menu"
+        parent="activo_informacion_conf_menu"
+        sequence="30"
+        name="Acceso" action="acceso_action"
     />
 
 </data>

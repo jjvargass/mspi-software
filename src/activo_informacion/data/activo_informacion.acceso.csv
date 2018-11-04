@@ -1,0 +1,5 @@
+id,name,descripcion
+__export__.activo_informacion_acceso_1,Empleados Pertenecientes al Proceso,Enpleados y contratistas que laboran en las áreas lidres o de apoyo del proceso
+__export__.activo_informacion_acceso_2,Empleados Pertenecientes a la Organización,Todos los empleados y contratista de la organización
+__export__.activo_informacion_acceso_3,Personas Externas,Personas externas de la organización
+__export__.activo_informacion_acceso_4,Estudiantes,Toda la comunidad estudiantil de la universidad

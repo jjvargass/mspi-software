@@ -26,3 +26,11 @@ activo_informacion.activo,name,char,,,Nombre,Nombre,1,0,1,0,0,1,1,1,0,0,main,Act
 ,fecha_ingreso,date,readonly:True,,Fecha Ingreso,Fecha Ingreso,1,0,1,0,0,1,1,1,0,0,,,,,,,,,
 ,fecha_retiro,date,readonly:True,,Fecha Retiro,Fecha Retiro,1,0,1,0,0,1,1,1,0,0,,,,,,,,,
 ,state,selection,selection:definido|revisado|publicado|actualizado|cancelado;default:’definido’,,Estado,Estado,1,0,1,0,0,1,1,1,1,0,,,,,,,,,
+activo_informacion.clasificacion,confidencialidad,selection,selection:IPR|IPC|IPB,,Confidencialidad,Confidencialidad,1,0,1,0,0,1,1,1,1,0,conf,Clasificación,Clasificación,,"mail.thread,models.soft_delete.mixin",0,0,0,new
+,integridad,selection,selection:A|M|B,,Integridad,Integridad,1,0,1,0,0,1,1,1,1,0,,,,,,,,,
+,disponibilidad,selection,selection:1|2|3,,Disponibilidad,Disponibilidad,1,0,1,0,0,1,1,1,1,0,,,,,,,,,
+,state,selection,selection:alta|media|baja,,Estado,Estado,1,0,1,0,0,1,1,1,1,0,,,,,,,,,
+,activo_sistema,boolean,default:True,,Habilitado en el sistema,Habilitado en el sistema,0,0,1,0,0,1,1,1,0,0,,,,,,,,,
+activo_informacion.acceso,name,char,,,Nombre,Nombre,1,1,1,0,0,1,1,1,0,0,conf,Acceso,Acceso,,"mail.thread,models.soft_delete.mixin",0,0,0,new
+,descripcion,text,,,Descripción,Descripción,1,0,1,0,0,1,1,1,0,0,,,,,,,,,
+,activo_sistema,boolean,default:True,,Habilitado en el sistema,Habilitado en el sistema,0,0,1,0,0,1,1,1,1,0,,,,,,,,,
