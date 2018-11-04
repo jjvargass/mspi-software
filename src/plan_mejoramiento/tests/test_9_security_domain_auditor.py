@@ -81,7 +81,7 @@ class Test_plan_mejoramiento_tipo_calificacion(common.TransactionCase):
             'dependencia_id': self.ref('base_idu.hr_department_7'),
             'state': 'en_progreso',
             'user_id': auditor_oaci,
-        })
+        }).with_context(no_enviar_mail=True)
 
         # Acciones
         try:
