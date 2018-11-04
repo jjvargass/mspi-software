@@ -506,12 +506,15 @@ class plan_mejoramiento_hallazgo(models.Model):
         return hallazgo
 
     @api.onchange('proceso_id')
-    def _onchange_proceso_id(self):
-        lideres = self.proceso_id.dependencia_lider_ids
-        print lideres
-        gestores = self.proceso_id.dependencia_gestor_ids
-        all_areas = lideres + gestores
-        print all_areas
+    def _onchange_areas_del_proceso_id(self):
+        areas_lideres = list(set([i.id for i in self.proceso_id.dependencia_lider_ids]))
+        areas_gestoras = list(set([i.id for i in self.proceso_id.dependencia_gestor_ids]))
+        all_areas = list(set(areas_lideres + areas_gestoras))
+        return {
+            'domain':{
+                'dependencia_id': [('id','in', all_areas)],
+            }
+        }
 
     @api.one
     def _compute_fecha_inicio(self):
