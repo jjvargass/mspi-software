@@ -13,6 +13,10 @@
         parent="activo_informacion_nav"
         sequence="10"
     />
+     <menuitem id="activo_informacion_report_menu" parent="activo_informacion_nav"
+        name="Reporte"
+        sequence="20"
+     />
      <menuitem id="activo_informacion_conf_menu" parent="activo_informacion_nav"
         name="Configuración"
         groups="base.group_configuration"

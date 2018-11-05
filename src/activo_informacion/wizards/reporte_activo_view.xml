@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <record model="ir.ui.view" id="crear_reporte_visitas_download">
+        <field name="name">activo_informacion.wizard.reporte_activo_download</field>
+        <field name="model">activo_informacion.wizard.reporte_activo</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <separator name="string1" string="Descargar Reporte Activo de Información"/>
+                    <group col="2" colspan="4">
+                        <field name="archivo" readonly="1" width="100" filename="nombre_archivo" icon="STOCK_SAVE"/>
+                    </group>
+                    <footer>
+                        <button string="Cancelar" special="cancel" />
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="crear_reporte_visita">
+        <field name="name">activo_informacion.wizard.reporte_activo</field>
+        <field name="model">activo_informacion.wizard.reporte_activo</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <separator name="string1" string="Reporte Activo de Información"/>
+                    <group>
+                        <field name="proceso_id" />
+                    </group>
+                    <footer>
+                        <button string="Crear Reporte" name="crear_reporte_activo" type="object" class="btn-primary"/>
+                        <button string="Cancelar" special="cancel" />
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_crear_reporte_activo">
+        <field name="name">Crear Reporte Activo</field>
+        <field name="res_model">activo_informacion.wizard.reporte_activo</field>
+        <field name="target">new</field>
+        <field name="view_mode">form</field>
+    </record>
+
+    <menuitem id="wizard_crear_reporte_activo"
+        parent="activo_informacion_report_menu"
+        name="Reporte de Activos"
+        sequence="150"
+        action="action_crear_reporte_activo"
+    />
+</data>
+</openerp>

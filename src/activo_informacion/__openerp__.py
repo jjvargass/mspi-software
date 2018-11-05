@@ -13,11 +13,13 @@
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
+        'wizards/reporte_activo_view.xml',
         'views/activo_informacion_view.xml',
         'data/activo_informacion.activo_tipo.csv',
         'data/activo_informacion.clasificacion.csv',
         'data/activo_informacion.acceso.csv',
         'data/res.company.location.csv',
+        'data/ir.config_parameter.csv',
     ],
     'test': [
     ],
