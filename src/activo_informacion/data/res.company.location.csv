@@ -1,0 +1,21 @@
+id,name,address,company_id/id
+__export__.res_company_location_1,TECNOLOGICA,CALLE 68D BIS A SUR # 49F -70,base.main_company
+__export__.res_company_location_2,MACARENA – A,CARRERA 3 # 26A -40,base.main_company
+__export__.res_company_location_3,MACARENA – B,CARRERA 4A # 26D – 54,base.main_company
+__export__.res_company_location_4,SOTANOS AVENIDA JIMENEZ,CARRERA 7 # 12C – 59,base.main_company
+__export__.res_company_location_5,ACADEMICA LUIS A. CALVO,CARRERA 9 # 52 -52,base.main_company
+__export__.res_company_location_6,ADUANILLA DE PAIBA,CARRERA 32 # 12 - 70,base.main_company
+__export__.res_company_location_7,CALLE 34,CALLE 34 # 13 -13,base.main_company
+__export__.res_company_location_8,VIVERO,CARRERA 5 ESTE # 15 – 82,base.main_company
+__export__.res_company_location_9,CALLE 40 (EDIFICIO ALEJANDRO SUÁRES COPETE),CARRERA 8 # 40 – 78,base.main_company
+__export__.res_company_location_10,CALLE 40 (EDIFICIO ADMINISTRATIVO),CARRERA 7 # 40B – 53,base.main_company
+__export__.res_company_location_11,CALLE 40 (FACULTAD INGENIERÍA),CARRERA 8 # 40 – 62,base.main_company
+__export__.res_company_location_12,ACADEMIA SUPERIOR ARTES-ASAB,CARRERA 13 # 14 – 69,base.main_company
+__export__.res_company_location_13,CALLE 64,AV. CIUDAD DE QUITO # 64-81,base.main_company
+__export__.res_company_location_14,CENTRO CULTURAL NUEVA SANTA FÉ,CARRERA 5 # 5 – 15,base.main_company
+__export__.res_company_location_15,CIUDADELA UNIVERSITARIA BOSA PORVENIR,CALLE 52 SUR # 93D – 97,base.main_company
+__export__.res_company_location_16,EDIFICIO UGI,CALLE 40B BIS # 13 – 09,base.main_company
+__export__.res_company_location_17,EDIFICIO VILLA ESTHER – DESARROLLO FISICO Y SGA/PIGA,CARRERA 13 – 42 – 36,base.main_company
+__export__.res_company_location_18,EMISORA LAUD 90.4 FM,CALLE 31 # 6 – 42/62,base.main_company
+__export__.res_company_location_19,IDEXUD,CARRERA 17 # 32A – 28,base.main_company
+__export__.res_company_location_20,SECCIÓN DE PUBLICACIONES,CARRERA 24 # 34 -37,base.main_company

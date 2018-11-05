@@ -17,6 +17,7 @@
         'data/activo_informacion.activo_tipo.csv',
         'data/activo_informacion.clasificacion.csv',
         'data/activo_informacion.acceso.csv',
+        'data/res.company.location.csv',
     ],
     'test': [
     ],

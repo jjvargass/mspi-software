@@ -574,5 +574,55 @@
         name="Acceso" action="acceso_action"
     />
 
+   <!--
+    =================================================================
+    res.company.location
+    Sedes
+    =================================================================
+    -->
+    <record model="ir.ui.view" id="location_form">
+        <field name="name">activo_informacion.location_form</field>
+        <field name="model">res.company.location</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="address" />
+                        <field name="company_id" />
+                    </group>
+                    <notebook>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="location_tree">
+        <field name="name">activo_informacion.location.tree</field>
+        <field name="model">res.company.location</field>
+        <field name="arch" type="xml">
+            <tree>
+	            <field name="name" />
+	            <field name="address" />
+	            <field name="company_id" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="location_action">
+        <field name="name">Acceso</field>
+        <field name="res_model">res.company.location</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="location_menu"
+        parent="activo_informacion_conf_menu"
+        sequence="30"
+        name="Sedes" action="location_action"
+    />
+
+
+
+
 </data>
 </openerp>

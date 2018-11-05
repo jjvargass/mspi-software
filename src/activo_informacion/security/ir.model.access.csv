@@ -1,3 +1,5 @@
 id,active,name,group_id/id,model_id/id,perm_create,perm_read,perm_write,perm_unlink
 activo_tipo_global,True,"activo_informacion.activo_tipo global",,activo_informacion.model_activo_informacion_activo_tipo,0,1,0,0
 activo_global,True,"activo_informacion.activo global",,activo_informacion.model_activo_informacion_activo,0,1,0,0
+clasificacion_global,True,"activo_informacion.clasificacion global",,activo_informacion.model_activo_informacion_clasificacion,0,1,0,0
+acceso_global,True,"activo_informacion.acceso global",,activo_informacion.model_activo_informacion_acceso,0,1,0,0
