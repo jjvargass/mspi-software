@@ -404,6 +404,8 @@ class activo_informacion_activo(models.Model):
             }
         }
 
+    @api.one
+    @api.constrains('confidencialidad', 'integridad', 'disponibilidad')
     @api.onchange('confidencialidad', 'integridad', 'disponibilidad')
     def _onchage_get_criticidad(self):
         if self.confidencialidad and self.integridad and self.disponibilidad:
