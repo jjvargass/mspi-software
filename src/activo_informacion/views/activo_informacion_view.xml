@@ -485,7 +485,7 @@
         <field name="name">activo_informacion.clasificacion.tree</field>
         <field name="model">activo_informacion.clasificacion</field>
         <field name="arch" type="xml">
-            <tree string="Semaforo" colors="red:state=='alta';yellow:state=='media';green:state=='baja'">
+            <tree string="Semaforo" colors="red:state=='ALTA';yellow:state=='MEDIA';green:state=='BAJA'">
                 <field name="confidencialidad" />
                 <field name="integridad" />
                 <field name="disponibilidad" />
