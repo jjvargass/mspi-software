@@ -101,7 +101,7 @@ class riesgo_contexto(models.Model):
         ],
     )
     factor_id = fields.Many2one(
-        string='Factor',
+        string='Factor Tipo de Contexto',
         required=True,
         track_visibility='onchange',
         comodel_name='riesgo.factor',

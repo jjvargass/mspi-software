@@ -68,8 +68,11 @@
                             <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
                         </button>
                     </div>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" string="Nombre " />
+                        <h1><field name="name" placeholder="Factor del Riesgo"/></h1>
+                    </div>
                     <group>
-                        <field name="name" />
                         <field name="descripcion" />
                         <field name="tipo" />
                         <field name="activo_sistema" />
@@ -151,8 +154,11 @@
                             <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
                         </button>
                     </div>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" string="Nombre " />
+                        <h1><field name="name" placeholder="Nombre del Contexto"/></h1>
+                    </div>
                     <group>
-                        <field name="name" />
                         <field name="descripcion" />
                         <field name="tipo" />
                         <field name="factor_id" />
@@ -293,8 +299,11 @@
                             <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
                         </button>
                     </div>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" string="Nombre " />
+                        <h1><field name="name" placeholder="Tipo de Riesgo"/></h1>
+                    </div>
                     <group>
-                        <field name="name" />
                         <field name="descripcion" />
                         <field name="activo_sistema" />
                     </group>
@@ -365,8 +374,11 @@
                             <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
                         </button>
                     </div>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" string="Nombre " />
+                        <h1><field name="name" placeholder="Nombre Probabilidad"/></h1>
+                    </div>
                     <group>
-                        <field name="name" />
                         <field name="descripcion" />
                         <field name="nivel" />
                         <field name="frecuencia" />
@@ -441,8 +453,11 @@
                             <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
                         </button>
                     </div>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" string="Nombre " />
+                        <h1><field name="name" placeholder="Nombre Impacto"/></h1>
+                    </div>
                     <group>
-                        <field name="name" />
                         <field name="nivel" />
                         <field name="cuantitativo" />
                         <field name="cualitativo" />
