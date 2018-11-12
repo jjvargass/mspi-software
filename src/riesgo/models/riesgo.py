@@ -404,6 +404,8 @@ class riesgo_riesgo(models.Model):
         comodel_name='activo_informacion.activo',
         ondelete='restrict',
         help='''Activo de Información''',
+        domain="[('proceso_id','=',proceso_id)]",
+
     )
     causa_ids = fields.Many2many(
         string='Causas',
@@ -447,11 +449,13 @@ class riesgo_riesgo(models.Model):
     )
     dependencia_id = fields.Many2one(
         string='Unidad',
-        required=True,
+        required=False,
         track_visibility='onchange',
         comodel_name='hr.department',
         ondelete='restrict',
         help='''Unidad''',
+        readonly=True,
+        default=lambda self: self.env.user.department_id.id,
     )
     impacto_id = fields.Many2one(
         string='Impacto',

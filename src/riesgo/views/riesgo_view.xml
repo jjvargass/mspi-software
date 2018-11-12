@@ -655,23 +655,45 @@
                             <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
                         </button>
                     </div>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" string="Nombre " />
+                        <h1><field name="name" placeholder="Nombre del Riesgo"/></h1>
+                    </div>
                     <group>
-                        <field name="name" />
                         <field name="descripcion" />
-                        <field name="proceso_id" />
-                        <field name="seguridad_de_la_informacion" />
-                        <field name="activo_informacion_id" />
-                        <field name="causa_ids" />
                         <field name="tipo_riesgo_id" />
-                        <field name="probabilidad_id" />
-                        <field name="user_id" />
-                        <field name="dependencia_id" />
-                        <field name="impacto_id" />
                     </group>
+                        <separator string="Identificación del Riesgo"/>
+                        <group>
+                            <field name="causa_ids" />
+                        </group>
+                        <separator string="Análisis del Riesgo"/>
+                        <group col='4'>
+                            <field name="probabilidad_id" />
+                            <field name="impacto_id" />
+                        </group>
+                        <separator string="Evaluación del Riesgo"/>
+                        <separator string="Registro"/>
+                        <group col='4'>
+                            <field name="user_id" />
+                            <field name="dependencia_id" />
+                        </group>
                     <notebook>
                         <page string='Contexto'>
                             <group>
-                                <separator colspan="4" string="Contexto" /><field name="contexto_ids" nolabel="1" colspan="4" />
+                                <separator colspan="4" string="Contexto Interno/Externo" />
+                                <field name="contexto_ids"/>
+                            </group>
+                            <separator string="Contexto del Proceso"/>
+                            <group>
+                                <field name="proceso_id" />
+                                <field name="seguridad_de_la_informacion" />
+                                <field name="activo_informacion_id"
+                                    attrs="{
+                                        'invisible':[('seguridad_de_la_informacion','=',False)],
+                                        'required':[('seguridad_de_la_informacion','=',True)],
+                                    }"
+                                />
                             </group>
                         </page>
                         <page string='Evaluar Control'>

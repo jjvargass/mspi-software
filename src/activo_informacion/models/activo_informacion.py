@@ -123,6 +123,7 @@ class activo_informacion_activo(models.Model):
         comodel_name='hr.department',
         ondelete='restrict',
         help='''Unidad Propietario''',
+        readonly=True,
         states={
             'definido': [('readonly', False)],
             'actualizado': [('readonly', False)],
@@ -146,6 +147,7 @@ class activo_informacion_activo(models.Model):
         comodel_name='hr.department',
         ondelete='restrict',
         help='''Unidad Custodio''',
+        readonly=True,
         states={
             'definido': [('readonly', False)],
             'actualizado': [('readonly', False)],
@@ -383,6 +385,7 @@ class activo_informacion_activo(models.Model):
         comodel_name='activo_informacion.acceso',
         ondelete='restrict',
         help='''Acceso''',
+        readonly=True,
         states={
             'definido': [('readonly', False)],
             'actualizado': [('readonly', False)],
@@ -420,6 +423,13 @@ class activo_informacion_activo(models.Model):
             self.criticidad = data.state
         else:
             self.criticidad = ''
+
+    @api.one
+    @api.constrains('company_location_piso')
+    @api.onchange('company_location_piso')
+    def _check_company_location_piso(self):
+        if self.company_location_piso > 99:
+            raise ValidationError("El maximo valor para piso es de  99")
 
 class activo_informacion_clasificacion(models.Model):
     _name = 'activo_informacion.clasificacion'
