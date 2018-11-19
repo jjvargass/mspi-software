@@ -19,6 +19,7 @@
         'data/riesgo.tipo_riesgo.csv',
         'data/riesgo.impacto.csv',
         'data/riesgo.probabilidad.csv',
+        'data/riesgo.contexto.csv',
     ],
     'test': [
     ],
