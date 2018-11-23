@@ -181,6 +181,7 @@
                 <field name="name" />
                 <field name="descripcion" />
                 <field name="tipo" />
+                <field name="factor_id" string="Factor"/>
             </tree>
         </field>
     </record>
@@ -678,27 +679,14 @@
                         <field name="descripcion" />
                         <field name="tipo_riesgo_id" />
                     </group>
-                        <separator string="Identificación del Riesgo"/>
-                        <group>
-                            <field name="causa_ids" />
-                        </group>
-                        <separator string="Análisis del Riesgo"/>
-                        <group col='4'>
-                            <field name="probabilidad_id" />
-                            <field name="impacto_id" />
-                        </group>
-                        <separator string="Evaluación del Riesgo"/>
-                        <separator string="Registro"/>
-                        <group col='4'>
-                            <field name="user_id" />
-                            <field name="dependencia_id" />
-                        </group>
+                    <group col='4'>
+                        <field name="user_id" />
+                        <field name="dependencia_id" />
+                    </group>
                     <notebook>
                         <page string='Contexto'>
-                            <group>
-                                <separator colspan="4" string="Contexto Interno/Externo" />
-                                <field name="contexto_ids"/>
-                            </group>
+                            <separator colspan="4" string="Contexto Interno/Externo" />
+                            <field name="contexto_ids"/>
                             <separator string="Contexto del Proceso"/>
                             <group>
                                 <field name="proceso_id" />
@@ -711,10 +699,26 @@
                                 />
                             </group>
                         </page>
-                        <page string='Evaluar Control'>
+
+                        <page string='Identificación del Riesgo'>
+                            <separator string="Causas"/>
+	                        <field name="causa_ids" />
+                        </page>
+
+                        <page string='Análisis de Riesgo'>
+                            <separator string="Probabilidad - Impacto"/>
+                            <group col='4'>
+                                <field name="probabilidad_id" />
+                                <field name="impacto_id" />
+                            </group>
+                            <separator string="Riesgo Inherente"/>
+                        </page>
+
+                        <page string='Evalucación de Riesgo'>
                             <group>
                                 <field name="evaluar_control_ids" />
                             </group>
+                            <separator string="Riesgo Residual"/>
                         </page>
                     </notebook>
                 </sheet>

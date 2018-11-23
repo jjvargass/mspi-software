@@ -430,7 +430,7 @@ class riesgo_riesgo(models.Model):
         help='''Tipo Riesgo''',
     )
     probabilidad_id = fields.Many2one(
-        string='Probabilida',
+        string='Probabilidad',
         required=True,
         track_visibility='onchange',
         comodel_name='riesgo.probabilidad',
