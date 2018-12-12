@@ -8,7 +8,7 @@ Guía 7 - Guía de Gestión de Riesgos
 
 Guía 17 - Guía de Mejora Continua
 
-![Refactor Metodo Post](/img/post.png)
+![Refactor Metodo Post](/img/000.png)
 
 ## Módulos
 
@@ -16,20 +16,27 @@ El sistema esta desarrollado por módulo:
 
 ### Módulos Operación por Procesos
 
-![Refactor Metodo Post](/img/post.png)
+![Refactor Metodo Post](/img/001.png)
+
+![Refactor Metodo Post](/img/002.png)
 
 ### Módulos Actios de Información
 
-![Refactor Metodo Post](/img/post.png)
+![Refactor Metodo Post](/img/003.png)
+
+![Refactor Metodo Post](/img/004.png)
 
 ### Módulos Gestión de Riesgos
 
-![Refactor Metodo Post](/img/post.png)
+![Refactor Metodo Post](/img/005.png)
+
+![Refactor Metodo Post](/img/006.png)
 
 ### Módulos Planes de Mejoramiento
 
-![Refactor Metodo Post](/img/post.png)
+![Refactor Metodo Post](/img/007.png)
 
+![Refactor Metodo Post](/img/008.png)
 
 ## Licencia
 
