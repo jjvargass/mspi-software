@@ -6,6 +6,8 @@ import erppeek
 import sys
 
 from tool_user import ToolUser
+from hallazgo import Hallazgo
+
 
 class Plan(ToolUser):
     def __init__(self, odoo, _logger, options):
@@ -21,16 +23,14 @@ class Plan(ToolUser):
             reader = csv.DictReader(csvfile)
             for row in reader:
                 try:
-                    self._logger.debug("***Cargando Plan: {0} ***".format(row['nombre']))
+                    self._logger.debug("***Cargando Plan: {0} ***".format(row['nombre'].split()))
                     # buscar existencia del auditor
                     auditor = self.get_user(None,row['email_user'])
                     if not auditor:
                         # crear
-                        self._logger.debug("crea")
                         auditor = self.create_user(row['auditor_login'], row['name_user'], row['email_user'], row['area_user'], row['number_rol_user'])
                     else:
                         # actualizo rol
-                        self._logger.debug("Actualiza")
                         self.add_rol_to_user(row['number_rol_user'], row['email_user'])
                     dependencia = self.find_area(row['dependencia'])
 
@@ -40,14 +40,14 @@ class Plan(ToolUser):
                         # Crear plan interno
                         plan_int = self.create_plan(row['nombre'], row['radicado'], dependencia, auditor, row['tipo'], origen.id, sub_origen.id)
                         # hallazgo
-                        #import_hallazgo = ImportHallazgo(self.odoo, self._logger, plan_int, row['id'], self.options)
-                        #import_hallazgo.open_file_hallazgo()
+                        hallazgo = Halllazgo(self.odoo, self._logger, plan_int, row['id'], self.options)
+                        hallazgo.open_file_hallazgo()
                     else:
                         #Crear plan  Ext
                         plan_ext = self.create_plan_ext(row['nombre'], row['radicado'], dependencia, auditor, row['tipo'])
                         # hallazgo
-                        #import_hallazgo = ImportHallazgo(self.odoo, self._logger, plan_ext, row['id'], self.options)
-                        #import_hallazgo.open_file_hallazgo()
+                        hallazgo = Hallazgo(self.odoo, self._logger, plan_ext, row['id'], self.options)
+                        hallazgo.open_file_hallazgo()
                 except Exception as e:
                     self._logger.error('*******************')
                     self._logger.exception(e)
