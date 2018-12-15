@@ -23,7 +23,7 @@ class Plan(ToolUser):
             reader = csv.DictReader(csvfile)
             for row in reader:
                 try:
-                    self._logger.debug("***Cargando Plan: {0} ***".format(row['nombre'].split()))
+                    self._logger.debug("***Cargando Plan: {0} ***".format(row['nombre'].strip()))
                     # buscar existencia del auditor
                     auditor = self.get_user(None,row['email_user'])
                     if not auditor:

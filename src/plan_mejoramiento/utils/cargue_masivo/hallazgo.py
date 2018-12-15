@@ -23,7 +23,7 @@ class Hallazgo(ToolUser):
             for row in reader:
                 cnt += 1
                 if self.id_plan_css == row['plan_id']:
-                    self._logger.debug("    ***[{2}] Cargando Hallazgo: [{0}] del Plan: [{1}]***".format(row['name'].split(), self.plan.name, cnt))
+                    self._logger.debug("    ***[{2}] Cargando Hallazgo: [{0}] del Plan: [{1}]***".format(row['name'].strip(), self.plan.name, cnt))
                     # Crear hallazgo
                     hallazgo = self.create_hallazgo(row['auditor_login'], row['name'], row['descripcion'], row['capitulo'], row['proceso_id'], row['dependencia'], row['causa'], self.plan)
                     if not hallazgo:
