@@ -36,13 +36,13 @@ class Hallazgo(ToolUser):
         causa = self.odoo.model('plan_mejoramiento.causa').get([('name','=',name_causa.strip())])
         if causa is None:
             #crear origen
-            new_causa = self.odoo.model('plan_mejoramiento.origen').create({'name':name_causa.strip()})
+            new_causa = self.odoo.model('plan_mejoramiento.causa').create({'name':name_causa.strip(), 'descripcion': 'descripcion'})
             return new_causa
         else:
             return causa
 
     def find_proceso(self, proceso_id):
-        proceso = self.odoo.model('plan_mejoramiento.causa').get([('id','=',proceso_id.strip())])
+        proceso = self.odoo.model('mapa_proceso.proceso').get([('id','=',proceso_id.strip())])
         return proceso
 
     def create_hallazgo(self, auditor_login, name, descripcion, capitulo, proceso_id, dependencia, causa, plan):
@@ -56,15 +56,15 @@ class Hallazgo(ToolUser):
         causa = self.find_causa(causa)
 
         proceso = self.find_proceso(proceso_id)
-        if not proceso_id:
-            raise Exception('Hallazgo, no se encuentra proceso_id: {}'.format(proceso_id))
+        if not proceso:
+            raise Exception('Hallazgo, no se encuentra proceso: {}'.format(proceso_id))
             return
             sys.exit("ERROR:DESCRIPTION:EL proceso_id: " + proceso_id + " No se encuentar definida en la BD")
 
         new_hallazgo = self.odoo.model('plan_mejoramiento.hallazgo').create({
             'plan_id': plan.id,
-            'name': name.split(),
-            'descripcion': descripcion.split(),
+            'name': name.strip(),
+            'descripcion': descripcion.strip(),
             'proceso_id': proceso.id,
             'dependencia_id': dependencia.id,
             'causa_ids': [causa.id],
