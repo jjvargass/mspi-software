@@ -14,9 +14,9 @@
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
-        'wizards/crear_progreso_de_tarea.xml',
         'views/plan_mejoramiento_view.xml',
         'views/project_view.xml',
+        'wizards/crear_progreso_de_tarea.xml',
         'data/plan_mejoramiento.tipo_calificacion.csv',
         'data/ir.config_parameter.csv',
         'data/plan_mejoramiento_notification.xml',
